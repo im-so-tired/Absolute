@@ -5,7 +5,7 @@ import {
 } from '@/store/Slices/MainForm/MainForm.interface'
 
 export interface ILabel {
-	slug: comfortsType & termsType & reachType
+	slug: comfortsType | termsType | reachType
 	text: string
 }
 export interface ICheckBox {

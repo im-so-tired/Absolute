@@ -29,14 +29,4 @@ export const mainFormSlice = createSlice({
 	},
 })
 export default mainFormSlice.reducer
-export const {
-	addHuman,
-	removeHuman,
-	changeDateComing,
-	changeDateExit,
-	resetData,
-	changePriceRange,
-	changeComforts,
-	changeTerms,
-	changeReach,
-} = mainFormSlice.actions
+export const mainFormActions = mainFormSlice.actions
