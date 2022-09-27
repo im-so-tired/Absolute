@@ -1,0 +1,58 @@
+{
+  "name": "toxin",
+  "version": "0.1.0",
+  "private": true,
+  "importSort": {
+    ".js, .jsx, .ts, .tsx": {
+      "style": "module",
+      "parser": "typescript"
+    }
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@date-io/date-fns": "^2.15.0",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.0",
+    "@mui/material": "^5.10.3",
+    "@mui/x-date-pickers": "^5.0.0-beta.7",
+    "@reduxjs/toolkit": "^1.8.5",
+    "@tailwindcss/forms": "^0.5.2",
+    "@tanstack/react-query": "^4.3.4",
+    "@types/react-redux": "^7.1.24",
+    "axios": "^0.27.2",
+    "classnames": "^2.3.1",
+    "date-fns": "^2.29.2",
+    "formik": "^2.2.9",
+    "js-cookie": "^3.0.1",
+    "moment": "^2.29.4",
+    "next": "12.2.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.4.0",
+    "react-redux": "^8.0.2",
+    "react-redux-toastr": "^7.6.9",
+    "react-select": "^5.4.0",
+    "sass": "^1.54.4",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^3.3.0",
+    "@types/js-cookie": "^3.0.2",
+    "@types/node": "18.7.3",
+    "@types/react": "18.0.17",
+    "@types/react-dom": "18.0.6",
+    "@types/react-redux-toastr": "^7.6.2",
+    "autoprefixer": "^10.4.8",
+    "eslint": "8.21.0",
+    "eslint-config-next": "12.2.5",
+    "postcss": "^8.4.16",
+    "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.8",
+    "typescript": "4.7.4"
+  }
+}

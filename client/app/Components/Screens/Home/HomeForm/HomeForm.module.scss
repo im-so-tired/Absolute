@@ -1,0 +1,15 @@
+.homeForm{
+	@apply inline-block mt-10 bg-white shadow-md rounded p-8 w-[380px];
+	h2{
+		@apply font-bold text-xl;
+	}
+}
+.dateFields{
+	@apply  mt-4 flex items-center;
+	>div{
+		@apply w-[100%];
+		&:first-child{
+			@apply mr-4
+		}
+	}
+}

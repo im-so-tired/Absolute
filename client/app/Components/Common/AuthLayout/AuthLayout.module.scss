@@ -1,0 +1,11 @@
+.authLayout{
+	@apply h-[90vh] flex items-center justify-center;
+	background: url('../../../Assets/image/authBack.jpg') no-repeat 50% 50%;
+	background-size: cover;
+	h2{
+		@apply font-bold text-xl;
+	}
+	.forma{
+		@apply bg-white shadow-md rounded p-8;
+	}
+}

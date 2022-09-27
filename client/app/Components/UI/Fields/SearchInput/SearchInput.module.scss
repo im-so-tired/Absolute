@@ -1,0 +1,18 @@
+.searchInput{
+	@apply transition-all;
+	label{
+		@apply absolute block bg-white transition-all cursor-text;
+		transform: translate(0,-50%);
+	}
+	input{
+		@apply outline-none border-none h-[100%] w-[100%] inline-block px-[14px] py-[16px] rounded;
+		&::placeholder{
+			opacity: 0;
+		}
+		&:focus{
+			&::placeholder{
+				opacity: 1;
+			}
+		}
+	}
+}

@@ -1,0 +1,11 @@
+.errorMessage{
+	@apply text-sm text-red-600 font-semibold inline-block absolute left-0 -bottom-5;
+}
+.borderError{
+	fieldset{
+	  border-color: red !important;
+	}
+	label{
+		color:red !important;
+	}
+}

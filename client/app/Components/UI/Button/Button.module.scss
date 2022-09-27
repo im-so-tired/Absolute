@@ -1,0 +1,12 @@
+.baseButton{
+	@apply  border border-blue-400 text-blue-500 block transition-colors uppercase rounded;
+	&:hover{
+		@apply border-blue-500 transition-colors;
+	}
+}
+.primaryButton{
+	@apply flex justify-center items-center btn-primary;
+	svg{
+		@apply inline-block ml-3 w-[20px] h-[20px];
+	}
+}

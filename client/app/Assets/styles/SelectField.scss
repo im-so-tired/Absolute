@@ -1,0 +1,25 @@
+.main-select{
+	>div{
+		height: 52px !important;
+	}
+	.custom-select{
+		@apply border-none outline-none;
+		&__control{
+			@apply h-[100%] w-[100%]  outline-none border-none box-border;
+			&:hover{
+				@apply border-none;
+			}
+
+		}
+		&__indicator-separator{
+			display:none !important;
+		}
+		&__option.custom-select__option--is-focused{
+			background-color:#F5F5F5 !important;
+		}
+		&__option.custom-select__option--is-selected{
+			background-color: #E3EEFA !important;
+			color:black;
+		}
+	}
+}

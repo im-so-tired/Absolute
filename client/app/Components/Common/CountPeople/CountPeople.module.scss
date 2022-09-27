@@ -1,0 +1,18 @@
+.heading{
+	@apply py-1 font-semibold border-b border-gray-400 border-opacity-80;
+	>span:first-child{
+		margin-right: 4px;
+	}
+}
+.personType{
+	@apply flex justify-between items-center py-2;
+	button{
+		@apply rounded-full p-2 w-[30px] h-[30px] bg-primary flex justify-between items-center text-white;
+	}
+	>div{
+		@apply flex items-center;
+		span{
+			@apply w-[40px] text-center px-1 block;
+		}
+	}
+}

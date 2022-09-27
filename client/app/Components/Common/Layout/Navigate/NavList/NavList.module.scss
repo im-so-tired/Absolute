@@ -1,0 +1,16 @@
+.navList{
+	@apply flex items-center;
+	>li{
+		@apply mr-4 transition-colors;
+		span{
+			@apply text-[15px]  font-semibold opacity-75;
+		}
+		
+		&:hover{
+			@apply text-blue-400 transition-colors;
+		}
+	}
+}
+.active {
+	@apply text-blue-400;
+}

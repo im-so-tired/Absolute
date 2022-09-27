@@ -1,0 +1,11 @@
+.roomsList{
+	@apply mt-4; 
+	flex-grow:2;
+	.header{
+		@apply flex items-center;
+		.search{
+			@apply mr-4;
+			flex-grow:2;
+		}
+	}
+}

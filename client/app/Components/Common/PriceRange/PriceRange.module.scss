@@ -1,0 +1,18 @@
+.priceRange{
+	@apply w-full mt-7;
+	> div:first-child {
+		@apply flex justify-between items-center;
+		h2 {
+			@apply font-bold text-sm uppercase;
+		}
+		span {
+			@apply text-sm
+		}
+	}
+	> span:nth-child(2) {
+		@apply block w-full;
+	}
+	> span:last-child {
+		@apply text-xs opacity-80;
+	}
+}

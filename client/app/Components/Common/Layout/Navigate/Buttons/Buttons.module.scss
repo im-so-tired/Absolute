@@ -1,0 +1,13 @@
+.buttonsContainer{
+	@apply flex ml-auto items-center text-sm;
+	>a{
+		button{
+			@apply py-1 px-3;
+		}
+		&:first-child{
+			button{
+				@apply py-0.5 mr-4;
+			}
+		}
+	}
+}

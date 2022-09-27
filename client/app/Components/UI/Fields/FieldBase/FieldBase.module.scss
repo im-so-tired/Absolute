@@ -1,0 +1,21 @@
+.container{
+	@apply border-2 border-gray-300 rounded h-[56px];
+	&:hover{
+		@apply border-black;
+	}
+	>div{
+		@apply relative;
+	}
+	&:focus-within{
+		@apply border-blue-500;
+	}
+}
+.labelStyles{
+	label{
+		@apply absolute top-0 left-[10px] px-1 text-sm duration-75 bg-white;
+		transform: translate(0,-50%);
+		&:focus-within{
+			@apply text-blue-500
+		}
+	}
+}
