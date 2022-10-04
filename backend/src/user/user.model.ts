@@ -1,4 +1,4 @@
-import { prop, getModelForClass } from '@typegoose/typegoose'
+import { prop } from '@typegoose/typegoose'
 import { TimeStamps, Base } from '@typegoose/typegoose/lib/defaultClasses'
 export interface UserModel extends Base {}
 export class UserModel extends TimeStamps {
@@ -10,4 +10,6 @@ export class UserModel extends TimeStamps {
   isAdmin?: boolean
   @prop({ default: [], type: () => [String] })
   favorites?: string[]
+  @prop({default:[],type:() => [String]})
+  booking?: string[]
 }

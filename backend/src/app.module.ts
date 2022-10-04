@@ -6,20 +6,22 @@ import { AppService } from './app.service'
 import { getMongoConfig } from './config/mongo.config'
 import { AuthModule } from './auth/auth.module'
 
-import { RoomsModule } from './rooms/rooms.module';
+import { RoomsModule } from './rooms/rooms.module'
+import { UserModule } from './user/user.module'
 
 @Module({
-  imports: [
-    ConfigModule.forRoot(),
-    TypegooseModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: getMongoConfig,
-    }),
-    AuthModule,
-    RoomsModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+	imports: [
+		ConfigModule.forRoot(),
+		TypegooseModule.forRootAsync({
+			imports: [ConfigModule],
+			inject: [ConfigService],
+			useFactory: getMongoConfig,
+		}),
+		AuthModule,
+		RoomsModule,
+		UserModule,
+	],
+	controllers: [AppController],
+	providers: [AppService],
 })
 export class AppModule {}

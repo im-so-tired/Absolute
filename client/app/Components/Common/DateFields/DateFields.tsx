@@ -1,6 +1,6 @@
 import DateFnsAdapter from '@date-io/date-fns'
 import cn from 'classnames'
-import { addDays } from 'date-fns'
+import { addDays, format, getUnixTime } from 'date-fns'
 import { FC } from 'react'
 
 import DateOfStay from '@/components/UI/Fields/DateOfStay/DateOfStay'
@@ -14,6 +14,7 @@ const DateFields: FC<{ className?: string }> = ({ className }) => {
 	const { dateComing, dateExit } = useAppSelector(state => state.mainForm.date)
 	const minDateExit = addDays(dateComing || dateFns.date(Date.now()), 1)
 	const { changeDateComing, changeDateExit } = useMainFormActions()
+
 	return (
 		<div className={className}>
 			<DateOfStay
