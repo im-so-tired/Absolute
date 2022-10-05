@@ -10,6 +10,7 @@ import { AuthDto } from './dto/auth.dto'
 import { compare, genSalt, hash } from 'bcrypt'
 import { JwtService } from '@nestjs/jwt'
 import { RefreshTokenDto } from './dto/refreshToken.dto'
+import { Register } from './dto/register.dto'
 
 @Injectable()
 export class AuthService {
@@ -41,7 +42,7 @@ export class AuthService {
 		}
 	}
 
-	async register(dto: AuthDto) {
+	async register(dto: Register) {
 		const oldUser = await this.UserModel.findOne({ email: dto.email })
 		if (oldUser)
 			throw new BadRequestException(
@@ -49,7 +50,7 @@ export class AuthService {
 			)
 		const salt = await genSalt(10)
 		const newUser = new this.UserModel({
-			email: dto.email,
+			...dto,
 			password: await hash(dto.password, salt),
 		})
 		const tokens = await this.issueTokenPair(String(newUser._id))
@@ -82,7 +83,10 @@ export class AuthService {
 	}
 	returnUserFields(user: UserModel) {
 		return {
-			_id: user._id,
+			firstName: user.firstName,
+			secondName: user.secondName,
+			gender: user.gender,
+			birthYear: user.birthYear,
 			email: user.email,
 			isAdmin: user.isAdmin,
 		}
