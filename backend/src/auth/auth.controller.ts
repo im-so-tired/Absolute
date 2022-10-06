@@ -1,9 +1,11 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common'
 import { UsePipes } from '@nestjs/common/decorators'
 import { ValidationPipe } from '@nestjs/common/pipes'
+import { UserModel } from 'src/user/user.model'
 import { AuthService } from './auth.service'
 import { AuthDto } from './dto/auth.dto'
 import { RefreshTokenDto } from './dto/refreshToken.dto'
+import { Register } from './dto/register.dto'
 
 @Controller('auth')
 export class AuthController {
@@ -26,7 +28,7 @@ export class AuthController {
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Post('register')
-	async register(@Body() dto: AuthDto) {
+	async register(@Body() dto: Register) {
 		return this.AuthService.register(dto)
 	}
 }
