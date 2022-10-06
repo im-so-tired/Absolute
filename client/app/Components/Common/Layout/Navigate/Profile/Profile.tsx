@@ -3,11 +3,11 @@ import { FC } from 'react'
 
 import defaultAvatar from '@/assets/image/defaultAvatar.svg'
 
-import { userState } from '@/store/Slices/User/user.interface'
+import { UserState } from '@/store/Slices/User/user.interface'
 
 import styles from './Profile.module.scss'
 
-const Profile: FC<{ user: userState }> = ({ user }) => {
+const Profile: FC<{ user: UserState }> = ({ user }) => {
 	return (
 		<div className={styles.profile}>
 			<button className={styles.picture}>

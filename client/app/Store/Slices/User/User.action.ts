@@ -5,11 +5,11 @@ import { AuthService } from '@/services/Auth/Auth.service'
 
 import { toastrError } from '@/utils/toastrError'
 
-import { IAuthResponce, IEmailPassword } from './user.interface'
+import { IAuthResponce, IEmailPassword, RegisterData } from './user.interface'
 
-export const register = createAsyncThunk<IAuthResponce, IEmailPassword>(
+export const register = createAsyncThunk<IAuthResponce, RegisterData>(
 	'auth/register',
-	async (data: IEmailPassword, thunkApi) => {
+	async (data: RegisterData, thunkApi) => {
 		try {
 			const responce = await AuthService.register(data)
 			toastr.success('Register', 'Register is successfully')

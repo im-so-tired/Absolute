@@ -4,3 +4,4 @@ export interface IUser {
 	password: string
 	createdAt: string
 }
+export type genderType = 'female' | 'male'

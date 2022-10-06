@@ -13,6 +13,7 @@ export const AuthService = {
 		if (data.accessToken) {
 			saveToLs(data)
 		}
+		console.log(data)
 		return data
 	},
 

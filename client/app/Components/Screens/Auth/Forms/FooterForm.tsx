@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import Button from '@/components/UI/Button/Button'
 
-import styles from './Login.module.scss'
+import styles from '../Login.module.scss'
 
 const FooterForm: FC<{ type: 'register' | 'login' }> = ({ type }) => {
 	return type === 'login' ? (
