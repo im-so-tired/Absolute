@@ -1,6 +1,7 @@
-import { fromUnixTime, getUnixTime, sub } from 'date-fns'
+import DateFnsAdapter from '@date-io/date-fns'
+import { getUnixTime, sub } from 'date-fns'
 import { Formik } from 'formik'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 
 import ChooseGender from '@/components/Common/ChooseGender/ChooseGender'
 import Button from '@/components/UI/Button/Button'
@@ -27,13 +28,13 @@ const initialState: RegisterData = {
 
 const FormRegister: FC = () => {
 	const { register } = useUserActions()
-	console.log(fromUnixTime(getUnixTime(sub(Date.now(), { years: 18 }))))
+	const [birthDate, setBirthDate] = useState<number>()
+	const dateFns = new DateFnsAdapter()
 	return (
 		<Formik
 			initialValues={initialState}
 			validationSchema={schemaRegister}
 			onSubmit={value => {
-				console.log(value)
 				register(value)
 			}}
 		>
@@ -60,14 +61,35 @@ const FormRegister: FC = () => {
 						value={values.gender}
 						onChange={handleChange}
 					/>
-					{/* <DateOfStay
+					<DateOfStay
 						label="Дата рождения"
 						value={values.birthYear}
-						onChange={handleChange}
-						maxDate={Date.now()}
+						onChange={newValue => {
+							if (!newValue) return
+							const result =
+								typeof newValue !== 'number' ? getUnixTime(newValue) : newValue
+							values.birthYear = result
+							setBirthDate(values.birthYear)
+						}}
+						name="birthYear"
+						maxDate={dateFns.date(Date.now())}
 						defaultDate={initialState.birthYear}
 						className={styles.textField}
-					/> */}
+					/>
+					<AuthField
+						name="email"
+						label="Email"
+						value={values.email}
+						onChange={handleChange}
+						className={styles.textField}
+					/>
+					<AuthField
+						name="password"
+						label="Пароль"
+						value={values.password}
+						onChange={handleChange}
+						className={styles.textField}
+					/>
 					<Button
 						link=""
 						background="primary"

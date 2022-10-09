@@ -1,4 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit'
+import { getUnixTime } from 'date-fns'
 
 import { initialState } from './InitialState'
 import {
@@ -35,15 +36,25 @@ export const removeHumanAction = (
 }
 export const changeDateComingAction = (
 	state: IMainFormValue,
-	action: PayloadAction<Date | null>
+	action: PayloadAction<Date | number | null>
 ) => {
-	state.date.dateComing = action.payload
+	if (!action.payload) return
+	const result =
+		typeof action.payload !== 'number'
+			? getUnixTime(action.payload)
+			: action.payload
+	state.date.dateComing = result
 }
 export const changeDateExitAction = (
 	state: IMainFormValue,
-	action: PayloadAction<Date | null>
+	action: PayloadAction<Date | number | null>
 ) => {
-	state.date.dateExit = action.payload
+	if (!action.payload) return
+	const result =
+		typeof action.payload !== 'number'
+			? getUnixTime(action.payload)
+			: action.payload
+	state.date.dateExit = result
 }
 export const resetDataAction = (state: IMainFormValue) => {
 	state.countPeople = initialState.countPeople

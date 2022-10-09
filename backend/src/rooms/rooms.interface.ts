@@ -1,7 +1,7 @@
 export interface IRoom {
 	userId: string
-	dateComing: Date
-	dateExit: Date
+	dateComing: number
+	dateExit: number
 	countAdults: number
 	counеBabies: number
 }

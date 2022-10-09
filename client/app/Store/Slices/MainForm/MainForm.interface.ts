@@ -1,8 +1,8 @@
 import { ICountPeople } from '@/shared/types/countPeople'
 
 interface IDateOfStay {
-	dateComing: Date | null
-	dateExit: Date | null
+	dateComing: number | null
+	dateExit: number | null
 }
 
 export type comfortsType = 'hasWifi' | 'hasConditioner' | 'hasWorkSpace'
