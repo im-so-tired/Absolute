@@ -28,7 +28,7 @@ const initialState: RegisterData = {
 
 const FormRegister: FC = () => {
 	const { register } = useUserActions()
-	const [birthDate, setBirthDate] = useState<number>()
+	const [birthDate, setBirthDate] = useState<number>(initialState.birthYear)
 	const dateFns = new DateFnsAdapter()
 	return (
 		<Formik

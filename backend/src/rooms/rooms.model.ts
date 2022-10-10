@@ -1,6 +1,6 @@
 import { prop, getModelForClass } from '@typegoose/typegoose'
 import { TimeStamps, Base } from '@typegoose/typegoose/lib/defaultClasses'
-import { IRoom } from './rooms.interface'
+import { comfortsType, IRoom, reachType, termsType } from './rooms.interface'
 
 export interface RoomsModel extends Base {}
 
@@ -16,11 +16,11 @@ export class RoomsModel extends TimeStamps {
 	@prop({ default: [], type: () => [String] })
 	images: string[]
 	@prop({ default: [], type: () => [String] })
-	comforts: string[]
+	comforts: comfortsType[]
 	@prop({ default: [], type: () => [String] })
-	livingСonditions: string[]
+	livingСonditions: termsType[]
 	@prop({ default: [], type: () => [String] })
-	accessibility: string[]
+	accessibility: reachType[]
 	@prop({ default: [] })
 	bookings: IRoom[]
 }

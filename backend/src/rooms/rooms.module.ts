@@ -3,6 +3,7 @@ import { RoomsService } from './rooms.service'
 import { RoomsController } from './rooms.controller'
 import { TypegooseModule } from 'nestjs-typegoose'
 import { RoomsModel } from './rooms.model'
+import { reachType } from './rooms.interface'
 
 @Module({
 	imports: [
