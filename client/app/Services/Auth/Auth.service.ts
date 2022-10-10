@@ -29,7 +29,7 @@ export const AuthService = {
 		const refreshToken = Cookies.get('refreshToken')
 		const { data } = await axiosClassic.post(
 			'/auth/login/accessToken',
-			refreshToken,
+			{ refreshToken },
 			{
 				headers: {
 					'Content-type': 'application/json',

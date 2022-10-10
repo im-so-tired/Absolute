@@ -12,12 +12,14 @@ import styles from './Profile.module.scss'
 const Profile: FC<{ user: UserState }> = ({ user }) => {
 	return (
 		<div className={styles.profile}>
-			<button className={styles.picture}>
-				<Image height={40} width={40} src={defaultAvatar} />
-			</button>
+			<div className={styles.picture}>
+				<MenuProfile>
+					<Image height={40} width={40} src={defaultAvatar} />
+				</MenuProfile>
+			</div>
 			<div className={styles.info}>
 				<span>Добро пожаловать!</span>
-				<div>{user?.email}</div>
+				<div>{user.email}</div>
 			</div>
 		</div>
 	)

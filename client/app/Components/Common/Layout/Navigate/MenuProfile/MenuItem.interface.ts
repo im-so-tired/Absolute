@@ -1,8 +1,8 @@
-import {iconsTypes} from '@/shared/types/iconTypes'
+import { iconsTypes } from '@/shared/types/iconTypes'
 
 export interface IMenuItem {
-    id: number
-    title: string
-    icon: iconsTypes
-    link: string
+	id: number
+	title: string
+	icon: iconsTypes
+	link: string
 }
