@@ -9,9 +9,9 @@ export class RoomsModel extends TimeStamps {
 	roomNumber: number
 	@prop()
 	price: number
-	@prop()
+	@prop({ default: 0 })
 	countReviews: number
-	@prop()
+	@prop({ default: 0 })
 	rate: number
 	@prop({ default: [], type: () => [String] })
 	images: string[]
