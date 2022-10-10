@@ -1,8 +1,9 @@
 import Button from '@mui/material/Button'
 import Fade from '@mui/material/Fade'
 import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
 import { FC, MouseEvent, PropsWithChildren, useState } from 'react'
+import { DataMenuItem } from './Menu.data'
+import MenuItem from './MenuItem'
 
 const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -34,9 +35,11 @@ const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 				onClose={handleClose}
 				TransitionComponent={Fade}
 			>
-				<MenuItem onClick={handleClose}>Profile</MenuItem>
-				<MenuItem onClick={handleClose}>My account</MenuItem>
-				<MenuItem onClick={handleClose}>Logout</MenuItem>
+				{/* {DataMenuItem.map(item => {
+					return(
+						<MenuItem menuItem={item} />
+					)
+				})} */}
 			</Menu>
 		</div>
 	)

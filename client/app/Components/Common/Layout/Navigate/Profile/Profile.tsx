@@ -13,9 +13,7 @@ const Profile: FC<{ user: UserState }> = ({ user }) => {
 	return (
 		<div className={styles.profile}>
 			<button className={styles.picture}>
-				<MenuProfile>
-					<Image height={40} width={40} src={defaultAvatar} />
-				</MenuProfile>
+				<Image height={40} width={40} src={defaultAvatar} />
 			</button>
 			<div className={styles.info}>
 				<span>Добро пожаловать!</span>
