@@ -5,8 +5,10 @@ import {
 } from '@nestjs/common'
 import { InjectModel } from 'nestjs-typegoose'
 import { ModelType } from 'typegoose'
-import { CrudRoomDto, UpdateRoomDto } from './dto/CrudRoom.dto'
+import { CrudRoomDto } from './dto/CrudRoom.dto'
+import { IQueryFilter } from './rooms.interface'
 import { RoomsModel } from './rooms.model'
+import { parametrHandler } from './utils/parametrHandler'
 
 @Injectable()
 export class RoomsService {
@@ -27,26 +29,32 @@ export class RoomsService {
 		return newRoom
 	}
 
+	async getAll(query: IQueryFilter) {
+		const rooms = await this.RoomsModel.find(parametrHandler(query))
+		return rooms
+	}
+
 	async byId(id: string) {
 		const room = await this.RoomsModel.findById(id)
 		if (!room) throw new NotFoundException('Номер не найден')
 		return room
 	}
 
-	async update(roomDto: UpdateRoomDto, id: string) {
+	async update(roomDto: CrudRoomDto, id: string) {
 		const oldRoom = await this.RoomsModel.findOne({
 			roomNumber: roomDto.roomNumber,
 		})
-		if (oldRoom && oldRoom._id !== id)
+		if (oldRoom && String(oldRoom._id) !== id)
 			throw new BadRequestException('Комната с таким номеров уже существует')
 		const room = await this.byId(id)
-		if (roomDto.roomNumber) room.roomNumber = roomDto.roomNumber
-		if (roomDto.images) room.images = roomDto.images
-		if (roomDto.price) room.price = roomDto.price
-		if (roomDto.comforts) room.comforts = roomDto.comforts
-		if (roomDto.accessibility) room.accessibility = roomDto.accessibility
-		if (roomDto.livingСonditions)
-			room.livingСonditions = roomDto.livingСonditions
+		room.roomNumber = roomDto.roomNumber
+		room.images = roomDto.images
+		room.price = roomDto.price
+		room.comforts = roomDto.comforts
+		room.accessibility = roomDto.accessibility
+		room.livingСonditions = roomDto.livingСonditions
+		room.type = roomDto.type
+		room.maxCountPeople = roomDto.maxCountPeople
 		room.save()
 		return room
 	}
@@ -54,4 +62,12 @@ export class RoomsService {
 	async delete(id: string) {
 		return this.RoomsModel.findByIdAndRemove(id)
 	}
+}
+function eq(
+	arg0: string,
+	arg1: string
+): import('mongoose').FilterQuery<
+	import('typegoose').InstanceType<RoomsModel>
+> {
+	throw new Error('Function not implemented.')
 }

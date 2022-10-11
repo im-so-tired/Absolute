@@ -1,8 +1,19 @@
-import { prop, getModelForClass } from '@typegoose/typegoose'
+import { prop, getModelForClass, Ref } from '@typegoose/typegoose'
 import { TimeStamps, Base } from '@typegoose/typegoose/lib/defaultClasses'
-import { comfortsType, IRoom, reachType, termsType } from './rooms.interface'
+import {
+	comfortsType,
+	IRoom,
+	reachType,
+	roomType,
+	termsType,
+} from './rooms.interface'
 
 export interface RoomsModel extends Base {}
+
+interface maxCountPeople {
+	adults: number
+	babies: number
+}
 
 export class RoomsModel extends TimeStamps {
 	@prop({ unique: true })
@@ -23,4 +34,8 @@ export class RoomsModel extends TimeStamps {
 	accessibility: reachType[]
 	@prop({ default: [] })
 	bookings: IRoom[]
+	@prop({ default: 'Standart' })
+	type: roomType
+	@prop()
+	maxCountPeople: maxCountPeople
 }

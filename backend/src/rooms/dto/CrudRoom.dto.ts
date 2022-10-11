@@ -1,5 +1,27 @@
-import { IsInt, IsPositive, IsArray } from 'class-validator'
-import { comfortsType, reachType, termsType } from '../rooms.interface'
+import { Type } from 'class-transformer'
+import {
+	IsInt,
+	IsPositive,
+	IsArray,
+	IsString,
+	IsNumber,
+	ValidateNested,
+} from 'class-validator'
+import { MaxCountPeopleValidate } from '../decorators/countPeopleValidate'
+import {
+	comfortsType,
+	reachType,
+	roomType,
+	termsType,
+} from '../rooms.interface'
+export class MaxCountPeople {
+	@IsNumber()
+	@IsInt()
+	adults: number
+	@IsNumber()
+	@IsInt()
+	babies: number
+}
 
 export class CrudRoomDto {
 	@IsInt()
@@ -11,18 +33,18 @@ export class CrudRoomDto {
 	@IsArray()
 	images: string[]
 	@IsArray()
-	comforts?: comfortsType[]
+	comforts: comfortsType[]
 	@IsArray()
-	livingСonditions?: termsType[]
+	livingСonditions: termsType[]
 	@IsArray()
-	accessibility?: reachType[]
-}
-
-export class UpdateRoomDto {
-	roomNumber?: number
-	price?: number
-	images?: string[]
-	comforts?: comfortsType[]
-	livingСonditions?: termsType[]
-	accessibility?: reachType[]
+	accessibility: reachType[]
+	@IsString()
+	type: roomType
+	@Type(() => MaxCountPeople)
+	@ValidateNested({ each: true })
+	@MaxCountPeopleValidate({
+		message:
+			'Поле "maxCountPeople" отсутствует или имеет неправильный формат данных',
+	})
+	maxCountPeople: MaxCountPeople
 }
