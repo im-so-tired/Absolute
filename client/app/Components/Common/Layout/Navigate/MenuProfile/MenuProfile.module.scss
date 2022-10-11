@@ -1,3 +1,7 @@
 .menuProfile{
-    @apply bg-fuchsia
+    @apply rounded-full w-full h-full flex justify-center items-center;
+    &:hover{
+        @apply ease-linear duration-200;
+        box-shadow: 0 0 15px 1px rgba(31,32,65,.2);
+    }
 }

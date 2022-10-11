@@ -1,7 +1,7 @@
 .profile{
 	@apply ml-auto flex items-center;
 	.picture{
-		@apply rounded-full mr-3 h-[56px] w-[56px] flex-center bg-gray-300 bg-opacity-30;
+		@apply rounded-full mr-3 h-[56px] w-[56px] flex-center bg-gray-300 bg-opacity-30 p-0;
 	}
 	.info{
 		span{
