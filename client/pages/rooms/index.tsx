@@ -1,7 +1,8 @@
+import Rooms from '@/components/Screens/Rooms/Rooms'
 import { NextPage } from 'next'
 
 const RoomsPage: NextPage = () => {
-	return <></>
+	return <Rooms />
 }
 
 export default RoomsPage
