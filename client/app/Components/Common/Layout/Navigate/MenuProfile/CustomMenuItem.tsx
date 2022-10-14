@@ -8,9 +8,11 @@ import MaterialIcon from '@/components/UI/MaterialIcon'
 import { IMenuItem } from './MenuItem.interface'
 import styles from './MenuProfile.module.scss'
 
-const CustomMenuItem: FC<{ menuItem: IMenuItem }> = ({ menuItem }) => {
+const CustomMenuItem: FC<{
+	menuItem: IMenuItem
+}> = ({ menuItem }) => {
 	return (
-		<Link href={menuItem.link}>
+		<Link href={menuItem.link ? menuItem.link : ''}>
 			<MenuItem>
 				<ListItemIcon>
 					<MaterialIcon name={menuItem.icon} color="#BC9CFF" />

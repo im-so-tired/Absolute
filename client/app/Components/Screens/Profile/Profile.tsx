@@ -1,17 +1,14 @@
-import { useAuth } from '@/hooks/useAuth'
 import { Container } from '@mui/system'
 import React, { FC } from 'react'
 
+import Breadcrumbs from '@/components/Common/Breadcrumbs/Breadcrumbs'
+import ProfileLayout from '@/components/Common/ProfileLayout/ProfileLayout'
+
+import { useAuth } from '@/hooks/useAuth'
+
 const Profile: FC = () => {
-	const user = useAuth();
-	console.log(user?.id)
-  return (
-    <div className="mt-4">
-      <Container>
-        {user?.email}
-      </Container>
-    </div>
-  )
+	const user = useAuth()
+	return <ProfileLayout />
 }
 
 export default Profile

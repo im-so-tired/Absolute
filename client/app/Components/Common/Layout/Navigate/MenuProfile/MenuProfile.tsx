@@ -4,12 +4,15 @@ import Fade from '@mui/material/Fade'
 import Menu from '@mui/material/Menu'
 import { FC, MouseEvent, PropsWithChildren, useEffect, useState } from 'react'
 
+import { useUserActions } from '@/hooks/useActions'
+
 import CustomMenuItem from './CustomMenuItem'
 import { DataMenuItem } from './Menu.data'
 import styles from './MenuProfile.module.scss'
 
 const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+	const { logout } = useUserActions()
 	const open = Boolean(anchorEl)
 	const handleClick = (event: MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget)
@@ -33,9 +36,14 @@ const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 				TransitionComponent={Fade}
 				className={styles.menu}
 			>
-				{DataMenuItem.map(item => {
+				{DataMenuItem.map((item, index) => {
 					return <CustomMenuItem key={item.id} menuItem={item} />
 				})}
+				<button onClick={logout} className="w-full">
+					<CustomMenuItem
+						menuItem={{ id: 6, title: 'Выйти', icon: 'MdExitToApp' }}
+					/>
+				</button>
 			</Menu>
 		</div>
 	)
