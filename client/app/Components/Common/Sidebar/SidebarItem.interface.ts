@@ -1,9 +1,9 @@
 import { iconsTypes } from '@/shared/types/iconTypes'
 
-export interface IMenuItem {
+export interface ISidebarItem {
 	id: number
 	title: string
 	icon: iconsTypes
 	link: string
-	handler?: () => void
+	forAdmin: boolean
 }

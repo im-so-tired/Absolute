@@ -37,11 +37,15 @@ const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 				className={styles.menu}
 			>
 				{DataMenuItem.map((item, index) => {
-					return <CustomMenuItem key={item.id} menuItem={item} />
+					return (
+						<div key={item.id} onClick={handleClose}>
+							<CustomMenuItem menuItem={item} />
+						</div>
+					)
 				})}
 				<button onClick={logout} className="w-full">
 					<CustomMenuItem
-						menuItem={{ id: 6, title: 'Выйти', icon: 'MdExitToApp' }}
+						menuItem={{ id: 6, title: 'Выйти', icon: 'MdExitToApp', link: '' }}
 					/>
 				</button>
 			</Menu>
