@@ -83,6 +83,7 @@ export class AuthService {
 	}
 	returnUserFields(user: UserModel) {
 		return {
+			id: user._id,
 			firstName: user.firstName,
 			secondName: user.secondName,
 			gender: user.gender,

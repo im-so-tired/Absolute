@@ -5,7 +5,7 @@ import {
 	isObject,
 	isNumber,
 } from 'class-validator'
-import { MaxCountPeople } from '../dto/CrudRoom.dto'
+import { MaxCountPeople } from '../dto/crudRoom.dto'
 
 export function MaxCountPeopleValidate(validationOptions?: ValidationOptions) {
 	return (object: any, propertyName: string) => {

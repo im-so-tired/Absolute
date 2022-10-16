@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common'
 import { InjectModel } from 'nestjs-typegoose'
 import { ModelType } from 'typegoose'
-import { CrudRoomDto } from './dto/CrudRoom.dto'
+import { CrudRoomDto } from './dto/crudRoom.dto'
 import { IQueryFilter } from './rooms.interface'
 import { RoomsModel } from './rooms.model'
 import { parametrHandler } from './utils/parametrHandler'
@@ -62,12 +62,4 @@ export class RoomsService {
 	async delete(id: string) {
 		return this.RoomsModel.findByIdAndRemove(id)
 	}
-}
-function eq(
-	arg0: string,
-	arg1: string
-): import('mongoose').FilterQuery<
-	import('typegoose').InstanceType<RoomsModel>
-> {
-	throw new Error('Function not implemented.')
 }

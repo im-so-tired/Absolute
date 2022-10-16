@@ -1,7 +1,7 @@
 import { PipeTransform } from '@nestjs/common'
 import { BadRequestException } from '@nestjs/common/exceptions'
 import { ArgumentMetadata } from '@nestjs/common/interfaces'
-import { CrudRoomDto } from 'src/rooms/dto/CrudRoom.dto'
+import { CrudRoomDto } from 'src/rooms/dto/crudRoom.dto'
 import { reachType, termsType, comfortsType } from '../rooms/rooms.interface'
 export class RoomValidate implements PipeTransform {
 	transform(value: CrudRoomDto, meta: ArgumentMetadata) {
