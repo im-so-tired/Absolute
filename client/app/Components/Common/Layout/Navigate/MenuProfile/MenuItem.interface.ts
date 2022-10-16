@@ -4,5 +4,6 @@ export interface IMenuItem {
 	id: number
 	title: string
 	icon: iconsTypes
-	link: string
+	link?: string
+	handler?: () => void
 }
