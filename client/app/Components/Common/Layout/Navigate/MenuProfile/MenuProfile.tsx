@@ -1,14 +1,18 @@
+import { IconButton, Tooltip } from '@mui/material'
 import Button from '@mui/material/Button'
 import Fade from '@mui/material/Fade'
 import Menu from '@mui/material/Menu'
 import { FC, MouseEvent, PropsWithChildren, useEffect, useState } from 'react'
 
+import { useUserActions } from '@/hooks/useActions'
+
+import CustomMenuItem from './CustomMenuItem'
 import { DataMenuItem } from './Menu.data'
-import MenuItem from './MenuItem'
 import styles from './MenuProfile.module.scss'
 
 const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+	const { logout } = useUserActions()
 	const open = Boolean(anchorEl)
 	const handleClick = (event: MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget)
@@ -18,15 +22,9 @@ const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 	}
 	return (
 		<div className={styles.menuProfile}>
-			<Button
-				id="fade-button"
-				aria-controls={open ? 'fade-menu' : undefined}
-				aria-haspopup="true"
-				aria-expanded={open ? 'true' : undefined}
-				onClick={handleClick}
-			>
-				{children}
-			</Button>
+			<Tooltip title="Открыть меню" arrow>
+				<IconButton onClick={handleClick}>{children}</IconButton>
+			</Tooltip>
 			<Menu
 				id="fade-menu"
 				MenuListProps={{
@@ -36,10 +34,16 @@ const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 				open={open}
 				onClose={handleClose}
 				TransitionComponent={Fade}
+				className={styles.menu}
 			>
-				{DataMenuItem.map(item => {
-					return <MenuItem key={item.id} menuItem={item} />
+				{DataMenuItem.map((item, index) => {
+					return <CustomMenuItem key={item.id} menuItem={item} />
 				})}
+				<button onClick={logout} className="w-full">
+					<CustomMenuItem
+						menuItem={{ id: 6, title: 'Выйти', icon: 'MdExitToApp' }}
+					/>
+				</button>
 			</Menu>
 		</div>
 	)
