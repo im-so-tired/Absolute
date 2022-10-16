@@ -32,8 +32,6 @@ export class RoomsModel extends TimeStamps {
 	livingСonditions: termsType[]
 	@prop({ default: [], type: () => [String] })
 	accessibility: reachType[]
-	@prop({ default: [] })
-	bookings: IRoom[]
 	@prop({ default: 'Standart' })
 	type: roomType
 	@prop()
