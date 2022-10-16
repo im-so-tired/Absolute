@@ -15,8 +15,9 @@ const SelectField: FC<ISelectFieldProps> = ({
 	className,
 	id,
 	options,
+	defaultValue,
 }) => {
-	const [currentOption, setCurrentOption] = useState<string>('')
+	const [currentOption, setCurrentOption] = useState<string>(defaultValue)
 	const labelRef = useRef() as React.MutableRefObject<HTMLLabelElement>
 	const getValue = () =>
 		currentOption

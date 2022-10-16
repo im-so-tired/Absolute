@@ -50,12 +50,14 @@ const RoomsList: FC = () => {
 					label="Сортировать"
 					options={sortOption}
 					className="w-[200px] mr-4"
+					defaultValue="des"
 				/>
 				<SelectField
 					id="amount rooms"
 					label="Отображать по"
 					options={amountOption}
 					className="w-[140px]"
+					defaultValue="12"
 				/>
 			</div>
 		</div>

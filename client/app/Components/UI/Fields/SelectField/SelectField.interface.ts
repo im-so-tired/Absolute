@@ -5,4 +5,5 @@ export interface ISelectFieldProps {
 	label: string
 	className?: string
 	options: IOptions[]
+	defaultValue: string
 }
