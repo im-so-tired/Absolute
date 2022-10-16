@@ -7,7 +7,6 @@ import ProfileLayout from '@/components/Common/ProfileLayout/ProfileLayout'
 import { useAuth } from '@/hooks/useAuth'
 
 const Profile: FC = () => {
-	const user = useAuth()
 	return <ProfileLayout />
 }
 

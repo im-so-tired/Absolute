@@ -18,7 +18,7 @@ const ProfileLayout: FC<PropsWithChildren> = ({ children }) => {
 	}, [user])
 	return (
 		<>
-			{user && (
+			{
 				<div className="mt-4">
 					<Container>
 						<Breadcrumbs />
@@ -26,7 +26,7 @@ const ProfileLayout: FC<PropsWithChildren> = ({ children }) => {
 						{children}
 					</Container>
 				</div>
-			)}
+			}
 		</>
 	)
 }
