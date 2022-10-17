@@ -21,4 +21,7 @@ export interface IQueryFilter {
 	type?: roomType
 	adults?: number
 	babies?: number
+	searchTerm?: number
+	page: number
+	per_page: number
 }

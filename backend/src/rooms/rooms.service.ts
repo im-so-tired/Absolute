@@ -9,6 +9,7 @@ import { CrudRoomDto } from './dto/crudRoom.dto'
 import { IQueryFilter } from './rooms.interface'
 import { RoomsModel } from './rooms.model'
 import { parametrHandler } from './utils/parametrHandler'
+import { sliceRoosm } from './utils/sliceRooms'
 
 @Injectable()
 export class RoomsService {
@@ -30,8 +31,18 @@ export class RoomsService {
 	}
 
 	async getAll(query: IQueryFilter) {
-		const rooms = await this.RoomsModel.find(parametrHandler(query))
-		return rooms
+		const data = await this.RoomsModel.find(parametrHandler(query))
+		const rooms = query.searchTerm
+			? data.filter((room: RoomsModel) =>
+					String(room.roomNumber).includes(String(query.searchTerm))
+			  )
+			: data
+		const totalCount = data.length
+
+		return {
+			totalCount,
+			data: sliceRoosm(rooms, query.page, query.per_page),
+		}
 	}
 
 	async byId(id: string) {
