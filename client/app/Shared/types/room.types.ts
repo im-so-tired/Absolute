@@ -6,7 +6,6 @@ import {
 
 export interface IRoom {
 	_id: string
-	bookings: any[]
 	livingСonditions: termsType[]
 	comforts: comfortsType[]
 	accessibility: reachType[]

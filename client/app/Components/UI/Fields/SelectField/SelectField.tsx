@@ -15,20 +15,14 @@ const SelectField: FC<ISelectFieldProps> = ({
 	className,
 	id,
 	options,
-	defaultValue,
+	value: currentOption,
+	onChange,
 }) => {
-	const [currentOption, setCurrentOption] = useState<string>(defaultValue)
 	const labelRef = useRef() as React.MutableRefObject<HTMLLabelElement>
 	const getValue = () =>
 		currentOption
 			? options.find(op => op.value === currentOption)
 			: { label: '', value: '' }
-	const onChange = (
-		newValue: SingleValue<IOptions>,
-		actionMeta: ActionMeta<IOptions>
-	) => {
-		setCurrentOption(newValue?.value || '')
-	}
 	const labelStyles = styles.labelStyles
 	return (
 		<FieldBase className={className} dynamicLabel={false}>

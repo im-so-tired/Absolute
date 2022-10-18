@@ -10,6 +10,7 @@ import { IQueryFilter } from './rooms.interface'
 import { RoomsModel } from './rooms.model'
 import { parametrHandler } from './utils/parametrHandler'
 import { sliceRoosm } from './utils/sliceRooms'
+import { sortRooms } from './utils/sortRooms'
 
 @Injectable()
 export class RoomsService {
@@ -37,11 +38,12 @@ export class RoomsService {
 					String(room.roomNumber).includes(String(query.searchTerm))
 			  )
 			: data
+		const sortedRooms = sortRooms(rooms, query.sortOption)
 		const totalCount = data.length
 
 		return {
 			totalCount,
-			data: sliceRoosm(rooms, query.page, query.per_page),
+			data: sliceRoosm(sortedRooms, query.page, query.per_page),
 		}
 	}
 

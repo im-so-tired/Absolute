@@ -24,4 +24,5 @@ export interface IQueryFilter {
 	searchTerm?: number
 	page: number
 	per_page: number
+	sortOption?:string
 }

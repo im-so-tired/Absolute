@@ -3,7 +3,8 @@ import { FC } from 'react'
 import Container from '@/components/Common/Container/Container'
 
 import RoomsForm from './RoomsForm/RoomsForm'
-import RoomsList from './RoomsList/RoomsList'
+import styles from './RoomsMain/RoomsList.module.scss'
+import RoomsMain from './RoomsMain/RoomsMain'
 
 const Rooms: FC = () => {
 	return (
@@ -11,7 +12,7 @@ const Rooms: FC = () => {
 			<Container>
 				<div className="flex">
 					<RoomsForm />
-					<RoomsList />
+					<RoomsMain />
 				</div>
 			</Container>
 		</div>
