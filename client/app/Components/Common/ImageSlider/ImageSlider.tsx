@@ -43,7 +43,7 @@ const ImageSlider: FC<{ imgArray: string[] }> = ({ imgArray }) => {
 	return (
 		<Slider {...settings}>
 			{imgArray.map((img, index) => (
-				<div>
+				<div key={index}>
 					<div
 						className="sliderImage"
 						style={{ backgroundImage: `url(${img}` }}

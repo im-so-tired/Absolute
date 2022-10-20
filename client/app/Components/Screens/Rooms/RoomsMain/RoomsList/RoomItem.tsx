@@ -6,11 +6,13 @@ import ImageSlider from '@/components/Common/ImageSlider/ImageSlider'
 
 import { IRoom } from '@/shared/types/room.types'
 
+import Comforts from './Comforts'
 import styles from './RoomsList.module.scss'
 
 const RoomItem: FC<{ info: IRoom }> = ({ info }) => {
 	return (
 		<div className={styles.roomItem}>
+			<Comforts arrayComforts={info.comforts} />
 			<div className={styles.top}>
 				<ImageSlider imgArray={info.images} />
 			</div>

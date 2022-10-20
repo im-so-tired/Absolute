@@ -7,7 +7,7 @@
 	}
 }
 .roomItem{
-	@apply rounded shadow-2xl bg-white transition-shadow;
+	@apply rounded shadow-2xl bg-white transition-shadow relative;
 	&:hover{
 		@apply  transition-shadow;
 		box-shadow: 0 0 30px gray;
@@ -36,6 +36,12 @@
 		}
 		.reviews{
 			@apply font-semibold text-gray-500 text-sm
+		}
+	}
+	.comforts{
+		@apply absolute flex-center top-2 right-2 z-2;
+		svg{
+			@apply rounded-full bg-fuchsia p-1 mr-1 h-6 w-6;
 		}
 	}
 }
