@@ -1,3 +1,41 @@
 .roomsList{
-	@apply grid grid-cols-3 gap-x-3 gap-y-5;
+	h1{
+		@apply mt-[30px] mb-5 inline-block font-bold text-xl
+	}
+	.gridContainer{
+		@apply grid grid-cols-3 gap-x-3 gap-y-5;
+	}
+}
+.roomItem{
+	@apply rounded shadow-2xl bg-white transition-shadow;
+	&:hover{
+		@apply  transition-shadow;
+		box-shadow: 0 0 30px gray;
+	}
+	.top{
+		@apply h-[150px] w-full;
+	}
+	.middle{
+		@apply flex justify-between items-center  py-4 border-b border-gray-500 border-opacity-50;
+		>p:first-child{
+			@apply font-semibold text-2xl;
+		}
+		>p:last-child{
+			@apply text-sm text-gray-500;
+		}
+		.nomer{
+			@apply text-xs inline-block mr-1;
+		}
+	}
+	.bottom{
+		@apply flex justify-between items-center py-4;
+		.rate{
+			span{
+				@apply text-fuchsia;
+			}
+		}
+		.reviews{
+			@apply font-semibold text-gray-500 text-sm
+		}
+	}
 }

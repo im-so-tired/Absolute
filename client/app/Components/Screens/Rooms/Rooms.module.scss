@@ -9,8 +9,5 @@
 	}
 }
 .roomsMain{
-	flex-grow: 2;
-}
-.roomsList{
-	@apply grid grid-cols-3 gap-x-3 gap-y-5;
+	flex:1 1;
 }

@@ -27,9 +27,9 @@ const RoomsList: FC<{ filters: IFilters }> = ({ filters }) => {
 		return <h1>Loading...</h1>
 	}
 	return (
-		<div>
+		<div className={styles.roomsList}>
 			<h1>Номера, которые мы для вас подобрали</h1>
-			<div className={styles.roomsList}>
+			<div className={styles.gridContainer}>
 				{response.data.map((room: IRoom) => (
 					<RoomItem key={room._id} info={room} />
 				))}
