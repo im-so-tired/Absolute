@@ -8,6 +8,8 @@ import { useAuth } from '@/hooks/useAuth'
 
 import Sidebar from '../Sidebar/Sidebar'
 
+import styles from './ProfileLayout.module.scss'
+
 const ProfileLayout: FC<PropsWithChildren> = ({ children }) => {
 	const user = useAuth()
 	const router = useRouter()
@@ -17,17 +19,17 @@ const ProfileLayout: FC<PropsWithChildren> = ({ children }) => {
 		}
 	}, [user])
 	return (
-		<>
-			{
-				<div className="mt-4">
-					<Container>
-						<Breadcrumbs />
-						<Sidebar />
-						{children}
-					</Container>
+		<div className={styles.layout}>
+			<Container>
+				<div className={styles['bread-crumbs']}>
+					<Breadcrumbs />
 				</div>
-			}
-		</>
+				<div className={styles.content}>
+					<Sidebar />
+					{children}
+				</div>
+			</Container>
+		</div>
 	)
 }
 

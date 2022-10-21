@@ -5,14 +5,19 @@ import React, { FC } from 'react'
 
 import MaterialIcon from '@/components/UI/MaterialIcon'
 
+import { useAuth } from '@/hooks/useAuth'
+
 import { IMenuItem } from './MenuItem.interface'
 import styles from './MenuProfile.module.scss'
 
-const CustomMenuItem: FC<{
+interface ICustomMenuItemProps {
 	menuItem: IMenuItem
-}> = ({ menuItem }) => {
+	baseUrl: string
+}
+
+const CustomMenuItem: FC<ICustomMenuItemProps> = ({ menuItem, baseUrl }) => {
 	return (
-		<Link href={menuItem.link ? menuItem.link : ''}>
+		<Link href={baseUrl}>
 			<MenuItem>
 				<ListItemIcon>
 					<MaterialIcon name={menuItem.icon} color="#BC9CFF" />

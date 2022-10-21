@@ -1,9 +1,33 @@
 .sidebar {
+  height: 100%;
+  background: #fff;
+
+  &.MuiList-root {
     height: 100%;
-    background: #fff;
-  
-    &.MuiList-root {
-      background: #f5f5f5;
-      border-right: 3px solid rgba(#1f2041, 0.1);
+    background: #f5f5f5;
+    border-right: 3px solid rgba(#1f2041, 0.1);
+  }
+}
+
+.sidebar-item{
+  color:#54556E;
+  @apply relative;
+  &::after{
+    @apply absolute h-full w-1 left-full top-0;
+    content: '';
+  }
+
+  &.active{
+    @apply text-fuchsia bg-fuchsia bg-opacity-10;
+    &::after{
+      @apply bg-fuchsia;
     }
   }
+  .sidebar-item__content{
+    @apply flex gap-2 items-center text-base font-semibold;
+    font-family: "Montserrat", sans-serif !important;
+    // span {
+    //   @apply ml-4;
+    // }
+  }
+}
