@@ -5,6 +5,7 @@ import Menu from '@mui/material/Menu'
 import { FC, MouseEvent, PropsWithChildren, useEffect, useState } from 'react'
 
 import { useUserActions } from '@/hooks/useActions'
+import { useAuth } from '@/hooks/useAuth'
 
 import CustomMenuItem from './CustomMenuItem'
 import { DataMenuItem } from './Menu.data'
@@ -12,6 +13,7 @@ import styles from './MenuProfile.module.scss'
 
 const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+	const user = useAuth()
 	const { logout } = useUserActions()
 	const open = Boolean(anchorEl)
 	const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -37,15 +39,28 @@ const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 				className={styles.menu}
 			>
 				{DataMenuItem.map((item, index) => {
+					const isDisplayAdmin = item.forAdmin && !user?.isAdmin
 					return (
-						<div key={item.id} onClick={handleClose}>
-							<CustomMenuItem menuItem={item} />
-						</div>
+						!isDisplayAdmin && (
+							<div key={item.id} onClick={handleClose}>
+								<CustomMenuItem
+									baseUrl={`/profile/${user?.id}${item.link}`}
+									menuItem={item}
+								/>
+							</div>
+						)
 					)
 				})}
 				<button onClick={logout} className="w-full">
 					<CustomMenuItem
-						menuItem={{ id: 6, title: 'Выйти', icon: 'MdExitToApp', link: '' }}
+						baseUrl=""
+						menuItem={{
+							id: 6,
+							title: 'Выйти',
+							icon: 'MdExitToApp',
+							link: '',
+							forAdmin: false,
+						}}
 					/>
 				</button>
 			</Menu>

@@ -1,6 +1,7 @@
 import { MenuItem, MenuList } from '@mui/material'
 import cn from 'classnames'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { FC, useState } from 'react'
 
 import { useAuth } from '@/hooks/useAuth'
@@ -11,20 +12,22 @@ import SidebarItem from './SidebarItem'
 
 const Sidebar: FC = () => {
 	const user = useAuth()
+	const { asPath } = useRouter()
 	const [activeLink, setActiveLink] = useState<number>(1)
 	return (
 		<MenuList className={cn([styles.sidebar, styles['MuiList-root']])}>
 			{DataSidebarItem.map(item => {
 				if (item.forAdmin && !user?.isAdmin) return
+				const isActive = asPath === `/profile/${user?.id}${item.link}`
 				return (
 					<div
 						key={item.id}
 						onClick={() => setActiveLink(item.id)}
 						className={cn(styles['sidebar-item'], {
-							[styles.active]: activeLink === item.id,
+							[styles.active]: isActive,
 						})}
 					>
-						<SidebarItem sidebarItem={item} active={activeLink} />
+						<SidebarItem sidebarItem={item} active={isActive} />
 					</div>
 				)
 			})}

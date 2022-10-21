@@ -1,9 +1,15 @@
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect } from 'react'
 
-import Profile from '@/components/Screens/Profile/Profile'
+import { useAuth } from '@/hooks/useAuth'
 
-const ProfilePage = () => {
-	return <Profile />
+const index = () => {
+	const router = useRouter()
+	const user = useAuth()
+	useEffect(() => {
+		router.push(`/profile/${user?.id}`)
+	}, [])
+	return <></>
 }
 
-export default ProfilePage
+export default index

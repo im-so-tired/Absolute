@@ -5,5 +5,6 @@ export interface IMenuItem {
 	title: string
 	icon: iconsTypes
 	link: string
+	forAdmin?: boolean
 	handler?: () => void
 }
