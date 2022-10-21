@@ -5,6 +5,26 @@
 	.gridContainer{
 		@apply grid grid-cols-3 gap-x-3 gap-y-5;
 	}
+	.pagination{
+		@apply mt-10;
+		ul{
+			@apply flex-center;
+			li{
+				@apply h-10 w-10 flex-center mx-1 rounded-full;
+				button{
+					@apply w-full h-full rounded-full m-0 text-gray-500 font-semibold text-base border-fuchsia;
+				}
+				&:first-child,&:last-child{
+					button{
+						@apply text-fuchsia;
+					}
+				}
+				button:hover, button[aria-current="true"]{
+					@apply text-white bg-fuchsia;
+				}
+			}
+		}
+	}
 }
 .roomItem{
 	@apply rounded shadow-2xl bg-white transition-shadow relative;
@@ -39,7 +59,7 @@
 		}
 	}
 	.comforts{
-		@apply absolute flex-center top-2 right-2 z-2;
+		@apply absolute flex-center top-2 right-2;
 		svg{
 			@apply rounded-full bg-fuchsia p-1 mr-1 h-6 w-6;
 		}

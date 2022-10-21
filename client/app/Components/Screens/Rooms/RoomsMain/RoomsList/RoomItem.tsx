@@ -12,7 +12,6 @@ import styles from './RoomsList.module.scss'
 const RoomItem: FC<{ info: IRoom }> = ({ info }) => {
 	return (
 		<div className={styles.roomItem}>
-			<Comforts arrayComforts={info.comforts} />
 			<div className={styles.top}>
 				<ImageSlider imgArray={info.images} />
 			</div>
@@ -43,6 +42,7 @@ const RoomItem: FC<{ info: IRoom }> = ({ info }) => {
 					</div>
 				</a>
 			</Link>
+			<Comforts arrayComforts={info.comforts} />
 		</div>
 	)
 }
