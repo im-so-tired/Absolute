@@ -2,9 +2,6 @@
 	h1{
 		@apply mt-[30px] mb-5 inline-block font-bold text-xl
 	}
-	.gridContainer{
-		@apply grid grid-cols-3 gap-x-3 gap-y-5;
-	}
 	.pagination{
 		@apply mt-10;
 		ul{
@@ -25,6 +22,10 @@
 			}
 		}
 	}
+}
+.gridContainer{
+	@apply grid gap-x-3 gap-y-5;
+	grid-template-columns:repeat(auto-fit,minmax(260px,3fr));
 }
 .roomItem{
 	@apply rounded shadow-2xl bg-white transition-shadow relative;

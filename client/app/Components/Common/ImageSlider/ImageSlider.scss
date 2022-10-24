@@ -13,7 +13,8 @@
 		@apply h-full;
 	}
 	.sliderImage{
-		@apply bg-cover rounded-t
+		@apply bg-cover rounded-t;
+		background-position: 50% 50%;
 	}
 	.slick-arrow{
 		@apply absolute top-1/2 -translate-y-1/2 opacity-0;

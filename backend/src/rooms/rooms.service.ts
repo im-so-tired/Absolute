@@ -39,7 +39,7 @@ export class RoomsService {
 			  )
 			: data
 		const sortedRooms = sortRooms(rooms, query.sortOption)
-		const totalCount = data.length
+		const totalCount = sortedRooms.length
 
 		return {
 			totalCount,
