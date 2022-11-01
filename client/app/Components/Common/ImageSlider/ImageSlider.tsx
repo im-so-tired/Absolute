@@ -30,7 +30,10 @@ function SlickNext(props: CustomArrowProps) {
 	)
 }
 
-const ImageSlider: FC<{ imgArray: string[] }> = ({ imgArray }) => {
+const ImageSlider: FC<{ imgArray: string[]; className?: string }> = ({
+	imgArray,
+	className,
+}) => {
 	const settings = {
 		dots: true,
 		infinite: true,
@@ -43,7 +46,7 @@ const ImageSlider: FC<{ imgArray: string[] }> = ({ imgArray }) => {
 	return (
 		<Slider {...settings}>
 			{imgArray.map((img, index) => (
-				<div>
+				<div className={className} key={index}>
 					<div
 						className="sliderImage"
 						style={{ backgroundImage: `url(${img}` }}

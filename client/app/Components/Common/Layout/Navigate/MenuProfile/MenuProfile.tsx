@@ -2,6 +2,7 @@ import { IconButton, Tooltip } from '@mui/material'
 import Button from '@mui/material/Button'
 import Fade from '@mui/material/Fade'
 import Menu from '@mui/material/Menu'
+import { useRouter } from 'next/router'
 import { FC, MouseEvent, PropsWithChildren, useEffect, useState } from 'react'
 
 import { useUserActions } from '@/hooks/useActions'
@@ -15,12 +16,17 @@ const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 	const user = useAuth()
 	const { logout } = useUserActions()
+	const { push, query } = useRouter()
 	const open = Boolean(anchorEl)
 	const handleClick = (event: MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget)
 	}
 	const handleClose = () => {
 		setAnchorEl(null)
+	}
+	const handleLogout = async () => {
+		push('/')
+		logout()
 	}
 	return (
 		<div className={styles.menuProfile}>
@@ -51,7 +57,7 @@ const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 						)
 					)
 				})}
-				<button onClick={logout} className="w-full">
+				<button onClick={handleLogout} className="w-full">
 					<CustomMenuItem
 						baseUrl=""
 						menuItem={{

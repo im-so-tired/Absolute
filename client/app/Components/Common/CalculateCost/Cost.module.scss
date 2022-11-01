@@ -1,0 +1,14 @@
+.container{
+	@apply w-full text-sm;
+	>div{
+		@apply flex items-center justify-between mt-3;
+	}
+	.tooltip{
+		button{
+			@apply bg-white;
+		}
+	}
+	.result{
+		@apply text-2xl font-bold mt-4 pt-2 border-t border-gray-500;
+	}
+}

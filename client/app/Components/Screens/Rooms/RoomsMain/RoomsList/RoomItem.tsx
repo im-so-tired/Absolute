@@ -3,9 +3,12 @@ import Link from 'next/link'
 import { FC } from 'react'
 
 import ImageSlider from '@/components/Common/ImageSlider/ImageSlider'
+import Price from '@/components/Common/RoomInfo/Price'
+import RoomNumber from '@/components/Common/RoomInfo/RoomNumber'
 
 import { IRoom } from '@/shared/types/room.types'
 
+import Comforts from './Comforts'
 import styles from './RoomsList.module.scss'
 
 const RoomItem: FC<{ info: IRoom }> = ({ info }) => {
@@ -14,18 +17,12 @@ const RoomItem: FC<{ info: IRoom }> = ({ info }) => {
 			<div className={styles.top}>
 				<ImageSlider imgArray={info.images} />
 			</div>
-			<Link href={`rooms/${info._id}`}>
+			<Link href={{ pathname: '/rooms/[id]', query: { id: info._id } }}>
 				<a>
 					<div className="px-5 py-[10px]">
 						<div className={styles.middle}>
-							<p>
-								<span className={styles.nomer}>№</span>
-								{info.roomNumber}
-							</p>
-							<p>
-								<span className="font-semibold">{info.price}&#8381;</span> в
-								сутки
-							</p>
+							<RoomNumber roomNumber={info.roomNumber} type={info.type} />
+							<Price price={info.price} />
 						</div>
 						<div className={styles.bottom}>
 							<Rating
@@ -41,6 +38,7 @@ const RoomItem: FC<{ info: IRoom }> = ({ info }) => {
 					</div>
 				</a>
 			</Link>
+			<Comforts arrayComforts={info.comforts} />
 		</div>
 	)
 }

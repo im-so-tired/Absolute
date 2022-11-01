@@ -2,12 +2,33 @@
 	h1{
 		@apply mt-[30px] mb-5 inline-block font-bold text-xl
 	}
-	.gridContainer{
-		@apply grid grid-cols-3 gap-x-3 gap-y-5;
+	.pagination{
+		@apply mt-10;
+		ul{
+			@apply flex-center;
+			li{
+				@apply h-10 w-10 flex-center mx-1 rounded-full;
+				button{
+					@apply w-full h-full rounded-full m-0 text-gray-500 font-semibold text-base border-fuchsia;
+				}
+				&:first-child,&:last-child{
+					button{
+						@apply text-fuchsia;
+					}
+				}
+				button:hover, button[aria-current="true"]{
+					@apply text-white bg-fuchsia;
+				}
+			}
+		}
 	}
 }
+.gridContainer{
+	@apply grid gap-x-3 gap-y-5;
+	grid-template-columns:repeat(auto-fit,minmax(260px,3fr));
+}
 .roomItem{
-	@apply rounded shadow-2xl bg-white transition-shadow;
+	@apply rounded shadow-2xl bg-white transition-shadow relative;
 	&:hover{
 		@apply  transition-shadow;
 		box-shadow: 0 0 30px gray;
@@ -17,25 +38,18 @@
 	}
 	.middle{
 		@apply flex justify-between items-center  py-4 border-b border-gray-500 border-opacity-50;
-		>p:first-child{
-			@apply font-semibold text-2xl;
-		}
-		>p:last-child{
-			@apply text-sm text-gray-500;
-		}
-		.nomer{
-			@apply text-xs inline-block mr-1;
-		}
 	}
 	.bottom{
 		@apply flex justify-between items-center py-4;
-		.rate{
-			span{
-				@apply text-fuchsia;
-			}
-		}
+		
 		.reviews{
 			@apply font-semibold text-gray-500 text-sm
+		}
+	}
+	.comforts{
+		@apply absolute flex-center top-2 right-2;
+		svg{
+			@apply rounded-full bg-fuchsia p-1 mr-1 h-6 w-6;
 		}
 	}
 }

@@ -2,7 +2,13 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { getValueLocalStorage } from '@/utils/localStorage'
 
-import { checkAuth, login, logout, register } from './User.action'
+import {
+	changeFavourites,
+	checkAuth,
+	login,
+	logout,
+	register,
+} from './User.action'
 import { IInitialState } from './user.interface'
 
 const initialState: IInitialState = {
@@ -53,6 +59,16 @@ export const userSlice = createSlice({
 			})
 			.addCase(checkAuth.rejected, state => {
 				state.user = null
+				state.isLoading = false
+			})
+			.addCase(changeFavourites.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(changeFavourites.fulfilled, (state, { payload }) => {
+				state.user ? (state.user.favourites = [...payload.favourites]) : null
+				state.isLoading = false
+			})
+			.addCase(changeFavourites.rejected, state => {
 				state.isLoading = false
 			})
 	},

@@ -1,6 +1,6 @@
 import { ICountPeople } from '@/shared/types/countPeople'
 
-interface IDateOfStay {
+export interface IDateOfStay {
 	dateComing: number | null
 	dateExit: number | null
 }
