@@ -38,23 +38,10 @@
 	}
 	.middle{
 		@apply flex justify-between items-center  py-4 border-b border-gray-500 border-opacity-50;
-		>p:first-child{
-			@apply font-semibold text-2xl;
-		}
-		>p:last-child{
-			@apply text-sm text-gray-500;
-		}
-		.nomer{
-			@apply text-xs inline-block mr-1;
-		}
 	}
 	.bottom{
 		@apply flex justify-between items-center py-4;
-		.rate{
-			span{
-				@apply text-fuchsia;
-			}
-		}
+		
 		.reviews{
 			@apply font-semibold text-gray-500 text-sm
 		}

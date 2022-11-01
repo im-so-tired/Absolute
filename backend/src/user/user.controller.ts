@@ -8,8 +8,9 @@ import {
 } from '@nestjs/common'
 import { Roles } from 'src/auth/decorators/roles'
 import { GenderValidate } from 'src/pipes/genderValidate'
+import { IdValidate } from 'src/pipes/objectId.pipes'
 import { User } from './decorators/user.decorator'
-import { UpdateDto } from './dto/update.dto'
+import { RoomId, UpdateDto } from './dto/update.dto'
 import { UserService } from './user.service'
 
 @Controller('user')
@@ -27,5 +28,14 @@ export class UserController {
 	@Roles()
 	update(@User('_id') id: string, @Body(GenderValidate) dto: UpdateDto) {
 		return this.userService.update(id, dto)
+	}
+
+	@Put('favourites')
+	@Roles()
+	changeFavourites(
+		@User('_id') id: string,
+		@Body(IdValidate) { roomId }: RoomId
+	) {
+		return this.userService.changeFavourite(id, roomId)
 	}
 }

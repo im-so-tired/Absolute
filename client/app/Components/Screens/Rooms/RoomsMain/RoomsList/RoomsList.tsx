@@ -8,6 +8,8 @@ import { IRoom } from '@/shared/types/room.types'
 
 import { RoomsService } from '@/services/Rooms/Rooms.service'
 
+import { toastrError } from '@/utils/toastrError'
+
 import { IFilters } from '../RoomsList.interface'
 
 import Loader from './Loader'
@@ -22,7 +24,10 @@ const RoomsList: FC<{
 	const { data: response, isLoading } = useQuery(
 		['get rooms', formState, filters],
 		() => RoomsService.getRooms(formState, filters),
-		{ select: data => data?.data }
+		{
+			select: data => data?.data,
+			onError: error => toastrError('Неправильный запрос', error),
+		}
 	)
 	return isLoading ? (
 		<div className={styles.roomsList}>

@@ -13,3 +13,8 @@ export class UpdateDto {
 	@IsNotEmpty()
 	birthYear?: number
 }
+
+export class RoomId {
+	@IsString()
+	roomId: string
+}

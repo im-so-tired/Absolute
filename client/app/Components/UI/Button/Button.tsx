@@ -9,7 +9,7 @@ import MaterialIcon from '../MaterialIcon'
 import styles from './Button.module.scss'
 
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
-	link: string
+	link?: string
 	background: 'base' | 'primary'
 	className?: string
 	endIcon?: iconsTypes
@@ -41,6 +41,7 @@ const Button: FC<PropsWithChildren<IButton>> = ({
 	) : (
 		<button className={cn(buttonClassName[background], className)} {...rest}>
 			{children}
+			{endIcon && <MaterialIcon name={endIcon} />}
 		</button>
 	)
 }

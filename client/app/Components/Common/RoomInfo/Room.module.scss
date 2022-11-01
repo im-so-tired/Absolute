@@ -1,0 +1,20 @@
+.roomNumber{
+	@apply font-semibold text-2xl;
+	.nomer{
+		@apply text-xs inline-block mr-1;
+	}
+	.hugeNomer{
+		@apply text-2xl
+	}
+	.type{
+		@apply inline-block ml-2 uppercase text-fuchsia text-sm;
+	}
+}
+.price{
+	@apply text-sm text-gray-500;
+}
+.rate{
+	span{
+		@apply text-fuchsia;
+	}
+}

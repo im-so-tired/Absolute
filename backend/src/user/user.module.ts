@@ -5,6 +5,7 @@ import { TypegooseModule } from 'nestjs-typegoose'
 import { UserModel } from './user.model'
 import { ConfigModule } from '@nestjs/config'
 import { AuthService } from 'src/auth/auth.service'
+import { RoomsModel } from 'src/rooms/rooms.model'
 
 @Module({
 	providers: [UserService],
@@ -15,6 +16,12 @@ import { AuthService } from 'src/auth/auth.service'
 				typegooseClass: UserModel,
 				schemaOptions: {
 					collection: 'User',
+				},
+			},
+			{
+				typegooseClass: RoomsModel,
+				schemaOptions: {
+					collection: 'rooms',
 				},
 			},
 		]),

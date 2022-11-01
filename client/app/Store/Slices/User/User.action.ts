@@ -2,10 +2,17 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { toastr } from 'react-redux-toastr'
 
 import { AuthService } from '@/services/Auth/Auth.service'
+import { UserService } from '@/services/User.service'
 
 import { toastrError } from '@/utils/toastrError'
 
-import { IAuthResponce, IEmailPassword, RegisterData } from './user.interface'
+import {
+	IAuthResponce,
+	IEmailPassword,
+	IFavourites,
+	RegisterData,
+} from './user.interface'
+import { errorMessage } from '@/helpers/ErrorMessage'
 
 export const register = createAsyncThunk<IAuthResponce, RegisterData>(
 	'auth/register',
@@ -45,6 +52,19 @@ export const checkAuth = createAsyncThunk<IAuthResponce>(
 		try {
 			return await AuthService.getNewTokens()
 		} catch (error) {
+			throw thunkApi.rejectWithValue(error)
+		}
+	}
+)
+
+export const changeFavourites = createAsyncThunk<IFavourites, string>(
+	'user/favourites',
+	async (roomId: string, thunkApi) => {
+		try {
+			return await UserService.changeFavourites(roomId)
+		} catch (error) {
+			if (errorMessage(error) === 'Unauthorized') thunkApi.dispatch(logout())
+			toastrError('Номер', error)
 			throw thunkApi.rejectWithValue(error)
 		}
 	}

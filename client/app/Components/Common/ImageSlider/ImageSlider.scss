@@ -33,9 +33,9 @@
 		li{
 			@apply mx-0 h-2 w-2 mr-1;
 			button{
-				@apply h-2 w-2;
+				@apply h-full w-full;
 				&::before{
-					@apply h-2 w-2 border rounded-full opacity-80;
+					@apply h-full w-full border rounded-full opacity-80;
 					content:'';
 					color:white;
 				}
@@ -46,6 +46,17 @@
 				@apply bg-white opacity-100;
 				color:white;
 			}
+		}
+	}
+}
+.big-slider{
+	.sliderImage{
+		@apply rounded;
+	}
+	.slick-dots{
+		@apply left-1/2 -translate-x-1/2;
+		li{
+			@apply h-4 w-4;
 		}
 	}
 }

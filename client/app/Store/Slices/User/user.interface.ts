@@ -1,5 +1,9 @@
 import { genderType } from '@/shared/types/user'
 
+export interface IFavourites {
+	favourites: string[]
+}
+
 export interface ITokens {
 	refreshToken: string
 	accessToken: string
@@ -16,6 +20,7 @@ export interface UserState {
 	secondName: string
 	birthYear: number
 	gender: genderType
+	favourites: string[]
 }
 export interface RegisterData extends IEmailPassword {
 	firstName: string

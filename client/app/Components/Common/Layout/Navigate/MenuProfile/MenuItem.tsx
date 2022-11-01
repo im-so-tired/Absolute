@@ -8,7 +8,7 @@ import { IMenuItem } from './MenuItem.interface'
 const MenuItem: FC<{ menuItem: IMenuItem }> = ({ menuItem }) => {
 	return (
 		<li>
-			<Link href={menuItem.link}>
+			<Link href={menuItem.link ?? ''}>
 				<a>
 					<MaterialIcon name={menuItem.icon} />
 					<span>{menuItem.title}</span>

@@ -1,0 +1,58 @@
+.gridContainer{
+	@apply grid gap-5 mt-10;
+	grid-template-areas: 'details rating form' 'review review form' 'regulations cancel form';
+	grid-auto-columns: minmax(100px, 400px);
+	grid-auto-rows: minmax(100px, auto);
+
+	.heading{
+		@apply font-semibold text-[1.35rem] mb-5 text-blue-600;
+	}
+	.details{
+		@apply flex flex-col;
+		grid-area: details;
+		.detailsItem{
+			@apply flex items-center py-3 border-b border-gray-500 border-opacity-40;
+			svg{
+				@apply text-fuchsia h-[50px] w-[50px];
+				path{
+					@apply h-[42px] w-[42px]
+				}
+			}
+			>div:last-child{
+				@apply flex flex-col text-sm;
+				h4{
+					@apply font-semibold text-blue-600;
+				}
+				span{
+					@apply text-gray-500;
+				}
+			}
+			&:last-child{
+				@apply border-none pb-0;
+			}
+			&:nth-child(2){
+				@apply pt-0;
+			}
+		}
+	}
+	.rating{
+		@apply text-xl;
+		grid-area: rating;
+		p{
+			span{
+				@apply text-blue-600 font-semibold;
+			}
+		}
+		.rate{
+			span{
+				@apply w-[30px] h-[30px];
+				svg{
+					@apply w-[30px] h-[30px]
+				}
+			}
+		}
+	}
+}
+.bookingForm{
+	
+}
