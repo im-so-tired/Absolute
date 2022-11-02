@@ -1,5 +1,3 @@
-import { SingleValue } from 'react-select'
-
 import { IOptions } from '@/shared/types/select'
 
 export interface ISelectFieldProps {
@@ -7,7 +5,5 @@ export interface ISelectFieldProps {
 	label: string
 	className?: string
 	options: IOptions[]
-	defaultValue?: string
-	value: string
-	onChange: (newValue: SingleValue<IOptions>) => void
+	defaultValue: string
 }

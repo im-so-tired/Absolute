@@ -13,7 +13,7 @@ import { BreadcrumbsTitles } from './BreadcrumbsTitles.dict'
 
 const Breadcrumbs: FC = () => {
 	const user = useAuth()
-	const { asPath, pathname } = useRouter()
+	const { asPath, pathname, isReady } = useRouter()
 	const urlParts = UrlSeparator(asPath)
 
 	// if (currnetUser) {
@@ -44,7 +44,12 @@ const Breadcrumbs: FC = () => {
 						{text}
 					</Typography>
 				) : (
-					<Link key={index} href={routeTo} className={styles.link} passHref>
+					<Link
+						key={index}
+						href={isReady ? routeTo : ''}
+						className={styles.link}
+						passHref
+					>
 						<MuiLink
 							underline="hover"
 							color="primary"

@@ -1,5 +1,6 @@
-.roomsOption{
+.roomsList{
 	@apply mt-4; 
+	flex-grow:2;
 	.header{
 		@apply flex items-center;
 		.search{
@@ -7,7 +8,4 @@
 			flex-grow:2;
 		}
 	}
-}
-.roomsMain{
-	flex:1 1;
 }

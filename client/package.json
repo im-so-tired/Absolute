@@ -34,13 +34,10 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
-    "react-loading-skeleton": "^3.1.0",
     "react-redux": "^8.0.2",
     "react-redux-toastr": "^7.6.9",
     "react-select": "^5.4.0",
-    "react-slick": "^0.29.0",
     "sass": "^1.54.4",
-    "slick-carousel": "^1.8.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {
@@ -50,7 +47,6 @@
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
     "@types/react-redux-toastr": "^7.6.2",
-    "@types/react-slick": "^0.23.10",
     "autoprefixer": "^10.4.8",
     "eslint": "8.21.0",
     "eslint-config-next": "12.2.5",

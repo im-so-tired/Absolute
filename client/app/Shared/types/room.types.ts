@@ -4,9 +4,9 @@ import {
 	termsType,
 } from '@/store/Slices/MainForm/MainForm.interface'
 
-export type typeRoom = 'Lux' | 'Standart'
 export interface IRoom {
 	_id: string
+	bookings: any[]
 	livingСonditions: termsType[]
 	comforts: comfortsType[]
 	accessibility: reachType[]
@@ -15,16 +15,6 @@ export interface IRoom {
 	price: number
 	rate: number
 	roomNumber: number
-	type: typeRoom
+	type: string
 	__v: number
-}
-
-export interface booking {
-	userId: string
-	roomId: string
-	dateComing: number
-	dateExit: number
-	adults: number
-	babies?: number
-	totalPrice: number
 }

@@ -23,7 +23,6 @@ module.exports = {
 				300: '#21BFF3',
 				400: '#8CBAE8',
 				500: '#1976D2',
-				600: '#1f2041',
 			},
 			fuchsia: '#BC9CFF',
 		},
@@ -68,13 +67,6 @@ module.exports = {
 				'.myField': {
 					border: `1px solid ${theme('colors.gray[400]')}`,
 					borderRadius: theme('borderRadius.common'),
-				},
-				'.formContainer': {
-					display: 'inline-block',
-					backgroundColor: 'white',
-					boxShadow: theme('boxShadow.md'),
-					borderRadius: theme('borderRadius.common'),
-					width: '380px',
 				},
 			}),
 				addUtilities({

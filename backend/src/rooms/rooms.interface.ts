@@ -14,15 +14,11 @@ export type roomType = 'Standart' | 'Lux'
 export interface IQueryFilter {
 	arrivalDate?: number
 	departureDate?: number
-	priceRange?: number[]
+	price?: number[]
 	comforts?: comfortsType[]
 	livingСonditions?: termsType[]
 	accessibility?: reachType[]
 	type?: roomType
 	adults?: number
 	babies?: number
-	searchTerm?: number
-	page: number
-	per_page: number
-	sortOption?:string
 }

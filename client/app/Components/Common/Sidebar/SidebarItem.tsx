@@ -15,15 +15,16 @@ const SidebarItem: FC<{ sidebarItem: ISidebarItem; active: boolean }> = ({
 	sidebarItem,
 	active,
 }) => {
+	const { isReady } = useRouter()
 	const user = useAuth()
 	return (
-		<Link href={`/profile/${user?.id}${sidebarItem.link}`}>
-			<MenuItem>
+		<Link href={isReady ? `/profile/${user?.id}${sidebarItem.link}` : ''}>
+			<MenuItem sx={{ transition: 'all 0.1s ease-in' }}>
 				<div className={styles['sidebar-item__content']}>
 					<MaterialIcon
 						name={sidebarItem.icon}
 						color={active ? '#B99DFC' : '#54556E'}
-						size={20}
+						size={24}
 					/>
 					<span>{sidebarItem.title}</span>
 				</div>

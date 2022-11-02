@@ -1,12 +1,12 @@
 import { IQueryFilter } from '../rooms.interface'
 
 export const parametrHandler = (query: IQueryFilter) => {
-	if (!query.priceRange) query.priceRange = [0, 15000]
+	if (!query.price) query.price = [0, 15000]
 	if (!query.adults) query.adults = 1
 	const mainObj: any = {
 		$and: [
-			{ price: { $lte: query.priceRange[1] } },
-			{ price: { $gte: query.priceRange[0] } },
+			{ price: { $lte: query.price[1] } },
+			{ price: { $gte: query.price[0] } },
 		],
 	}
 	mainObj['maxCountPeople.adults'] = { $gte: Number(query.adults) }

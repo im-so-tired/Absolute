@@ -90,7 +90,6 @@ export class AuthService {
 			birthYear: user.birthYear,
 			email: user.email,
 			isAdmin: user.isAdmin,
-			favourites: user.favorites,
 		}
 	}
 }

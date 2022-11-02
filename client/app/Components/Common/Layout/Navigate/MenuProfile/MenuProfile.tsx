@@ -14,9 +14,10 @@ import styles from './MenuProfile.module.scss'
 
 const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-	const user = useAuth()
+	const currentUser = useAuth()
+	const router = useRouter()
+	const [user, setUser] = useState<any>()
 	const { logout } = useUserActions()
-	const { push, query } = useRouter()
 	const open = Boolean(anchorEl)
 	const handleClick = (event: MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget)
@@ -24,10 +25,18 @@ const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 	const handleClose = () => {
 		setAnchorEl(null)
 	}
-	const handleLogout = async () => {
-		push('/')
+
+	const handleLogout = () => {
+		router.push({
+			...router,
+			pathname: '/',
+		})
 		logout()
 	}
+
+	useEffect(() => {
+		setUser(currentUser)
+	}, [currentUser])
 	return (
 		<div className={styles.menuProfile}>
 			<Tooltip title="Открыть меню" arrow>
@@ -50,7 +59,9 @@ const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 						!isDisplayAdmin && (
 							<div key={item.id} onClick={handleClose}>
 								<CustomMenuItem
-									baseUrl={`/profile/${user?.id}${item.link}`}
+									baseUrl={
+										router.isReady ? `/profile/${user?.id}${item.link}` : ''
+									}
 									menuItem={item}
 								/>
 							</div>
