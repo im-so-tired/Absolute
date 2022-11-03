@@ -7,11 +7,18 @@ import { IUser } from '@/shared/types/user'
 
 import defaultAvatar from '@/assets/image/defaultAvatar.svg'
 
+import { getDateByNumber } from '@/utils/getDateByNumber'
+
 import styles from './MainForm.module.scss'
 
 const MainForm: FC = () => {
 	const CurrentUser = useAuth()
 	const [user, setUser] = useState<any>()
+	const birthYear = getDateByNumber(user?.birthYear, {
+		day: 'numeric',
+		month: 'long',
+		year: 'numeric',
+	})
 	useEffect(() => {
 		setUser(CurrentUser)
 	}, [])
@@ -27,7 +34,7 @@ const MainForm: FC = () => {
 					<p>Фамилия: {user?.secondName}</p>
 					<p>Пол: {user?.gender}</p>
 					<p>Статус: {user?.isAdmin ? 'Администратор' : 'Пользователь'}</p>
-					<p>Дата рождения: {user?.birthYear}</p>
+					<p>Дата рождения: {birthYear}</p>
 				</div>
 			</div>
 		</div>
