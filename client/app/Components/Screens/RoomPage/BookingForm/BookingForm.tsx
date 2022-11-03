@@ -10,6 +10,7 @@ import MaterialIcon from '@/components/UI/MaterialIcon'
 
 import { useAppSelector } from '@/hooks/Redux'
 
+import Modal from '../Modal'
 import { IBookingForm } from '../Room.interface'
 
 import styles from './BookingForm.module.scss'
@@ -20,8 +21,14 @@ const BookingForm: FC<IBookingForm> = ({
 	favouritesHandler,
 	roomInfo,
 }) => {
-	const { countBooking, mutateAsync } = useBooking()
-	console.log(countBooking)
+	const {
+		countBooking,
+		mutateAsync,
+		buttonActive,
+		error,
+		openModal,
+		handleClose,
+	} = useBooking()
 	const [resultPrice, setResultPrice] = useState<number>(0)
 	const { date, countPeople } = useAppSelector(state => state.mainForm)
 	const changePrice = (value: number) => {
@@ -40,6 +47,7 @@ const BookingForm: FC<IBookingForm> = ({
 	const bool = favourites.filter(id => id === roomInfo.id).length === 0
 	return (
 		<div className={styles.form}>
+			<Modal open={openModal} handleClose={handleClose} date={date} />
 			<button className={styles.buttonFavourites} onClick={favouritesHandler}>
 				<MaterialIcon name={bool ? 'MdStarBorder' : 'MdStar'} />
 			</button>
@@ -55,6 +63,7 @@ const BookingForm: FC<IBookingForm> = ({
 				<DateFields className={styles.dateFields} />
 				<CountPeople className="mt-4 text-sm" />
 				<CalculateCost
+					countBooking={countBooking}
 					price={roomInfo.price}
 					date={date}
 					className="mt-4"
@@ -65,10 +74,12 @@ const BookingForm: FC<IBookingForm> = ({
 					className="mt-6 w-full py-3"
 					endIcon="MdChevronRight"
 					onClick={clickHandler}
+					disabled={!buttonActive}
 				>
 					Забронировать
 				</Button>
 			</div>
+			{error && <span className="text-red-600 text-sm mt-2">{error}</span>}
 		</div>
 	)
 }

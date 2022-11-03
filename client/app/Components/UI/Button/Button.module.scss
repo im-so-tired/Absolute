@@ -4,9 +4,15 @@
 		@apply border-blue-500 transition-colors;
 	}
 }
-.primaryButton{
-	@apply flex justify-center items-center btn-primary;
+button.primaryButton{
+	@apply flex-center btn-primary;
 	svg{
 		@apply inline-block ml-3 w-[20px] h-[20px];
+	}
+	&:disabled{
+		box-shadow: none;
+		span, svg{
+			@apply opacity-25;
+		}
 	}
 }
