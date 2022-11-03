@@ -1,5 +1,6 @@
 .form{
-	@apply flex flex-col formContainer items-center p-[30px];
+	@apply flex-center flex-col formContainer  p-[30px];
+	grid-area: form;
 	.buttonFavourites{
 		@apply flex-center w-[50px] h-[50px]  rounded-full transition-colors mt-2;
 		&:hover{

@@ -18,7 +18,7 @@ export const useRoom = () => {
 		{
 			enabled: !!query.id,
 			select: data => data?.data,
-			onError: error => toastrError('Номер', error),
+			onError: error => toastrError('Номер недоступен', error),
 		}
 	)
 

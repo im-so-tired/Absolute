@@ -13,12 +13,14 @@ interface ICalculateCost {
 	className?: string
 	date: IDateOfStay
 	changePrice: (value: number) => void
+	countBooking?: number
 }
 const CalculateCost: FC<ICalculateCost> = ({
 	price,
 	className,
 	date,
 	changePrice,
+	countBooking,
 }) => {
 	const days = differenceInCalendarDays(
 		fromUnixTime(date.dateExit ?? 0),
@@ -28,6 +30,10 @@ const CalculateCost: FC<ICalculateCost> = ({
 		totalPrice: days * price,
 		discount: 0,
 		services: 300,
+	}
+	const hasDiscont = !countBooking && countBooking !== undefined
+	if (hasDiscont) {
+		priceDetails.discount = Math.floor(priceDetails.totalPrice * 0.1)
 	}
 	const resultPrice =
 		priceDetails.totalPrice - priceDetails.discount + priceDetails.services
@@ -42,6 +48,17 @@ const CalculateCost: FC<ICalculateCost> = ({
 				</span>
 				<span>{priceDetails.totalPrice}₽</span>
 			</div>
+			{!countBooking && countBooking !== undefined ? (
+				<div>
+					<p className="flex items-center">
+						<span className="inline-block mr-2">Акции: скидка 10%</span>
+						<Tooltip title="Скидка на первую бронь" placement="top">
+							<TooltipComponent />
+						</Tooltip>
+					</p>
+					<span>-{priceDetails.discount}₽</span>
+				</div>
+			) : null}
 			<div>
 				<p className="flex items-center">
 					<span className="inline-block mr-2">Сбор за доп. услуги</span>

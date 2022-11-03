@@ -32,6 +32,7 @@ export class BookingController {
 	@Post()
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
+	@Roles()
 	async create(@Body() dto: BookingDto) {
 		return this.bookingService.create(dto)
 	}

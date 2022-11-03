@@ -4,7 +4,7 @@ import { booking } from '@/shared/types/room.types'
 
 export const BookingService = {
 	async book(data: booking) {
-		await axiosClassic.post('/booking', data)
+		await axiosAuth.post('/booking', data)
 	},
 	async bookingUser(userId: string) {
 		const { data } = await axiosAuth.get<booking[]>(`booking/${userId}`)

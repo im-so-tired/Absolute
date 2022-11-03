@@ -1,0 +1,4 @@
+.modal{
+	@apply absolute top-1/2 left-1/2 rounded shadow-lg bg-white p-4;
+	transform: translate(-50%,-50%);
+}

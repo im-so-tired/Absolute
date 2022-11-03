@@ -7,42 +7,17 @@ import { iconsTypes } from '@/shared/types/iconTypes'
 import MaterialIcon from '../MaterialIcon'
 
 import styles from './Button.module.scss'
+import ButtonBase, { IButton } from './ButtonBase'
 
-interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
-	link?: string
-	background: 'base' | 'primary'
-	className?: string
-	endIcon?: iconsTypes
-}
-const buttonClassName = {
-	base: styles.baseButton,
-	primary: styles.primaryButton,
-}
-const Button: FC<PropsWithChildren<IButton>> = ({
-	background,
-	link,
-	children,
-	className,
-	endIcon,
-	...rest
-}) => {
-	return link ? (
-		<Link href={link}>
+const Button: FC<PropsWithChildren<IButton>> = props => {
+	return props.link ? (
+		<Link href={props.link}>
 			<a>
-				<button
-					className={cn(buttonClassName[background], className)}
-					{...rest}
-				>
-					{children}
-					{endIcon && <MaterialIcon name={endIcon} />}
-				</button>
+				<ButtonBase {...props} />
 			</a>
 		</Link>
 	) : (
-		<button className={cn(buttonClassName[background], className)} {...rest}>
-			{children}
-			{endIcon && <MaterialIcon name={endIcon} />}
-		</button>
+		<ButtonBase {...props} />
 	)
 }
 
