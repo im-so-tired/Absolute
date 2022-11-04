@@ -28,9 +28,10 @@ const BookingForm: FC<IBookingForm> = ({
 		error,
 		openModal,
 		handleClose,
+		date,
+		countPeople,
 	} = useBooking()
 	const [resultPrice, setResultPrice] = useState<number>(0)
-	const { date, countPeople } = useAppSelector(state => state.mainForm)
 	const changePrice = (value: number) => {
 		setResultPrice(value)
 	}
