@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toastr } from 'react-redux-toastr'
 
+import { useAppSelector } from '@/hooks/Redux'
 import { useAuth } from '@/hooks/useAuth'
 
 import { booking } from '@/shared/types/room.types'
@@ -17,6 +18,7 @@ export const useBooking = () => {
 	const [openModal, setOpenModal] = useState<boolean>(false)
 	const [buttonActive, setButtonActive] = useState<boolean>(true)
 	const [error, setError] = useState<string>('')
+	const { date, countPeople } = useAppSelector(state => state.mainForm)
 	const { mutateAsync } = useMutation(
 		(data: Omit<booking, 'userId'>) =>
 			BookingService.book({ ...data, userId: user?.id || '' }),
@@ -41,6 +43,10 @@ export const useBooking = () => {
 	const handleClose = () => {
 		setOpenModal(false)
 	}
+	useEffect(() => {
+		setError('')
+		setButtonActive(true)
+	}, [date])
 	return {
 		countBooking,
 		mutateAsync,
@@ -48,5 +54,7 @@ export const useBooking = () => {
 		buttonActive,
 		error,
 		handleClose,
+		date,
+		countPeople,
 	}
 }

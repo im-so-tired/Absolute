@@ -1,6 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { ModelType } from '@typegoose/typegoose/lib/types'
+import { ObjectId } from 'mongoose'
 import { InjectModel } from 'nestjs-typegoose'
+import { IRoom } from 'src/rooms/rooms.interface'
 import { RoomsModel } from 'src/rooms/rooms.model'
 import { UpdateDto } from './dto/update.dto'
 import { UserModel } from './user.model'
@@ -46,5 +48,12 @@ export class UserService {
 		)
 		if (!room) throw new NotFoundException('Комната не найдена')
 		return room
+	}
+
+	async getFavouritesRooms(dto: string[]) {
+		const rooms: RoomsModel[] = await this.RoomsModel.find({
+			_id: { $in: dto },
+		})
+		return rooms
 	}
 }
