@@ -38,4 +38,10 @@ export class UserController {
 	) {
 		return this.userService.changeFavourite(id, roomId)
 	}
+
+	@Get('favourites')
+	@Roles()
+	async getFavouritesRoom(@User('favorites') dto: string[]) {
+		return this.userService.getFavouritesRooms(dto)
+	}
 }

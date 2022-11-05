@@ -9,7 +9,7 @@ import { AuthModule } from './auth/auth.module'
 import { RoomsModule } from './rooms/rooms.module'
 import { UserModule } from './user/user.module'
 import { BookingModule } from './booking/booking.module'
-import { ReviewsModule } from './reviews/reviews.module';
+import { ReviewsModule } from './reviews/reviews.module'
 
 @Module({
 	imports: [
