@@ -13,6 +13,7 @@ import {
 } from '@nestjs/common'
 import { Roles } from 'src/auth/decorators/roles'
 import { RoomValidate } from 'src/pipes/rooms.pipes'
+import { User } from 'src/user/decorators/user.decorator'
 import { CrudRoomDto } from './dto/crudRoom.dto'
 import { IQueryFilter } from './rooms.interface'
 import { RoomsService } from './rooms.service'
@@ -60,5 +61,11 @@ export class RoomsController {
 	@Roles('admin')
 	async delete(@Param('id') id: string) {
 		return this.roomsService.delete(id)
+	}
+
+	@Get('favourites')
+	@Roles()
+	async getFavouritesRoom(@User('favorites') dto: string[]) {
+		return this.roomsService.getFavouritesRooms(dto)
 	}
 }

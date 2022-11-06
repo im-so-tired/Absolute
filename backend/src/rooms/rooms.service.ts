@@ -75,4 +75,11 @@ export class RoomsService {
 	async delete(id: string) {
 		return this.RoomsModel.findByIdAndRemove(id)
 	}
+
+	async getFavouritesRooms(dto: string[]) {
+		const rooms: RoomsModel[] = await this.RoomsModel.find({
+			_id: { $in: dto },
+		})
+		return rooms
+	}
 }
