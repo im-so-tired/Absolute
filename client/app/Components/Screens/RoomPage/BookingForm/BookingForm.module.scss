@@ -1,5 +1,5 @@
 .form{
-	@apply flex-center flex-col formContainer  p-[30px];
+	@apply flex-center flex-col formContainer p-[30px] ml-auto;
 	grid-area: form;
 	.buttonFavourites{
 		@apply flex-center w-[50px] h-[50px]  rounded-full transition-colors mt-2;

@@ -14,5 +14,6 @@ export class createReviewsDto {
 
 export class updateReviewsDto {
 	@IsString()
+	@IsNotEmpty()
 	message: string
 }

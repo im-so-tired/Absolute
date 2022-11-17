@@ -1,0 +1,55 @@
+.comments{
+	.heading{
+		@apply flex items-center justify-between mb-5;
+		h2{
+			@apply mb-0;
+		}
+	}
+	span{
+		@apply text-sm text-blue-600 text-opacity-75;
+	}
+}
+
+.comment{
+	@apply mb-5;
+	.top{
+		@apply flex justify-between;
+		.userInfo{
+			@apply flex;
+			.name{
+				@apply text-blue-600 font-bold mr-2;
+			}
+			.avatar{
+				@apply bg-gray-300 rounded-full;
+			}
+		}
+		.likeBtn{
+			@apply flex-center border border-fuchsia px-1 rounded-[12px] w-12 mt-2 transition-colors;
+			&:hover{
+				@apply bg-fuchsia bg-opacity-50;
+			}
+			svg{
+				@apply h-[14px] w-[14px] mr-1;
+			}
+		}
+	}
+	.message{
+		@apply text-opacity-100;
+	}
+}
+
+.tooltip{
+	@apply mr-2;
+	button{
+		@apply h-6 w-6 rounded-full p-1 flex-center transition-colors;
+	}
+}
+
+.rate{
+	span{
+		@apply w-[24px] h-[24px];
+		svg{
+			@apply w-[24px] h-[24px] text-fuchsia;
+		}
+	}
+}

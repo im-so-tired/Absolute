@@ -39,4 +39,9 @@ export class UserController {
 	) {
 		return this.userService.changeFavourite(id, roomId)
 	}
+
+	@Get(':id')
+	getById(@Param('id', IdValidate) userId: string) {
+		return this.userService.getById(userId)
+	}
 }

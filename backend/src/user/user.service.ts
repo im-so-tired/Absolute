@@ -13,6 +13,7 @@ export class UserService {
 		@InjectModel(UserModel) private readonly UserModel: ModelType<UserModel>,
 		@InjectModel(RoomsModel) private readonly RoomsModel: ModelType<RoomsModel>
 	) {}
+
 	async getById(id: string) {
 		const user = await this.UserModel.findById(id).select(
 			'-password -createdAt -updatedAt -__v'

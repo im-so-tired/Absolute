@@ -44,9 +44,17 @@ export class ReviewsController {
 	@UsePipes(new ValidationPipe())
 	async updateComment(
 		@Param('id', IdValidate) id: string,
-		@Body() dto: updateReviewsDto
+		@Body() dto: updateReviewsDto,
+		@User('_id') userId: string
 	) {
-		return this.reviewsService.update(dto.message, id)
+		return this.reviewsService.update(dto.message, id, userId)
+	}
+
+	@Put('like/:id')
+	@Roles()
+	@UsePipes(new ValidationPipe())
+	async like(@Param('id', IdValidate) id: string, @User('_id') userId: string) {
+		return this.reviewsService.likesHandler(id, userId)
 	}
 
 	@Get('user')
@@ -61,6 +69,7 @@ export class ReviewsController {
 	}
 
 	@Get(':id')
+	@Roles('admin')
 	async getOneComment(@Param('id', IdValidate) id: string) {
 		return this.reviewsService.getOne(id)
 	}

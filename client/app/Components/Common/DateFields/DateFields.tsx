@@ -1,6 +1,6 @@
 import DateFnsAdapter from '@date-io/date-fns'
 import cn from 'classnames'
-import { addDays, format, fromUnixTime, getUnixTime } from 'date-fns'
+import { addDays, fromUnixTime } from 'date-fns'
 import { FC } from 'react'
 
 import DateOfStay from '@/components/UI/Fields/DateOfStay/DateOfStay'

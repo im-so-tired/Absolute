@@ -1,6 +1,7 @@
 import { format, fromUnixTime } from 'date-fns'
 import 'date-fns'
-import ru from 'date-fns/esm/locale/ru'
+import { ru } from 'date-fns/locale'
+import dynamic from 'next/dynamic'
 import { FC } from 'react'
 
 import Button from '@/components/UI/Button/Button'
@@ -10,7 +11,6 @@ import ModalBase, { IModal } from '@/components/UI/Modal/Modal'
 import { IDateOfStay } from '@/store/Slices/MainForm/MainForm.interface'
 
 import styles from './Room.module.scss'
-import monthLocalize, { buildLocalizeFn } from '@/helpers/localize'
 
 interface IModalProps extends IModal {
 	date: IDateOfStay

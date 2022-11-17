@@ -27,5 +27,6 @@ import { RoomsModel } from 'src/rooms/rooms.model'
 		]),
 		ConfigModule,
 	],
+	exports: [UserService],
 })
 export class UserModule {}

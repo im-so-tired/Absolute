@@ -12,6 +12,7 @@ import { RoomsService } from '@/services/Rooms/Rooms.service'
 import { toastrError } from '@/utils/toastrError'
 
 import BookingForm from './BookingForm/BookingForm'
+import Reviews from './Comments/Reviews'
 import styles from './Room.module.scss'
 import RoomDetails from './RoomDetails/RoomDetails'
 import RoomRating from './RoomRating'
@@ -48,6 +49,7 @@ const Room: FC = () => {
 					favourites={user?.favourites ?? []}
 					favouritesHandler={clickHandler}
 				/>
+				<Reviews roomId={room._id} />
 			</div>
 		</Container>
 	)

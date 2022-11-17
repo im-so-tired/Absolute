@@ -1,8 +1,13 @@
-import { BadRequestException, Injectable } from '@nestjs/common'
+import {
+	BadRequestException,
+	ForbiddenException,
+	Injectable,
+} from '@nestjs/common'
 import { NotFoundException } from '@nestjs/common'
 import mongoose, { ObjectId } from 'mongoose'
 import { InjectModel } from 'nestjs-typegoose'
 import { RoomsService } from 'src/rooms/rooms.service'
+import { UserService } from 'src/user/user.service'
 import { ModelType } from 'typegoose'
 import { createReviewsDto } from './reviews.dto'
 import { ReviewsModel } from './reviews.model'
@@ -12,7 +17,8 @@ export class ReviewsService {
 	constructor(
 		@InjectModel(ReviewsModel)
 		private readonly ReviewsModel: ModelType<ReviewsModel>,
-		private readonly roomsService: RoomsService
+		private readonly roomsService: RoomsService,
+		private readonly userService: UserService
 	) {}
 	async leave(comment: createReviewsDto, userId: ObjectId) {
 		if (!mongoose.Types.ObjectId.isValid(comment.roomId))
@@ -30,13 +36,20 @@ export class ReviewsService {
 	}
 
 	async delete(id: string) {
-		await this.getOne(id)
+		const comment = await this.getOne(id)
+		const user = await this.userService.getById(comment.userId)
+		if (user.id !== comment.userId && !user.isAdmin)
+			throw new ForbiddenException('Вы не можете удалить этот комментарий')
 		const deletedComment = await this.ReviewsModel.findByIdAndDelete(id)
 		return deletedComment
 	}
 
-	async update(message: string, id: string) {
+	async update(message: string, id: string, userId: string) {
 		const comment = await this.getOne(id)
+		if (comment.userId !== String(userId))
+			throw new BadRequestException(
+				'У вас нет прав на редактирование этого комментария'
+			)
 		comment.message = message
 		comment.save()
 		return comment
@@ -51,5 +64,17 @@ export class ReviewsService {
 		await this.roomsService.byId(roomId)
 		const comments = await this.ReviewsModel.find({ roomId })
 		return comments
+	}
+
+	async likesHandler(id: string, userId: string) {
+		const comment = await this.getOne(id)
+		this.userService.getById(userId)
+		comment.likes.includes(userId)
+			? (comment.likes = comment.likes.filter(
+					(id) => String(id) !== String(userId)
+			  ))
+			: comment.likes.push(userId)
+		comment.save()
+		return comment
 	}
 }

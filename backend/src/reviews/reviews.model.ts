@@ -10,6 +10,6 @@ export class ReviewsModel extends TimeStamps {
 	message: string
 	@prop()
 	rating: number
-	@prop({ default: 0 })
-	countLikes: number
+	@prop({ default: [] })
+	likes: string[]
 }

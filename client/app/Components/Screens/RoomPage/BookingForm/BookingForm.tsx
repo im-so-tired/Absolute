@@ -8,8 +8,6 @@ import RoomNumber from '@/components/Common/RoomInfo/RoomNumber'
 import Button from '@/components/UI/Button/Button'
 import MaterialIcon from '@/components/UI/MaterialIcon'
 
-import { useAppSelector } from '@/hooks/Redux'
-
 import Modal from '../Modal'
 import { IBookingForm } from '../Room.interface'
 
