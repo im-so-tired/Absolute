@@ -28,6 +28,7 @@ const Room: FC = () => {
 			</Container>
 		)
 	}
+
 	const clickHandler = () => {
 		changeFavourites(room._id)
 	}

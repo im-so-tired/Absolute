@@ -45,40 +45,42 @@ const BookingForm: FC<IBookingForm> = ({
 	}
 	const bool = favourites.filter(id => id === roomInfo.id).length === 0
 	return (
-		<div className={styles.form}>
-			<Modal open={openModal} handleClose={handleClose} date={date} />
-			<button className={styles.buttonFavourites} onClick={favouritesHandler}>
-				<MaterialIcon name={bool ? 'MdStarBorder' : 'MdStar'} />
-			</button>
-			<div className="w-full">
-				<div className={styles.header}>
-					<RoomNumber
-						roomNumber={roomInfo.number}
-						type={roomInfo.type}
-						size="big"
+		<div className={styles.wrapper}>
+			<div className={styles.form}>
+				<Modal open={openModal} handleClose={handleClose} date={date} />
+				<button className={styles.buttonFavourites} onClick={favouritesHandler}>
+					<MaterialIcon name={bool ? 'MdStarBorder' : 'MdStar'} />
+				</button>
+				<div className="w-full">
+					<div className={styles.header}>
+						<RoomNumber
+							roomNumber={roomInfo.number}
+							type={roomInfo.type}
+							size="big"
+						/>
+						<Price price={roomInfo.price} />
+					</div>
+					<DateFields className={styles.dateFields} />
+					<CountPeople className="mt-4 text-sm" />
+					<CalculateCost
+						countBooking={countBooking}
+						price={roomInfo.price}
+						date={date}
+						className="mt-4"
+						changePrice={changePrice}
 					/>
-					<Price price={roomInfo.price} />
+					<Button
+						background="primary"
+						className="mt-6 w-full py-3"
+						endIcon="MdChevronRight"
+						onClick={clickHandler}
+						disabled={!buttonActive}
+					>
+						Забронировать
+					</Button>
 				</div>
-				<DateFields className={styles.dateFields} />
-				<CountPeople className="mt-4 text-sm" />
-				<CalculateCost
-					countBooking={countBooking}
-					price={roomInfo.price}
-					date={date}
-					className="mt-4"
-					changePrice={changePrice}
-				/>
-				<Button
-					background="primary"
-					className="mt-6 w-full py-3"
-					endIcon="MdChevronRight"
-					onClick={clickHandler}
-					disabled={!buttonActive}
-				>
-					Забронировать
-				</Button>
+				{error && <span className="text-red-600 text-sm mt-2">{error}</span>}
 			</div>
-			{error && <span className="text-red-600 text-sm mt-2">{error}</span>}
 		</div>
 	)
 }

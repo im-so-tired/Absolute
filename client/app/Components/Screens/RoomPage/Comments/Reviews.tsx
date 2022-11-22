@@ -1,14 +1,43 @@
-import { FC } from 'react'
+import cn from 'classnames'
+import { FC, useEffect } from 'react'
 
-import Comments from '@/components/Common/Comments/Comments'
+import CommentItem from '@/screens/RoomPage/Comments/CommentItem'
+import styles from '@/screens/RoomPage/Comments/Comments.module.scss'
+import roomStyles from '@/screens/RoomPage/Room.module.scss'
 
-import { useComments } from './useComments'
+import { useAppSelector } from '@/hooks/Redux'
+import { useReviewsActions } from '@/hooks/useActions'
+
+import { countReviews } from '@/helpers/countReviews'
 
 const Reviews: FC<{ roomId: string }> = ({ roomId }) => {
-	const { isLoading, comments } = useComments(roomId)
+	const { comments, loading: isLoading } = useAppSelector(
+		state => state.reviews
+	)
+	const { getAllComments } = useReviewsActions()
+	useEffect(() => {
+		getAllComments(roomId)
+	}, [])
+	if (isLoading) return <div>Loading...</div>
 	return comments?.length ? (
 		<div style={{ gridArea: 'review' }}>
-			<Comments comments={comments} />
+			<div className={styles.comments}>
+				<div className={styles.heading}>
+					<h2 className={cn(roomStyles.heading, 'mb-0')}>
+						Отзывы посетителей номера
+					</h2>
+					<span>{countReviews(comments.length)}</span>
+				</div>
+				<section>
+					{comments.map(comment => (
+						<CommentItem
+							key={comment._id}
+							comment={comment}
+							// deleteComment={deleteComment}
+						/>
+					))}
+				</section>
+			</div>
 		</div>
 	) : null
 }

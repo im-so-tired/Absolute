@@ -2,8 +2,8 @@ import {
 	BadRequestException,
 	ForbiddenException,
 	Injectable,
+	NotFoundException,
 } from '@nestjs/common'
-import { NotFoundException } from '@nestjs/common'
 import mongoose, { ObjectId } from 'mongoose'
 import { InjectModel } from 'nestjs-typegoose'
 import { RoomsService } from 'src/rooms/rooms.service'
@@ -20,6 +20,7 @@ export class ReviewsService {
 		private readonly roomsService: RoomsService,
 		private readonly userService: UserService
 	) {}
+
 	async leave(comment: createReviewsDto, userId: ObjectId) {
 		if (!mongoose.Types.ObjectId.isValid(comment.roomId))
 			throw new BadRequestException('Неправильный формат id')
@@ -56,14 +57,12 @@ export class ReviewsService {
 	}
 
 	async getUserReviews(userId: string) {
-		const comments = await this.ReviewsModel.find({ userId: userId })
-		return comments
+		return this.ReviewsModel.find({ userId: userId })
 	}
 
 	async getRoomReviews(roomId: string) {
 		await this.roomsService.byId(roomId)
-		const comments = await this.ReviewsModel.find({ roomId })
-		return comments
+		return this.ReviewsModel.find({ roomId })
 	}
 
 	async likesHandler(id: string, userId: string) {
@@ -75,6 +74,6 @@ export class ReviewsService {
 			  ))
 			: comment.likes.push(userId)
 		comment.save()
-		return comment
+		return comment.likes
 	}
 }

@@ -14,7 +14,7 @@ import styles from './CheckboxMenu.module.scss'
 interface ICheckboxMenu {
 	header: string
 	items: ILabel[]
-	onChange: (slug: comfortsType & reachType & termsType) => void
+	onChange: (slug: comfortsType | reachType | termsType) => void
 	value: string[]
 }
 const CheckboxMenu: FC<ICheckboxMenu> = ({

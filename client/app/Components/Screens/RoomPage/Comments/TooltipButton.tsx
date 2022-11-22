@@ -2,9 +2,9 @@ import React, { ReactNode, forwardRef, useState } from 'react'
 
 import MaterialIcon from '@/components/UI/MaterialIcon'
 
-import { iconsTypes } from '@/shared/types/iconTypes'
+import styles from '@/screens/RoomPage/Comments/Comments.module.scss'
 
-import styles from './Comments.module.scss'
+import { iconsTypes } from '@/shared/types/iconTypes'
 
 interface Props {
 	children?: ReactNode

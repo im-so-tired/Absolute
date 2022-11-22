@@ -9,7 +9,7 @@ export const UserService = {
 	},
 
 	async getById(id: string) {
-		const { data } = await axiosClassic.get(`/user/${id}`)
-		return data
+		const { data: user } = await axiosClassic.get(`/user/${id}`)
+		return user
 	},
 }

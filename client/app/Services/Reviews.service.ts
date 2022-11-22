@@ -1,6 +1,6 @@
 import { axiosAuth, axiosClassic } from 'Api/intersaptors'
 
-import { IComment } from '@/components/Common/Comments/Comments.interface'
+import { IComment } from '@/store/Slices/Reviews/Reviews.interface'
 
 export const ReviewsService = {
 	async update(id: string, message: string) {
@@ -17,12 +17,18 @@ export const ReviewsService = {
 		const { data: comments } = await axiosClassic.get<IComment[]>(
 			`/reviews/room/${roomId}`
 		)
-
 		return comments
 	},
 
 	async delete(id: string) {
-		const deletedComment = await axiosAuth.delete<IComment>(`/reviews/${id}`)
-		return deletedComment
+		await axiosAuth.delete<IComment>(`/reviews/${id}`)
+		return id
+	},
+
+	async like(commentId: string) {
+		const { data: likes } = await axiosAuth.put<string[]>(
+			`/reviews/like/${commentId}`
+		)
+		return likes
 	},
 }
