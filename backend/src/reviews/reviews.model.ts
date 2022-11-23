@@ -12,4 +12,6 @@ export class ReviewsModel extends TimeStamps {
 	rating: number
 	@prop({ default: [] })
 	likes: string[]
+	@prop()
+	lastUpdate: number
 }

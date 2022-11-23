@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { toastr } from 'react-redux-toastr'
 
 import {
+	createComment,
 	deleteComment,
 	getAllComments,
 	likeHandler,
@@ -52,18 +54,18 @@ export const reviewsSlice = createSlice({
 				})
 				state.loading = false
 			})
-			.addCase(likeHandler.rejected, (state, { payload }) => {
-				state.loading = false
-			})
 			.addCase(updateComment.fulfilled, (state, { payload }) => {
 				const index = state.comments.findIndex(
 					comment => comment._id === payload?.commentId
 				)
-				console.log(index)
 				state.comments[index].message = payload?.message || 'Default comment'
+				state.comments[index].lastUpdate = Date.now()
 			})
 			.addCase(updateComment.rejected, (state, { payload }) => {
 				state.error = errorMessage(payload)
+			})
+			.addCase(createComment.fulfilled, (state, { payload }) => {
+				payload ? state.comments.unshift(payload) : null
 			})
 	},
 })

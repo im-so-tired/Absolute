@@ -6,7 +6,7 @@
 		}
 	}
 
-	span {
+	.commentSpan{
 		@apply text-sm text-blue-600 text-opacity-75;
 	}
 }
@@ -67,7 +67,15 @@
 		}
 	}
 }
-.errorMessage{
-	@apply text-sm font-semibold inline-block absolute left-0 -bottom-5;
-	color: red !important;
+.errorMessage {
+	@apply text-xs font-semibold inline-block absolute left-0 -bottom-5 text-red-600;
+}
+.createReview{
+	.rating{
+		@apply flex items-center my-5;
+		>span:first-child{
+			@apply font-semibold text-blue-600 text-opacity-80;
+		}
+	}
+
 }

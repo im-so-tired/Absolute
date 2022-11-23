@@ -5,11 +5,12 @@ export interface IComment {
 	message: string
 	rating: number
 	likes: string[]
+	lastUpdate: number
 	createdAt: string
 	updatedAt: string
 }
 export interface IReviewsState {
-	comments: IComment[] | []
+	comments: IComment[]
 	loading: boolean
 	error: string | null
 }
@@ -17,4 +18,9 @@ export interface IReviewsState {
 export interface IUpdateCommentData {
 	commentId: string
 	message: string
+}
+export interface ICreateComment {
+	message: string
+	rating: number
+	roomId: string
 }

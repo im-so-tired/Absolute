@@ -1,8 +1,16 @@
 import { axiosAuth, axiosClassic } from 'Api/intersaptors'
 
-import { IComment } from '@/store/Slices/Reviews/Reviews.interface'
+import {
+	IComment,
+	ICreateComment,
+} from '@/store/Slices/Reviews/Reviews.interface'
 
 export const ReviewsService = {
+	async create(data: ICreateComment) {
+		const { data: comment } = await axiosAuth.post<IComment>('/reviews', data)
+		return comment
+	},
+
 	async update(id: string, message: string) {
 		const { data: updatedComment } = await axiosAuth.put<IComment>(
 			`/reviews/${id}`,

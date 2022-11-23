@@ -25,7 +25,11 @@ export class ReviewsService {
 		if (!mongoose.Types.ObjectId.isValid(comment.roomId))
 			throw new BadRequestException('Неправильный формат id')
 		await this.roomsService.byId(comment.roomId)
-		const newComment = new this.ReviewsModel({ ...comment, userId })
+		const newComment = new this.ReviewsModel({
+			...comment,
+			userId,
+			lastUpdate: Date.now(),
+		})
 		newComment.save()
 		return newComment
 	}
@@ -52,6 +56,7 @@ export class ReviewsService {
 				'У вас нет прав на редактирование этого комментария'
 			)
 		comment.message = message
+		comment.lastUpdate = Date.now()
 		comment.save()
 		return comment
 	}

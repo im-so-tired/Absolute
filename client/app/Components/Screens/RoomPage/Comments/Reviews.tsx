@@ -1,8 +1,10 @@
 import cn from 'classnames'
+import { useRouter } from 'next/router'
 import { FC, useEffect } from 'react'
 
 import CommentItem from '@/screens/RoomPage/Comments/CommentItem'
 import styles from '@/screens/RoomPage/Comments/Comments.module.scss'
+import CreateReview from '@/screens/RoomPage/Comments/CreateReview/CreateReview'
 import roomStyles from '@/screens/RoomPage/Room.module.scss'
 
 import { useAppSelector } from '@/hooks/Redux'
@@ -14,6 +16,7 @@ const Reviews: FC<{ roomId: string }> = ({ roomId }) => {
 	const { comments, loading: isLoading } = useAppSelector(
 		state => state.reviews
 	)
+	const { query } = useRouter()
 	const { getAllComments } = useReviewsActions()
 	useEffect(() => {
 		getAllComments(roomId)
@@ -26,7 +29,9 @@ const Reviews: FC<{ roomId: string }> = ({ roomId }) => {
 					<h2 className={cn(roomStyles.heading, 'mb-0')}>
 						Отзывы посетителей номера
 					</h2>
-					<span>{countReviews(comments.length)}</span>
+					<span className={styles.commentSpan}>
+						{countReviews(comments.length)}
+					</span>
 				</div>
 				<section>
 					{comments.map(comment => (
@@ -37,6 +42,7 @@ const Reviews: FC<{ roomId: string }> = ({ roomId }) => {
 						/>
 					))}
 				</section>
+				<CreateReview />
 			</div>
 		</div>
 	) : null

@@ -1,8 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { toastr } from 'react-redux-toastr'
 
 import { ReviewsService } from '@/services/Reviews.service'
 
-import { IUpdateCommentData } from '@/store/Slices/Reviews/Reviews.interface'
+import {
+	ICreateComment,
+	IUpdateCommentData,
+} from '@/store/Slices/Reviews/Reviews.interface'
 
 import { errorMessage } from '@/helpers/ErrorMessage'
 
@@ -40,6 +44,12 @@ export const likeHandler = createAsyncThunk(
 				commentId,
 			}
 		} catch (error) {
+			if (errorMessage(error) === 'Unauthorized') {
+				toastr.error(
+					'Вы не авторизованы!',
+					'Чтобы ставить лайки нужно авторизоваться'
+				)
+			}
 			throw thunkAPI.rejectWithValue(error)
 		}
 	}
@@ -54,6 +64,24 @@ export const updateComment = createAsyncThunk(
 			return payload
 		} catch (error) {
 			throw thunkAPI.rejectWithValue(error)
+		}
+	}
+)
+
+export const createComment = createAsyncThunk(
+	'reviews/create',
+	async (payload: ICreateComment, thunkAPI) => {
+		try {
+			const newComment = await ReviewsService.create(payload)
+			return newComment
+		} catch (error) {
+			if (errorMessage(error) === 'Unauthorized') {
+				toastr.error(
+					'Вы не авторизованы!',
+					'Чтобы оставить комментарий нужно авторизоваться'
+				)
+			}
+			thunkAPI.rejectWithValue(error)
 		}
 	}
 )

@@ -28,7 +28,7 @@ const CommentItem: FC<{ comment: IComment }> = ({ comment }) => {
 	const [author, setAuthor] = useState<UserState | null>(null)
 	const timeMessage = updateTime(
 		parseISO(comment.createdAt),
-		parseISO(comment.updatedAt)
+		comment.lastUpdate
 	)
 	const { deleteComment, likeHandler, updateComment } = useReviewsActions()
 	const [edited, setEdited] = useState<boolean>(false)
@@ -75,7 +75,7 @@ const CommentItem: FC<{ comment: IComment }> = ({ comment }) => {
 					<div>
 						<p className="flex items-center">
 							<span
-								className={styles.name}
+								className={cn(styles.name, styles.commentSpan)}
 							>{`${author?.firstName} ${author?.secondName}`}</span>
 							{currentUser?.id === comment?.userId ? (
 								<>
@@ -96,7 +96,9 @@ const CommentItem: FC<{ comment: IComment }> = ({ comment }) => {
 								</>
 							) : null}
 						</p>
-						<span className="block mb-3">{timeMessage}</span>
+						<span className={cn('block mb-3', styles.commentSpan)}>
+							{timeMessage}
+						</span>
 					</div>
 					<div>
 						<Rating value={comment.rating} readOnly className={styles.rate} />
@@ -108,7 +110,9 @@ const CommentItem: FC<{ comment: IComment }> = ({ comment }) => {
 						initState={comment.message}
 					/>
 				) : (
-					<span className={styles.message}>{comment.message}</span>
+					<span className={cn(styles.commentSpan, styles.message)}>
+						{comment.message}
+					</span>
 				)}
 			</div>
 		</div>

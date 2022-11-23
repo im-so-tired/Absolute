@@ -1,10 +1,6 @@
 import cn from 'classnames'
 import Link from 'next/link'
-import { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react'
-
-import { iconsTypes } from '@/shared/types/iconTypes'
-
-import MaterialIcon from '../MaterialIcon'
+import { FC, PropsWithChildren } from 'react'
 
 import styles from './Button.module.scss'
 import ButtonBase, { IButton } from './ButtonBase'

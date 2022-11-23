@@ -5,7 +5,6 @@ export const updateTime = (
 	createdAt: Date | number,
 	updatedAt: Date | number
 ) => {
-	getUnixTime
 	let value
 	getUnixTime(createdAt) === getUnixTime(updatedAt)
 		? (value = `Опубликован: ${formatDistanceToNow(createdAt, {

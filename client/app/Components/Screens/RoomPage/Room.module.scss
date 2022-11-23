@@ -50,18 +50,16 @@
         @apply text-blue-600 font-semibold;
       }
     }
-
-    .rate {
-      span {
-        @apply w-[30px] h-[30px];
-        svg {
-          @apply w-[30px] h-[30px]
-        }
-      }
+  }
+}
+.rate {
+  span {
+    @apply w-[30px] h-[30px];
+    svg {
+      @apply w-[30px] h-[30px]
     }
   }
 }
-
 .modal {
   @apply font-bold;
   h3 {
