@@ -1,9 +1,9 @@
 import { NextPage } from 'next'
 
-import ProfileFavourites from '@/components/Screens/Profile/ProfileFavourites'
+import ProfileFavorites from '@/components/Screens/Profile/ProfileFavorites'
 
-const FavouritesPage: NextPage = () => {
-	return <ProfileFavourites />
+const FavoritesPage: NextPage = () => {
+	return <ProfileFavorites />
 }
 
-export default FavouritesPage
+export default FavoritesPage

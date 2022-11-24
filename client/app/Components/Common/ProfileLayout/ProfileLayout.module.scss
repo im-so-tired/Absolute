@@ -1,16 +1,18 @@
 $width-breadcrumbs: 24px;
 
-.layout{
-    font-family: "Montserrat", sans-serif !important;
-    height: 78vh;
-    border-bottom: 1px solid #C7C7CF;
-    @apply flex mt-4 box-border relative;
-    .content {
-        height: calc(78vh - $width-breadcrumbs - 9px);
-        @apply flex gap-14;
-    }
+.layout {
+	font-family: 'Montserrat', sans-serif !important;
+	min-height: 78vh;
+	border-bottom: 1px solid #c7c7cf;
+	// min-height: fit-content;
+	@apply flex mt-4 box-border relative;
+	.content {
+		// height: calc(78vh - $width-breadcrumbs - 9px);
+		height: calc(100% - $width-breadcrumbs - 9px);
+		@apply flex gap-14;
+	}
 }
 
 .bread-crumbs {
-    @apply h-6 p-0 mb-2;
+	@apply h-6 p-0 mb-2;
 }

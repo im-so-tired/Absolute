@@ -19,6 +19,7 @@ const Breadcrumbs: FC = () => {
 	// if (currnetUser) {
 	// 	urlParts.push(currnetUser?.id)
 	// }
+
 	return (
 		<MuiBreadcrumbs aria-label="breadcrumb">
 			<Link href="/" passHref>

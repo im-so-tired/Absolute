@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { stat } from 'fs'
 
 import { getValueLocalStorage } from '@/utils/localStorage'
 
 import {
 	changeFavourites,
 	checkAuth,
+	editProfile,
 	login,
 	logout,
 	register,
@@ -69,6 +71,17 @@ export const userSlice = createSlice({
 				state.isLoading = false
 			})
 			.addCase(changeFavourites.rejected, state => {
+				state.isLoading = false
+			})
+			.addCase(editProfile.pending, state => {
+				state.isLoading = true
+			})
+			.addCase(editProfile.rejected, state => {
+				state.user = null
+				state.isLoading = false
+			})
+			.addCase(editProfile.fulfilled, (state, { payload }) => {
+				state.user = { ...payload }
 				state.isLoading = false
 			})
 	},

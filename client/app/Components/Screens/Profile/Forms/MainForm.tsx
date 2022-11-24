@@ -21,7 +21,7 @@ const MainForm: FC = () => {
 	})
 	useEffect(() => {
 		setUser(CurrentUser)
-	}, [])
+	}, [CurrentUser])
 	return (
 		<div className={styles.wrapper}>
 			<h1>Страница пользователя {`${user?.firstName} ${user?.secondName}`}</h1>

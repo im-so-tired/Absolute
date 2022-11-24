@@ -18,6 +18,7 @@ const ProfileLayout: FC<PropsWithChildren> = ({ children }) => {
 			router.push('/auth/login')
 		}
 	}, [user])
+
 	return (
 		<div className={styles.layout}>
 			<Container>

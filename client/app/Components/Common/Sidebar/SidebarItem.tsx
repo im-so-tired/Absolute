@@ -18,16 +18,18 @@ const SidebarItem: FC<{ sidebarItem: ISidebarItem; active: boolean }> = ({
 	const user = useAuth()
 	return (
 		<Link href={`/profile/${user?.id}${sidebarItem.link}`}>
-			<MenuItem>
-				<div className={styles['sidebar-item__content']}>
-					<MaterialIcon
-						name={sidebarItem.icon}
-						color={active ? '#B99DFC' : '#54556E'}
-						size={20}
-					/>
-					<span>{sidebarItem.title}</span>
-				</div>
-			</MenuItem>
+			<a>
+				<MenuItem>
+					<div className={styles['sidebar-item__content']}>
+						<MaterialIcon
+							name={sidebarItem.icon}
+							color={active ? '#B99DFC' : '#54556E'}
+							size={20}
+						/>
+						<span>{sidebarItem.title}</span>
+					</div>
+				</MenuItem>
+			</a>
 		</Link>
 	)
 }

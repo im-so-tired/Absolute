@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { toastr } from 'react-redux-toastr'
 
+import { IEditProfile } from '@/shared/types/user'
+
 import { AuthService } from '@/services/Auth/Auth.service'
 import { UserService } from '@/services/User.service'
 
@@ -11,6 +13,7 @@ import {
 	IEmailPassword,
 	IFavourites,
 	RegisterData,
+	UserState,
 } from './user.interface'
 import { errorMessage } from '@/helpers/ErrorMessage'
 
@@ -23,6 +26,20 @@ export const register = createAsyncThunk<IAuthResponce, RegisterData>(
 			return responce
 		} catch (error) {
 			toastrError('Auth error', error)
+			throw thunkApi.rejectWithValue(error)
+		}
+	}
+)
+
+export const editProfile = createAsyncThunk<UserState, IEditProfile>(
+	'user/profile',
+	async (data: IEditProfile, thunkApi) => {
+		try {
+			const responce = await UserService.editProfile(data)
+			toastr.success('Edit data', 'Edit is successfully')
+			return responce
+		} catch (error) {
+			toastrError('Edit error', error)
 			throw thunkApi.rejectWithValue(error)
 		}
 	}

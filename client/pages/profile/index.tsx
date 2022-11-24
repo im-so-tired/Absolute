@@ -9,7 +9,7 @@ const index: NextPage = () => {
 	const user = useAuth()
 	useEffect(() => {
 		router.push(`/profile/${user?.id}`)
-	}, [])
+	}, [user])
 	return <></>
 }
 

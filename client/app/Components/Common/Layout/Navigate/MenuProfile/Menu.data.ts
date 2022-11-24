@@ -30,6 +30,6 @@ export const DataMenuItem: IMenuItem[] = [
 		id: 5,
 		title: 'Избранное',
 		icon: 'MdTurnedInNot',
-		link: '',
+		link: '/favorites',
 	},
 ]

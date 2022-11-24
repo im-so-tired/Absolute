@@ -50,7 +50,7 @@ export class UserService {
 		return room
 	}
 
-	async getFavouritesRooms(dto: string[]) {
+	async getFavoritesRooms(dto: string[]) {
 		const rooms: RoomsModel[] = await this.RoomsModel.find({
 			_id: { $in: dto },
 		})
