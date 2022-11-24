@@ -11,7 +11,7 @@ const RoomRating: FC<{ value: number }> = ({ value }) => {
 			<p>
 				Общая оценка: <span>{value} из 5</span>
 			</p>
-			<Rating className={styles.rate} readOnly value={value} />
+			<Rating className={styles.rate} precision={0.1} readOnly value={value} />
 		</div>
 	)
 }

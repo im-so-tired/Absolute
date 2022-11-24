@@ -13,6 +13,7 @@ export interface IReviewsState {
 	comments: IComment[]
 	loading: boolean
 	error: string | null
+	rate: number
 }
 
 export interface IUpdateCommentData {

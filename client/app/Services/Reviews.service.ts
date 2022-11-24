@@ -1,4 +1,5 @@
 import { axiosAuth, axiosClassic } from 'Api/intersaptors'
+import { getUnixTime, parseISO } from 'date-fns'
 
 import {
 	IComment,
@@ -25,6 +26,7 @@ export const ReviewsService = {
 		const { data: comments } = await axiosClassic.get<IComment[]>(
 			`/reviews/room/${roomId}`
 		)
+		comments.sort((a, b) => b.lastUpdate - a.lastUpdate)
 		return comments
 	},
 

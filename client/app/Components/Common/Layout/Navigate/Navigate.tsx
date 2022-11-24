@@ -16,17 +16,13 @@ import Profile from './Profile/Profile'
 
 const Navigate: FC = () => {
 	const user = useAuth()
-	const [userState, setUserState] = useState<null | UserState>(null)
 
-	useEffect(() => {
-		setUserState(user)
-	}, [user])
 	return (
 		<div className="shadow-xl">
 			<Container className={styles.wrapper}>
 				<Logo />
 				<NavList />
-				{userState ? <Profile user={userState} /> : <Buttons />}
+				{user ? <Profile user={user} /> : <Buttons />}
 			</Container>
 		</div>
 	)

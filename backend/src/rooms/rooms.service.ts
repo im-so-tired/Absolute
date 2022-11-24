@@ -82,4 +82,11 @@ export class RoomsService {
 		})
 		return rooms
 	}
+
+	async countReviewsHandler(roomId: string, delta: number) {
+		const room = await this.RoomsModel.findById(roomId)
+		room.countReviews += delta
+		room.save()
+		return room.countReviews
+	}
 }

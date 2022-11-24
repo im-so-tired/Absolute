@@ -26,7 +26,7 @@ const CreateReview = () => {
 	return (
 		<div className={styles.createReview}>
 			<h3 className={mainStyles.heading}>Оставить отзыв</h3>
-			<p className="relative">
+			<div className="relative">
 				<TextField
 					id="outlined-textarea"
 					label="Оставить отзыв"
@@ -42,7 +42,7 @@ const CreateReview = () => {
 						Поле не должно быть пустым
 					</span>
 				) : null}
-			</p>
+			</div>
 			<div className={styles.rating}>
 				<span>Ваша оценка: </span>
 				<Rating

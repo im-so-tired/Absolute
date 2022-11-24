@@ -10,6 +10,7 @@ import { IRoom } from '@/shared/types/room.types'
 
 import Comforts from './Comforts'
 import styles from './RoomsList.module.scss'
+import { countReviews } from '@/helpers/countReviews'
 
 const RoomItem: FC<{ info: IRoom }> = ({ info }) => {
 	return (
@@ -32,7 +33,7 @@ const RoomItem: FC<{ info: IRoom }> = ({ info }) => {
 								readOnly
 							/>
 							<span className={styles.reviews}>
-								{info.countReviews} Отзывов
+								{countReviews(info.countReviews)}
 							</span>
 						</div>
 					</div>

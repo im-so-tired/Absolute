@@ -16,36 +16,33 @@ const Reviews: FC<{ roomId: string }> = ({ roomId }) => {
 	const { comments, loading: isLoading } = useAppSelector(
 		state => state.reviews
 	)
-	const { query } = useRouter()
 	const { getAllComments } = useReviewsActions()
 	useEffect(() => {
 		getAllComments(roomId)
 	}, [])
 	if (isLoading) return <div>Loading...</div>
-	return comments?.length ? (
+	return (
 		<div style={{ gridArea: 'review' }}>
-			<div className={styles.comments}>
-				<div className={styles.heading}>
-					<h2 className={cn(roomStyles.heading, 'mb-0')}>
-						Отзывы посетителей номера
-					</h2>
-					<span className={styles.commentSpan}>
-						{countReviews(comments.length)}
-					</span>
+			{comments?.length ? (
+				<div className={styles.comments}>
+					<div className={styles.heading}>
+						<h2 className={cn(roomStyles.heading, 'mb-0')}>
+							Отзывы посетителей номера
+						</h2>
+						<span className={styles.commentSpan}>
+							{countReviews(comments.length)}
+						</span>
+					</div>
+					<section>
+						{comments.map(comment => (
+							<CommentItem key={comment._id} comment={comment} />
+						))}
+					</section>
 				</div>
-				<section>
-					{comments.map(comment => (
-						<CommentItem
-							key={comment._id}
-							comment={comment}
-							// deleteComment={deleteComment}
-						/>
-					))}
-				</section>
-				<CreateReview />
-			</div>
+			) : null}
+			<CreateReview />
 		</div>
-	) : null
+	)
 }
 
 export default Reviews

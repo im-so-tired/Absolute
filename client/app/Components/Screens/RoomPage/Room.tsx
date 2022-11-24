@@ -1,15 +1,10 @@
-import { useQuery } from '@tanstack/react-query'
-import { useRouter } from 'next/router'
 import { FC } from 'react'
 
 import Container from '@/components/Common/Container/Container'
 import ImageSlider from '@/components/Common/ImageSlider/ImageSlider'
 
+import { useAppSelector } from '@/hooks/Redux'
 import { useAuth } from '@/hooks/useAuth'
-
-import { RoomsService } from '@/services/Rooms/Rooms.service'
-
-import { toastrError } from '@/utils/toastrError'
 
 import BookingForm from './BookingForm/BookingForm'
 import Reviews from './Comments/Reviews'
@@ -21,6 +16,7 @@ import { useRoom } from './useRoom'
 const Room: FC = () => {
 	const { isLoading, room, changeFavourites, queryId } = useRoom()
 	const user = useAuth()
+	const rate = useAppSelector(state => state.reviews.rate)
 	if (isLoading || !queryId || !room) {
 		return (
 			<Container>
@@ -39,7 +35,7 @@ const Room: FC = () => {
 			</div>
 			<div className={styles.gridContainer}>
 				<RoomDetails />
-				<RoomRating value={room.rate} />
+				<RoomRating value={rate || 0} />
 				<BookingForm
 					roomInfo={{
 						id: room._id,

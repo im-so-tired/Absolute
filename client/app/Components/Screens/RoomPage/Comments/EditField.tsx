@@ -18,7 +18,7 @@ const EditField: FC<IEditFieldProps> = ({ initState, finishEditing }) => {
 	}
 	return (
 		<div>
-			<p className="relative">
+			<div className="relative">
 				<TextField
 					id="outlined-multiline-static"
 					label=""
@@ -34,7 +34,7 @@ const EditField: FC<IEditFieldProps> = ({ initState, finishEditing }) => {
 						Поле не должно быть пустым
 					</span>
 				) : null}
-			</p>
+			</div>
 			<Button
 				background={'base'}
 				onClick={handleClick}

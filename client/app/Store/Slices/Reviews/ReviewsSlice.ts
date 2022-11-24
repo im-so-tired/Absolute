@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toastr } from 'react-redux-toastr'
 
+import { countRoomRating } from '@/utils/countRoomRating'
+
 import {
 	createComment,
 	deleteComment,
@@ -16,6 +18,7 @@ const initialState: IReviewsState = {
 	comments: [],
 	loading: true,
 	error: null,
+	rate: 0,
 }
 export const reviewsSlice = createSlice({
 	name: 'reviews',
@@ -26,6 +29,7 @@ export const reviewsSlice = createSlice({
 			.addCase(getAllComments.fulfilled, (state, { payload }) => {
 				state.comments = payload
 				state.loading = false
+				state.rate = countRoomRating(state.comments)
 			})
 			.addCase(getAllComments.pending, state => {
 				state.loading = true
@@ -40,6 +44,7 @@ export const reviewsSlice = createSlice({
 							comment => comment._id !== payload
 					  ))
 					: null
+				state.rate = countRoomRating(state.comments)
 				state.loading = false
 			})
 			.addCase(deleteComment.rejected, (state, { payload }) => {
@@ -60,12 +65,16 @@ export const reviewsSlice = createSlice({
 				)
 				state.comments[index].message = payload?.message || 'Default comment'
 				state.comments[index].lastUpdate = Date.now()
+				state.comments.sort((a, b) => b.lastUpdate - a.lastUpdate)
 			})
 			.addCase(updateComment.rejected, (state, { payload }) => {
 				state.error = errorMessage(payload)
 			})
 			.addCase(createComment.fulfilled, (state, { payload }) => {
-				payload ? state.comments.unshift(payload) : null
+				if (payload) {
+					state.comments.unshift(payload)
+					state.rate = countRoomRating(state.comments)
+				}
 			})
 	},
 })

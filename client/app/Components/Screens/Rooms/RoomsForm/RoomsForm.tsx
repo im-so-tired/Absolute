@@ -23,13 +23,13 @@ const RoomsForm: FC = () => {
 	const { resetData, changeComforts, changeTerms, changeReach } =
 		useMainFormActions()
 	const { reach, terms, comforts } = useAppSelector(state => state.mainForm)
-	const changeComfortsFunc = (slug: comfortsType & termsType & reachType) => {
+	const changeComfortsFunc = (slug: comfortsType) => {
 		changeComforts(slug)
 	}
-	const changeTermsFunc = (slug: comfortsType & termsType & reachType) => {
+	const changeTermsFunc = (slug: termsType) => {
 		changeTerms(slug)
 	}
-	const changeReachFunc = (slug: comfortsType & termsType & reachType) => {
+	const changeReachFunc = (slug: reachType) => {
 		changeReach(slug)
 	}
 	return (
