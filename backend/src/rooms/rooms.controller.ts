@@ -24,8 +24,14 @@ export class RoomsController {
 
 	@Get()
 	@HttpCode(200)
-	async getAll(@Query() query: IQueryFilter) {
-		return this.roomsService.getAll(query)
+	async getAllWithQuery(@Query() query: IQueryFilter) {
+		return this.roomsService.getAllWithQuery(query)
+	}
+
+	@Get('all')
+	@HttpCode(200)
+	async getAll() {
+		return this.roomsService.getAll()
 	}
 
 	@Get(':id')

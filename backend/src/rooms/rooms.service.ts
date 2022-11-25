@@ -31,7 +31,7 @@ export class RoomsService {
 		return newRoom
 	}
 
-	async getAll(query: IQueryFilter) {
+	async getAllWithQuery(query: IQueryFilter) {
 		const data = await this.RoomsModel.find(parametrHandler(query))
 		const rooms = query.searchTerm
 			? data.filter((room: RoomsModel) =>
@@ -45,6 +45,11 @@ export class RoomsService {
 			totalCount,
 			data: sliceRoosm(sortedRooms, query.page, query.per_page),
 		}
+	}
+
+	async getAll() {
+		const data = await this.RoomsModel.find()
+		return data
 	}
 
 	async byId(id: string) {

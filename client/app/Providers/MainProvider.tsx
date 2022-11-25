@@ -6,6 +6,8 @@ import { Provider } from 'react-redux'
 
 import Layout from '@/components/Common/Layout/Layout'
 
+import { TypeComponentsAuthFields } from '@/shared/types/auth.types'
+
 import { store } from '@/store/Store'
 
 import AuthProvider from './Auth/AuthProvider'
@@ -14,11 +16,14 @@ import ReduxToastr from './ReduxToastr'
 const queryClient = new QueryClient({
 	defaultOptions: { queries: { refetchOnWindowFocus: false } },
 })
-const MainProvider: FC<PropsWithChildren> = ({ children }) => {
+const MainProvider: FC<PropsWithChildren<TypeComponentsAuthFields>> = ({
+	children,
+	Component,
+}) => {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Provider store={store}>
-				<AuthProvider>
+				<AuthProvider Component={Component}>
 					<LocalizationProvider dateAdapter={AdapterDateFns}>
 						<ReduxToastr />
 						<Layout>{children}</Layout>

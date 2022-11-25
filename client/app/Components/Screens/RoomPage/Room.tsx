@@ -2,9 +2,15 @@ import { FC } from 'react'
 
 import Container from '@/components/Common/Container/Container'
 import ImageSlider from '@/components/Common/ImageSlider/ImageSlider'
+import Loader from '@/components/UI/Loader'
 
 import { useAppSelector } from '@/hooks/Redux'
+import { useUserActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
+
+import { IRoom } from '@/shared/types/room.types'
+
+import { IComment } from '@/store/Slices/Reviews/Reviews.interface'
 
 import BookingForm from './BookingForm/BookingForm'
 import Reviews from './Comments/Reviews'
@@ -13,18 +19,13 @@ import RoomDetails from './RoomDetails/RoomDetails'
 import RoomRating from './RoomRating'
 import { useRoom } from './useRoom'
 
-const Room: FC = () => {
-	const { isLoading, room, changeFavourites, queryId } = useRoom()
+const Room: FC<{ room: IRoom; comments: IComment[] }> = ({
+	room,
+	comments,
+}) => {
 	const user = useAuth()
 	const rate = useAppSelector(state => state.reviews.rate)
-	if (isLoading || !queryId || !room) {
-		return (
-			<Container>
-				<div>Loading...</div>
-			</Container>
-		)
-	}
-
+	const { changeFavourites } = useUserActions()
 	const clickHandler = () => {
 		changeFavourites(room._id)
 	}
@@ -46,7 +47,7 @@ const Room: FC = () => {
 					favourites={user?.favourites ?? []}
 					favouritesHandler={clickHandler}
 				/>
-				<Reviews roomId={room._id} />
+				<Reviews comments={comments} />
 			</div>
 		</Container>
 	)

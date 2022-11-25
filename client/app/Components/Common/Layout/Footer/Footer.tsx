@@ -4,13 +4,14 @@ import FieldBase from '@/components/UI/Fields/FieldBase/FieldBase'
 import MaterialIcon from '@/components/UI/MaterialIcon'
 
 import Container from '../../Container/Container'
+import mainStyles from '../Layout.module.scss'
 import Logo from '../Navigate/Logo'
 
 import styles from './Footer.module.scss'
 
 const Footer: FC = () => {
 	return (
-		<Container>
+		<Container className={mainStyles.footer}>
 			<div className={styles.footer}>
 				<div>
 					<div>

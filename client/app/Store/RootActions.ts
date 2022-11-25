@@ -1,5 +1,7 @@
+import { reviewsActions } from '@/store/Slices/Reviews/ReviewsSlice'
+
 import { mainFormActions } from './Slices/MainForm/MainFormSlice'
-import * as reviewsActions from './Slices/Reviews/Reviews.actions'
+import * as reviewsAsyncActions from './Slices/Reviews/Reviews.actions'
 import * as userActions from './Slices/User/User.action'
 
 export const allUserActions = {
@@ -11,5 +13,6 @@ export const allFormActions = {
 }
 
 export const allReviewsActions = {
+	...reviewsAsyncActions,
 	...reviewsActions,
 }

@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { toastr } from 'react-redux-toastr'
 
 import { countRoomRating } from '@/utils/countRoomRating'
@@ -10,7 +10,10 @@ import {
 	likeHandler,
 	updateComment,
 } from '@/store/Slices/Reviews/Reviews.actions'
-import { IReviewsState } from '@/store/Slices/Reviews/Reviews.interface'
+import {
+	IComment,
+	IReviewsState,
+} from '@/store/Slices/Reviews/Reviews.interface'
 
 import { errorMessage } from '@/helpers/ErrorMessage'
 
@@ -23,7 +26,11 @@ const initialState: IReviewsState = {
 export const reviewsSlice = createSlice({
 	name: 'reviews',
 	initialState,
-	reducers: {},
+	reducers: {
+		writeComments: (state, { payload }: PayloadAction<IComment[]>) => {
+			state.comments = payload
+		},
+	},
 	extraReducers: builder => {
 		builder
 			.addCase(getAllComments.fulfilled, (state, { payload }) => {
@@ -78,5 +85,5 @@ export const reviewsSlice = createSlice({
 			})
 	},
 })
-
+export const reviewsActions = reviewsSlice.actions
 export default reviewsSlice.reducer

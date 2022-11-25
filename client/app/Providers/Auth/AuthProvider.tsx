@@ -1,13 +1,18 @@
 import Cookies from 'js-cookie'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { FC, PropsWithChildren, useEffect } from 'react'
+import { FC, useEffect } from 'react'
 
 import { useUserActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
 
-import { getValueLocalStorage } from '@/utils/localStorage'
+import { TypeComponentsAuthFields } from '@/shared/types/auth.types'
 
-const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
+const DynamicCheckRole = dynamic(() => import('./CheckRole'), { ssr: false })
+const AuthProvider: FC<TypeComponentsAuthFields> = ({
+	children,
+	Component: { isOnlyUser, isOnlyAdmin },
+}) => {
 	const { logout, checkAuth } = useUserActions()
 	const { pathname } = useRouter()
 	const user = useAuth()
@@ -19,7 +24,12 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 		const refreshToken = Cookies.get('refreshToken')
 		if (!refreshToken || !user) logout()
 	}, [pathname])
-	return <>{children}</>
+	if (!isOnlyUser && !isOnlyAdmin) return <>{children}</>
+	return (
+		<DynamicCheckRole Component={{ isOnlyAdmin, isOnlyUser }}>
+			{children}
+		</DynamicCheckRole>
+	)
 }
 
 export default AuthProvider

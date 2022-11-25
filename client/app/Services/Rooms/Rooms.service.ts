@@ -11,7 +11,15 @@ import { IMainFormValue } from '@/store/Slices/MainForm/MainForm.interface'
 import { convertParams } from './helpers'
 
 export const RoomsService = {
-	async getRooms(formState: IMainFormValue, filters: IFilters) {
+	async getRooms(
+		formState: IMainFormValue,
+		filters: IFilters = {
+			searchTerm: '',
+			perPage: '12',
+			page: 1,
+			sortOption: 'des',
+		}
+	) {
 		const query = convertParams(formState)
 
 		const rooms = await axiosClassic.get<{
@@ -27,7 +35,7 @@ export const RoomsService = {
 		return rooms
 	},
 	async getRoomById(id: string) {
-		const room = await axiosClassic.get<IRoom>(`/rooms/${id}`)
+		const { data: room } = await axiosClassic.get<IRoom>(`/rooms/${id}`)
 		return room
 	},
 }

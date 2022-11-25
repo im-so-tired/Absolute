@@ -17,7 +17,6 @@ export const useRoom = () => {
 		() => RoomsService.getRoomById(queryId),
 		{
 			enabled: !!query.id,
-			select: data => data?.data,
 			onError: error => toastrError('Номер недоступен', error),
 		}
 	)

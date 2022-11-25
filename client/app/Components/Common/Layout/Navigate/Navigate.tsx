@@ -16,7 +16,6 @@ import Profile from './Profile/Profile'
 
 const Navigate: FC = () => {
 	const user = useAuth()
-
 	return (
 		<div className="shadow-xl">
 			<Container className={styles.wrapper}>

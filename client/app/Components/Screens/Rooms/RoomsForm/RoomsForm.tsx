@@ -58,7 +58,6 @@ const RoomsForm: FC = () => {
 			/>
 			<Button
 				background="primary"
-				link=""
 				className="w-full mt-4 py-2"
 				onClick={resetData}
 			>

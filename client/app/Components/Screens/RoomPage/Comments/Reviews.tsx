@@ -10,20 +10,23 @@ import roomStyles from '@/screens/RoomPage/Room.module.scss'
 import { useAppSelector } from '@/hooks/Redux'
 import { useReviewsActions } from '@/hooks/useActions'
 
+import { IComment } from '@/store/Slices/Reviews/Reviews.interface'
+
 import { countReviews } from '@/helpers/countReviews'
 
-const Reviews: FC<{ roomId: string }> = ({ roomId }) => {
-	const { comments, loading: isLoading } = useAppSelector(
+const Reviews: FC<{ comments: IComment[] }> = ({ comments }) => {
+	const { comments: commentsState, loading: isLoading } = useAppSelector(
 		state => state.reviews
 	)
-	const { getAllComments } = useReviewsActions()
+
+	const { writeComments } = useReviewsActions()
 	useEffect(() => {
-		getAllComments(roomId)
-	}, [])
-	if (isLoading) return <div>Loading...</div>
+		writeComments(comments)
+	}, [comments])
+	// if (isLoading) return <div>Loading...</div>
 	return (
 		<div style={{ gridArea: 'review' }}>
-			{comments?.length ? (
+			{commentsState?.length ? (
 				<div className={styles.comments}>
 					<div className={styles.heading}>
 						<h2 className={cn(roomStyles.heading, 'mb-0')}>
@@ -34,7 +37,7 @@ const Reviews: FC<{ roomId: string }> = ({ roomId }) => {
 						</span>
 					</div>
 					<section>
-						{comments.map(comment => (
+						{commentsState.map(comment => (
 							<CommentItem key={comment._id} comment={comment} />
 						))}
 					</section>
