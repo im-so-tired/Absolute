@@ -1,11 +1,11 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import styles from '../Room.module.scss'
 
 import DetailsItem from './DetailsItem'
 import { roomDetails } from './RoomDetails.data'
 
-const RoomDetails: FC = () => {
+const RoomDetails: FC = memo(() => {
 	return (
 		<div className={styles.details}>
 			<h3 className={styles.heading}>Сведения о номере</h3>
@@ -14,6 +14,6 @@ const RoomDetails: FC = () => {
 			))}
 		</div>
 	)
-}
+})
 
 export default RoomDetails

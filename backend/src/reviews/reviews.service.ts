@@ -57,6 +57,19 @@ export class ReviewsService {
 		if (user.id !== comment.userId && !user.isAdmin)
 			throw new ForbiddenException('Вы не можете удалить этот комментарий')
 		const deletedComment = await this.ReviewsModel.findByIdAndDelete(id)
+		const room = await this.roomsService.byId(comment.roomId)
+		const roomComments = await this.getRoomReviews(comment.roomId)
+		roomComments.length
+			? (room.rate = Number(
+					(
+						roomComments.reduce(
+							(sumRate, comment) => sumRate + comment.rating,
+							0
+						) / roomComments.length
+					).toFixed(1)
+			  ))
+			: (room.rate = 0)
+		room.save()
 		await this.roomsService.countReviewsHandler(comment.roomId, -1)
 		return deletedComment
 	}

@@ -10,6 +10,6 @@ export const useAuth = () => {
 
 	useEffect(() => {
 		setCurrentUser(user)
-	}, [user])
+	}, [])
 	return currentUser
 }

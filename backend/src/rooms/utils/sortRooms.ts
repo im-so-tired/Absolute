@@ -9,10 +9,10 @@ export const sortRooms = (rooms: RoomsModel[], sortOption: string) => {
 			rooms.sort((a, b) => b.roomNumber - a.roomNumber)
 			break
 		case 'popular':
-			rooms.sort((a, b) => a.countReviews - b.countReviews)
+			rooms.sort((a, b) => b.countReviews - a.countReviews)
 			break
 		case 'high-rating':
-			rooms.sort((a, b) => a.rate - b.rate)
+			rooms.sort((a, b) => b.rate - a.rate)
 			break
 		case 'cheap-first':
 			rooms.sort((a, b) => a.price - b.price)

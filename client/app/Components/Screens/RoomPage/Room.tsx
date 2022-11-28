@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
 
 import Container from '@/components/Common/Container/Container'
 import ImageSlider from '@/components/Common/ImageSlider/ImageSlider'
@@ -26,9 +26,9 @@ const Room: FC<{ room: IRoom; comments: IComment[] }> = ({
 	const user = useAuth()
 	const rate = useAppSelector(state => state.reviews.rate)
 	const { changeFavourites } = useUserActions()
-	const clickHandler = () => {
+	const clickHandler = useCallback(() => {
 		changeFavourites(room._id)
-	}
+	}, [room])
 	return (
 		<Container>
 			<div className="big-slider h-[500px] mt-4">
