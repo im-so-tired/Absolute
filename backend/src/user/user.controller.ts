@@ -2,6 +2,7 @@ import {
 	Body,
 	Controller,
 	Get,
+	Param,
 	Put,
 	UsePipes,
 	ValidationPipe,
@@ -30,11 +31,11 @@ export class UserController {
 		return this.userService.update(id, dto)
 	}
 
-	@Put('favourites')
+	@Put('favourites/:id')
 	@Roles()
 	changeFavourites(
-		@User('_id') id: string,
-		@Body(IdValidate) { roomId }: RoomId
+		@Param('id', IdValidate) roomId: string,
+		@User('_id') id: string
 	) {
 		return this.userService.changeFavourite(id, roomId)
 	}

@@ -18,5 +18,6 @@ import { reachType } from './rooms.interface'
 	],
 	providers: [RoomsService],
 	controllers: [RoomsController],
+	exports: [RoomsService],
 })
 export class RoomsModule {}

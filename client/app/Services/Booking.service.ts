@@ -10,4 +10,11 @@ export const BookingService = {
 		const { data } = await axiosAuth.get<booking[]>(`booking/${userId}`)
 		return data
 	},
+	async getAllbookings() {
+		const { data } = await axiosAuth.get<booking[]>(`booking/`)
+		return data
+	},
+	async delete(bookId: string) {
+		await axiosAuth.delete(`booking/${bookId}`)
+	},
 }

@@ -1,5 +1,6 @@
-import { axiosClassic } from 'Api/intersaptors'
+import { axiosAuth, axiosClassic } from 'Api/intersaptors'
 
+import { IEditRoom } from '@/components/Common/RoomEditModal/RoomEditModalForm'
 import { IFilters } from '@/components/Screens/Rooms/RoomsMain/RoomsList.interface'
 
 import { IRoom } from '@/shared/types/room.types'
@@ -26,8 +27,19 @@ export const RoomsService = {
 		})
 		return rooms
 	},
+	async getAllRooms() {
+		const rooms = await axiosClassic.get<{
+			totalCount: number
+			data: IRoom[]
+		}>('/rooms/all')
+		return rooms
+	},
 	async getRoomById(id: string) {
 		const room = await axiosClassic.get<IRoom>(`/rooms/${id}`)
 		return room
+	},
+	async update(roomId: string, body: IEditRoom) {
+		const { data } = await axiosAuth.put(`/rooms/${roomId}`, body)
+		return data
 	},
 }

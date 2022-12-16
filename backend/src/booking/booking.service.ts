@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common'
+import {
+	BadRequestException,
+	Injectable,
+	NotFoundException,
+} from '@nestjs/common'
 import { InjectModel } from 'nestjs-typegoose'
 import { ModelType } from 'typegoose'
 import { BookingModel } from './booking.model'
@@ -12,6 +16,12 @@ export class BookingService {
 	) {}
 	async getAll() {
 		return await this.BookingModel.find()
+	}
+
+	async delete(id: string) {
+		const deleteDoc = await this.BookingModel.findByIdAndDelete(id).exec()
+		if (!deleteDoc) throw new NotFoundException('Book not found')
+		return deleteDoc
 	}
 
 	async getUserBooking(userId: string) {

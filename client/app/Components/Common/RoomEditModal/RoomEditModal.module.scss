@@ -1,0 +1,44 @@
+.modal {
+	@apply font-bold;
+	h3 {
+		@apply text-2xl flex items-center;
+		svg {
+			@apply rounded-full border-none ml-2 h-[30px] w-[30px];
+			background: green;
+		}
+	}
+	h4 {
+		@apply text-xl mb-3;
+	}
+	.dateOfStay {
+		@apply mt-6;
+		p {
+			@apply flex items-center;
+			span:first-child {
+				@apply w-1/2;
+			}
+			span:last-child {
+				@apply text-base font-normal;
+			}
+		}
+	}
+	.buttons {
+		@apply flex items-center justify-end mt-6;
+	}
+}
+
+.textField {
+	@apply w-[420px] mt-6;
+}
+
+.selectLabel {
+	@apply z-3;
+}
+
+.checkboxLable {
+	@apply ml-2 select-none;
+}
+
+.checkboxContainer {
+	@apply mt-3 flex flex-col;
+}

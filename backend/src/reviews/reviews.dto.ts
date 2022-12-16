@@ -1,16 +1,18 @@
-import { IsInt, IsPositive, IsString } from 'class-validator'
+import { IsInt, IsNotEmpty, IsPositive, IsString } from 'class-validator'
+import { ObjectId } from 'mongoose'
 
 export class createReviewsDto {
 	@IsString()
-	userId: string
-	@IsString()
+	@IsNotEmpty()
 	roomId: string
 	@IsString()
 	message: string
 	@IsInt()
 	@IsPositive()
 	rating: number
-	@IsInt()
-	@IsPositive()
-	countLikes: number
+}
+
+export class updateReviewsDto {
+	@IsString()
+	message: string
 }

@@ -7,10 +7,10 @@ import { IOptions } from '@/shared/types/select'
 
 import FieldBase from '../FieldBase/FieldBase'
 
-import { ISelectFieldProps } from './SelectField.interface'
-import styles from './SelectField.module.scss'
+import { IMultiSelectFieldProps } from './MultiSelectField.interface'
+import styles from './MultiSelectField.module.scss'
 
-const SelectField: FC<ISelectFieldProps> = ({
+const MultiSelectField: FC<IMultiSelectFieldProps> = ({
 	label,
 	className,
 	id,
@@ -18,17 +18,18 @@ const SelectField: FC<ISelectFieldProps> = ({
 	value: currentOption,
 	onChange,
 	name,
+	labelClassName,
 }) => {
 	const labelRef = useRef() as React.MutableRefObject<HTMLLabelElement>
 	const getValue = () =>
 		currentOption
-			? options.find(op => op.value === currentOption)
-			: { label: '', value: '' }
+			? options.filter(op => currentOption.includes(op.value))
+			: [{ label: '', value: '' }]
 	const labelStyles = styles.labelStyles
 	return (
 		<FieldBase className={className} dynamicLabel={false}>
-			<div className={styles.selectField}>
-				<label ref={labelRef} htmlFor={id}>
+			<div className={styles.MultiSelectField}>
+				<label className={labelClassName} ref={labelRef} htmlFor={id}>
 					{label}
 				</label>
 				<div className="main-select">
@@ -37,6 +38,7 @@ const SelectField: FC<ISelectFieldProps> = ({
 						instanceId={id}
 						options={options}
 						value={getValue()}
+						isMulti={true}
 						onChange={onChange}
 						classNamePrefix="custom-select"
 						onFocus={() => labelRef.current.classList.toggle(labelStyles)}
@@ -49,4 +51,4 @@ const SelectField: FC<ISelectFieldProps> = ({
 	)
 }
 
-export default SelectField
+export default MultiSelectField
