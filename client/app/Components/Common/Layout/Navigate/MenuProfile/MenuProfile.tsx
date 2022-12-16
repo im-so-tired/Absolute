@@ -25,7 +25,7 @@ const MenuProfile: FC<PropsWithChildren> = ({ children }) => {
 		setAnchorEl(null)
 	}
 	const handleLogout = async () => {
-		push('/')
+		// push('/')
 		logout()
 	}
 	return (

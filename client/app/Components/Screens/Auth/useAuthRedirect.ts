@@ -8,6 +8,6 @@ export const useAuthRedirect = () => {
 
 	const { push, back } = useRouter()
 	useEffect(() => {
-		if (user) push('/')
+		if (user) back()
 	}, [user, push])
 }
