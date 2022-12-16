@@ -11,13 +11,6 @@ import Sidebar from '../Sidebar/Sidebar'
 import styles from './ProfileLayout.module.scss'
 
 const ProfileLayout: FC<PropsWithChildren> = ({ children }) => {
-	const user = useAuth()
-	const router = useRouter()
-	// useEffect(() => {
-	// 	if (!user) {
-	// 		router.push('/auth/login')
-	// 	}
-	// }, [user])
 	return (
 		<div className={styles.layout}>
 			<Container>

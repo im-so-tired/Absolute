@@ -11,9 +11,14 @@ import styles from './Sidebar.module.scss'
 import SidebarItem from './SidebarItem'
 
 const Sidebar: FC = () => {
-	const user = useAuth()
+	const currentUser = useAuth()
+	const [user, setUser] = useState<any>(null)
 	const { asPath } = useRouter()
 	const [activeLink, setActiveLink] = useState<number>(1)
+
+	useEffect(() => {
+		setUser(currentUser)
+	}, [currentUser])
 
 	return (
 		<MenuList className={cn([styles.sidebar, styles['MuiList-root']])}>

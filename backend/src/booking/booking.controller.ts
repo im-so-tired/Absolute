@@ -1,6 +1,7 @@
 import {
 	Body,
 	Controller,
+	Delete,
 	Get,
 	HttpCode,
 	Param,
@@ -35,5 +36,11 @@ export class BookingController {
 	@Roles()
 	async create(@Body() dto: BookingDto) {
 		return this.bookingService.create(dto)
+	}
+
+	@Delete(':id')
+	@Roles('admin')
+	async delete(@Param('id') bookId: string) {
+		return this.bookingService.delete(bookId)
 	}
 }

@@ -51,6 +51,15 @@ export class RoomsService {
 		const data = await this.RoomsModel.find()
 		return data
 	}
+	async getAllRoomsWithoutQuerys() {
+		const data = await this.RoomsModel.find()
+		const totalCount = data.length
+
+		return {
+			totalCount,
+			data,
+		}
+	}
 
 	async byId(id: string) {
 		const room = await this.RoomsModel.findById(id)

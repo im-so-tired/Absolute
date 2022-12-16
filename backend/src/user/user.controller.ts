@@ -44,4 +44,9 @@ export class UserController {
 	getById(@Param('id', IdValidate) userId: string) {
 		return this.userService.getById(userId)
 	}
+	@Get('favorites')
+	@Roles()
+	async getFavoritesRoom(@User('favorites') dto: string[]) {
+		return this.userService.getFavoritesRooms(dto)
+	}
 }

@@ -34,6 +34,12 @@ export class RoomsController {
 		return this.roomsService.getAll()
 	}
 
+	@Get('all')
+	@HttpCode(200)
+	async getAllRoomsWithoutQuerys() {
+		return this.roomsService.getAllRoomsWithoutQuerys()
+	}
+
 	@Get(':id')
 	@HttpCode(200)
 	async byId(@Param('id') id: string) {

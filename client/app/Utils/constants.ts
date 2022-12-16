@@ -15,6 +15,12 @@ export const arrayComforts: ILabel[] = [
 	{ text: 'Рабочее место', slug: 'hasWorkSpace' },
 ]
 
+export const arrayComfortsOptions: IOptions[] = [
+	{ value: 'hasWorkSpace', label: 'Рабочее место' },
+	{ value: 'hasConditioner', label: 'Кондиционер' },
+	{ value: 'hasWifi', label: 'Wi-Fi' },
+]
+
 export const arrayTerms: ILabel[] = [
 	{ text: 'Можно c питомцами', slug: 'canPets' },
 	{ text: 'Можно курить', slug: 'canSmoke' },
@@ -22,10 +28,15 @@ export const arrayTerms: ILabel[] = [
 ]
 
 export const arrayReach: ILabel[] = [
-	{ text: 'Ширина коридоров в номере не менее 91см', slug: 'hasWideCorridor' },
+	{
+		text: 'Ширина коридоров в номере не менее 91см',
+		slug: 'hasWideCorridor',
+		title: 'Широкий коридор',
+	},
 	{
 		text: 'На 1 этаже вас встретит специалист и проводит до номера',
 		slug: 'hasDisabledAssistant',
+		title: 'Помощник для инвалидов',
 	},
 ]
 

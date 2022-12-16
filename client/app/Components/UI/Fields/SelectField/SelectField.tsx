@@ -17,6 +17,7 @@ const SelectField: FC<ISelectFieldProps> = ({
 	options,
 	value: currentOption,
 	onChange,
+	name,
 }) => {
 	const labelRef = useRef() as React.MutableRefObject<HTMLLabelElement>
 	const getValue = () =>
@@ -32,6 +33,7 @@ const SelectField: FC<ISelectFieldProps> = ({
 				</label>
 				<div className="main-select">
 					<Select
+						name={name}
 						instanceId={id}
 						options={options}
 						value={getValue()}

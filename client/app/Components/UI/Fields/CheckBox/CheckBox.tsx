@@ -9,11 +9,13 @@ const CheckBox: FC<ICheckBox> = ({
 	className,
 	onChange: changeFunc,
 	value,
+	name,
 }) => {
 	return (
 		<label className={cn(styles.container, className)}>
 			<span className={styles.labelText}>{label.text}</span>
 			<input
+				name={name}
 				type="checkbox"
 				onChange={() => changeFunc(label.slug)}
 				checked={value}

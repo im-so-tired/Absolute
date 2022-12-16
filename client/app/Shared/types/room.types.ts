@@ -20,6 +20,7 @@ export interface IRoom {
 }
 
 export interface booking {
+	_id: string
 	userId: string
 	roomId: string
 	dateComing: number

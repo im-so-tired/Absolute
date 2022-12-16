@@ -50,4 +50,11 @@ export class UserService {
 		if (!room) throw new NotFoundException('Комната не найдена')
 		return room
 	}
+
+	async getFavoritesRooms(dto: string[]) {
+		const rooms: RoomsModel[] = await this.RoomsModel.find({
+			_id: { $in: dto },
+		})
+		return rooms
+	}
 }
