@@ -2,14 +2,14 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 
 export const axiosClassic = axios.create({
-	baseURL: `${process.env.APP_URL}/api`,
+	baseURL: `http://localhost:9000/api`,
 	headers: {
 		'Content-Type': 'application/json',
 	},
 })
 
 export const axiosAuth = axios.create({
-	baseURL: `${process.env.APP_URL}/api`,
+	baseURL: `http://localhost:9000/api`,
 	headers: {
 		'Content-Type': 'application/json',
 	},
