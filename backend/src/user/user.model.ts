@@ -11,8 +11,6 @@ export class UserModel extends TimeStamps {
 	isAdmin?: boolean
 	@prop({ default: [], type: () => [String] })
 	favorites?: string[]
-	@prop({ default: [], type: () => [String] })
-	booking?: string[]
 	@prop()
 	firstName: string
 	@prop()
