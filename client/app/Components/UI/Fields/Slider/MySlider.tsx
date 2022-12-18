@@ -6,7 +6,7 @@ import { ISliderProps } from './Slider.interface'
 function valueLabelFormat(value: number) {
 	return `${value}₽`
 }
-const MySlider: FC<ISliderProps> = ({ max = 15000, min = 0, ...rest }) => {
+const MySlider: FC<ISliderProps> = ({ max = 50000, min = 0, ...rest }) => {
 	return (
 		<Slider
 			getAriaLabel={() => 'Temperature range'}

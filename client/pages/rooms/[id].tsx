@@ -38,7 +38,7 @@ export default RoomPage
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const { data: allRooms } = await axiosClassic.get('/rooms/all')
-	const paths = allRooms.map((room: IRoom) => ({
+	const paths = allRooms.data.map((room: IRoom) => ({
 		params: { id: room._id },
 	}))
 	return { paths, fallback: false }

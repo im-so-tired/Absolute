@@ -1,10 +1,13 @@
 import { NextPage } from 'next'
 import React from 'react'
 
-import MainPage from '@/components/Screens/Profile/MainPage'
+import BookingsPage from '@/components/Screens/Profile/BookingsPage'
 
-const BookingPage: NextPage = () => {
-	return <MainPage />
+import { NextPageAuth } from '@/shared/types/auth.types'
+
+const BookingPage: NextPageAuth = () => {
+	return <BookingsPage />
 }
 
+BookingPage.isOnlyUser = true
 export default BookingPage

@@ -81,8 +81,9 @@ export const userSlice = createSlice({
 				state.isLoading = false
 			})
 			.addCase(editProfile.fulfilled, (state, { payload }) => {
-				state.user = { ...payload }
 				state.isLoading = false
+				const { _id, ...rest } = payload
+				state.user = { ...rest, id: _id }
 			})
 	},
 })

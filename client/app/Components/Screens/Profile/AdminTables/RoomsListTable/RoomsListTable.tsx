@@ -33,68 +33,6 @@ import styles from '../AdminTables.module.scss'
 
 import RoomsListTableRow from './RoomsTableItem'
 
-// function TablePaginationActions(props) {
-// 	const theme = useTheme()
-// 	const { count, page, rowsPerPage, onPageChange } = props
-
-// 	const handleFirstPageButtonClick = event => {
-// 		onPageChange(event, 0)
-// 	}
-
-// 	const handleBackButtonClick = event => {
-// 		onPageChange(event, page - 1)
-// 	}
-
-// 	const handleNextButtonClick = event => {
-// 		onPageChange(event, page + 1)
-// 	}
-
-// 	const handleLastPageButtonClick = event => {
-// 		onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1))
-// 	}
-
-// return (
-// 	<Box sx={{ flexShrink: 0, ml: 2.5 }}>
-// 		<IconButton
-// 			onClick={handleFirstPageButtonClick}
-// 			disabled={page === 0}
-// 			aria-label="first page"
-// 		>
-// 			{theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-// 		</IconButton>
-// 		<IconButton
-// 			onClick={handleBackButtonClick}
-// 			disabled={page === 0}
-// 			aria-label="previous page"
-// 		>
-// 			{theme.direction === 'rtl' ? (
-// 				<KeyboardArrowRight />
-// 			) : (
-// 				<KeyboardArrowLeft />
-// 			)}
-// 		</IconButton>
-// 		<IconButton
-// 			onClick={handleNextButtonClick}
-// 			disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-// 			aria-label="next page"
-// 		>
-// 			{theme.direction === 'rtl' ? (
-// 				<KeyboardArrowLeft />
-// 			) : (
-// 				<KeyboardArrowRight />
-// 			)}
-// 		</IconButton>
-// 		<IconButton
-// 			onClick={handleLastPageButtonClick}
-// 			disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-// 			aria-label="last page"
-// 		>
-// 			{theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-// 		</IconButton>
-// 	</Box>
-// )
-// }
-
 interface IHeadCeils {
 	id: keyof IRoom | 'bookings'
 	numeric?: boolean
@@ -165,14 +103,12 @@ export const RoomsListTable = () => {
 			onError: error => toastrError('Неправильный запрос', error),
 		}
 	)
-
+	// console.log(rooms)
 	const { sortedItems, sortBy, handleRequestSort } = useSort(
-		isLoading
-			? rooms?.data.map(room => ({
-					...room,
-					bookings: !!bookings?.filter(item => item.roomId === room._id).length,
-			  }))
-			: [],
+		rooms?.data.map(room => ({
+			...room,
+			bookings: !!bookings?.filter(item => item.roomId === room._id).length,
+		})) || [],
 		{
 			path: 'bookings',
 			order: 'desc',
@@ -194,69 +130,63 @@ export const RoomsListTable = () => {
 		handleChangePageSize,
 	} = usePagination(sortedItems, rowsPerPageOptions[0])
 
-	// console.log(rooms?.data)
-
-	return (
-		<>
-			{!isLoading && (
-				<Box sx={{ width: '100%' }} className="mt-4 mb-1">
-					<TableContainer component={Paper} className="min-h-fit">
-						<h1 className="font-bold text-2xl ml-8 mt-4">Список номеров</h1>
-						<Table>
-							<TableHead>
-								<TableRow>
-									{headCeils.map(headCell => (
-										<TableCell
-											key={String(headCell.id)}
-											align={headCell?.numeric ? 'right' : 'left'}
-											padding={headCell?.disablePadding ? 'none' : 'normal'}
-											sortDirection={
-												sortBy && sortBy.path === headCell.id
-													? sortBy.order
-													: false
+	return !isLoading && !isBookingsLoading ? (
+		<Box sx={{ width: '100%' }} className="mt-4 mb-1">
+			<TableContainer component={Paper} className="min-h-fit">
+				<h1 className="font-bold text-2xl ml-8 mt-4">Список номеров</h1>
+				<Table>
+					<TableHead>
+						<TableRow>
+							{headCeils.map(headCell => (
+								<TableCell
+									key={String(headCell.id)}
+									align={headCell?.numeric ? 'right' : 'left'}
+									padding={headCell?.disablePadding ? 'none' : 'normal'}
+									sortDirection={
+										sortBy && sortBy.path === headCell.id ? sortBy.order : false
+									}
+								>
+									{sortBy && (
+										<TableSortLabel
+											active={sortBy.path === headCell.id}
+											direction={
+												sortBy.path === headCell.id ? sortBy.order : 'asc'
 											}
+											onClick={createSortHandler(headCell.id)}
 										>
-											{sortBy && (
-												<TableSortLabel
-													active={sortBy.path === headCell.id}
-													direction={
-														sortBy.path === headCell.id ? sortBy.order : 'asc'
-													}
-													onClick={createSortHandler(headCell.id)}
-												>
-													{headCell.label}
-													{sortBy.path === headCell.id ? (
-														<span className={styles['visually-hidden']}>
-															{sortBy.order === 'desc'
-																? 'sorted descending'
-																: 'sorted ascending'}
-														</span>
-													) : null}
-												</TableSortLabel>
-											)}
-											{!sortBy && headCell.label}
-										</TableCell>
-									))}
-									<TableCell />
-								</TableRow>
-							</TableHead>
-							<TableBody
-								itemsCount={sortedItems.length}
-								page={currentPage - 1}
-								rowsPerPage={pageSize}
-							>
-								{roomsCroppedList.map((row: IRoom) => (
-									<RoomsListTableRow
-										roomsRefetch={roomsRefetch}
-										bookingsRefetch={bookingsRefetch}
-										bookings={bookings || []}
-										isLoading={isBookingsLoading}
-										key={row._id}
-										row={row}
-									/>
-								))}
-							</TableBody>
-							{/* <TableBody>
+											{headCell.label}
+											{sortBy.path === headCell.id ? (
+												<span className={styles['visually-hidden']}>
+													{sortBy.order === 'desc'
+														? 'sorted descending'
+														: 'sorted ascending'}
+												</span>
+											) : null}
+										</TableSortLabel>
+									)}
+									{!sortBy && headCell.label}
+								</TableCell>
+							))}
+							<TableCell />
+						</TableRow>
+					</TableHead>
+					<TableBody
+						itemsCount={sortedItems.length}
+						page={currentPage - 1}
+						rowsPerPage={pageSize}
+					>
+						{roomsCroppedList.map((row: IRoom) => (
+							<RoomsListTableRow
+								roomsRefetch={roomsRefetch}
+								bookingsRefetch={bookingsRefetch}
+								bookings={bookings || []}
+								isLoading={isBookingsLoading}
+								key={row._id}
+								row={row}
+							/>
+						))}
+					</TableBody>
+					{/* <TableBody>
 							<TableRow>
 								<TableCell>
 									<p>ss</p>
@@ -269,27 +199,25 @@ export const RoomsListTable = () => {
 								</TableCell>
 							</TableRow>
 						</TableBody> */}
-							{/* {roomsCroppedList.map(row => (
+					{/* {roomsCroppedList.map(row => (
 								<RoomsListTableRow key={row._id} row={row} />
 							))} */}
-							{/* </TableBody> */}
-						</Table>
-						<TablePagination
-							rowsPerPageOptions={[5, 10, 25]}
-							component="div"
-							count={Number(rooms?.totalCount)}
-							rowsPerPage={pageSize}
-							page={currentPage - 1}
-							onPageChange={(event, value) =>
-								handleChangePage(event, value + 1)
-							}
-							onRowsPerPageChange={handleChangePageSize}
-							labelRowsPerPage="Номеров на странице"
-						/>
-					</TableContainer>
-				</Box>
-			)}
-		</>
+					{/* </TableBody> */}
+				</Table>
+				<TablePagination
+					rowsPerPageOptions={[5, 10, 25]}
+					component="div"
+					count={Number(rooms?.totalCount)}
+					rowsPerPage={pageSize}
+					page={currentPage - 1}
+					onPageChange={(event, value) => handleChangePage(event, value + 1)}
+					onRowsPerPageChange={handleChangePageSize}
+					labelRowsPerPage="Номеров на странице"
+				/>
+			</TableContainer>
+		</Box>
+	) : (
+		<></>
 	)
 }
 

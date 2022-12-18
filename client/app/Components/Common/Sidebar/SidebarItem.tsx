@@ -8,14 +8,20 @@ import MaterialIcon from '@/components/UI/MaterialIcon'
 
 import { useAuth } from '@/hooks/useAuth'
 
+import { IUser } from '@/shared/types/user'
+
+import { UserState } from '@/store/Slices/User/user.interface'
+
 import styles from './Sidebar.module.scss'
 import { ISidebarItem } from './SidebarItem.interface'
 
-const SidebarItem: FC<{ sidebarItem: ISidebarItem; active: boolean }> = ({
-	sidebarItem,
-	active,
-}) => {
-	const user = useAuth()
+const SidebarItem: FC<{
+	sidebarItem: ISidebarItem
+	active: boolean
+	user: UserState
+}> = ({ sidebarItem, active, user }) => {
+	// const user = useAuth()
+	// console.log(user)
 	return (
 		<Link href={`/profile/${user?.id}${sidebarItem.link}`}>
 			<a>

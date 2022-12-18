@@ -47,10 +47,6 @@ export class RoomsService {
 		}
 	}
 
-	async getAll() {
-		const data = await this.RoomsModel.find()
-		return data
-	}
 	async getAllRoomsWithoutQuerys() {
 		const data = await this.RoomsModel.find()
 		const totalCount = data.length
@@ -72,7 +68,7 @@ export class RoomsService {
 			roomNumber: roomDto.roomNumber,
 		})
 		if (oldRoom && String(oldRoom._id) !== id)
-			throw new BadRequestException('Комната с таким номеров уже существует')
+			throw new BadRequestException('Комната с таким номером уже существует')
 		const room = await this.byId(id)
 		room.roomNumber = roomDto.roomNumber
 		room.images = roomDto.images

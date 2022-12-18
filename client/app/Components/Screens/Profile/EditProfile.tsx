@@ -1,12 +1,17 @@
 import ProfileLayout from '@/components/Common/ProfileLayout/ProfileLayout'
 
+import { useAuth } from '@/hooks/useAuth'
+
 import EditProfileForm from './Forms/EditProfileForm/EditProfileForm'
 
 const EditProfile = () => {
-	return (
+	const user = useAuth()
+	return user ? (
 		<ProfileLayout>
-			<EditProfileForm />
+			<EditProfileForm user={user} />
 		</ProfileLayout>
+	) : (
+		<></>
 	)
 }
 

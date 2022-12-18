@@ -22,16 +22,16 @@ import { RoomsService } from './rooms.service'
 export class RoomsController {
 	constructor(private readonly roomsService: RoomsService) {}
 
+	@Get('favourites')
+	@Roles()
+	async getFavouritesRoom(@User('favorites') dto: string[]) {
+		return this.roomsService.getFavouritesRooms(dto)
+	}
+
 	@Get()
 	@HttpCode(200)
 	async getAllWithQuery(@Query() query: IQueryFilter) {
 		return this.roomsService.getAllWithQuery(query)
-	}
-
-	@Get('all')
-	@HttpCode(200)
-	async getAll() {
-		return this.roomsService.getAll()
 	}
 
 	@Get('all')
@@ -73,11 +73,5 @@ export class RoomsController {
 	@Roles('admin')
 	async delete(@Param('id') id: string) {
 		return this.roomsService.delete(id)
-	}
-
-	@Get('favourites')
-	@Roles()
-	async getFavouritesRoom(@User('favorites') dto: string[]) {
-		return this.roomsService.getFavouritesRooms(dto)
 	}
 }

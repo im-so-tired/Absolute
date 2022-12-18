@@ -1,0 +1,25 @@
+.bookingCard {
+	@apply py-4 px-5 mb-3;
+}
+
+.bookingCard-btns {
+	@apply py-4 px-5 relative w-80 flex-col gap-3;
+}
+
+.bookingInfo {
+	@apply my-4 border-collapse;
+}
+
+.bookingInfo-body {
+	& tr > td {
+		@apply p-3 border w-1/2;
+	}
+	.bookingInfo-item {
+		& td {
+			@apply font-bold;
+		}
+		& td > span {
+			@apply font-normal;
+		}
+	}
+}

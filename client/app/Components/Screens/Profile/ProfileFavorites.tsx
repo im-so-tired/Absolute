@@ -31,7 +31,7 @@ const ProfileFavorites: FC = () => {
 		setFavorites(favoritesList as string[])
 	}, [favoritesList])
 
-	return (
+	return !isLoading ? (
 		<ProfileLayout>
 			<div className="w-full mb-10">
 				<h1 className="font-bold text-2xl mb-6">Мои любимые номера</h1>
@@ -42,7 +42,7 @@ const ProfileFavorites: FC = () => {
 				) : (
 					<div className={styles.roomsList}>
 						{response?.length === 0 ? (
-							<h1>Список пуст</h1>
+							<h1 className="ml-5">Список пуст</h1>
 						) : (
 							<>
 								<div className={styles.gridContainer}>
@@ -56,6 +56,8 @@ const ProfileFavorites: FC = () => {
 				)}
 			</div>
 		</ProfileLayout>
+	) : (
+		<></>
 	)
 }
 

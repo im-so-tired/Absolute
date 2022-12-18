@@ -3,7 +3,7 @@ import { axiosAuth, axiosClassic } from 'Api/intersaptors'
 import { booking } from '@/shared/types/room.types'
 
 export const BookingService = {
-	async book(data: booking) {
+	async book(data: Omit<booking, '_id'>) {
 		await axiosAuth.post('/booking', data)
 	},
 	async bookingUser(userId: string) {

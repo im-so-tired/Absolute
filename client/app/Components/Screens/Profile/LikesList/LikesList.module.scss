@@ -1,13 +1,11 @@
-.comments {
-	.heading {
-		@apply flex items-center justify-between mb-5;
-		h2 {
-			@apply mb-0;
-		}
+.likesList {
+	> h1 {
+		@apply font-bold text-2xl mb-6;
 	}
-
-	.commentSpan {
-		@apply text-sm text-blue-600 text-opacity-75;
+	.container {
+		.item {
+			@apply border-l-8 border-gray-300 pl-4;
+		}
 	}
 }
 

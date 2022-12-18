@@ -22,6 +22,12 @@ export class ReviewsController {
 		private readonly roomsService: RoomsService
 	) {}
 
+	@Get('favorites')
+	@Roles('user')
+	async getFavorites(@User('_id') userId: string) {
+		return this.reviewsService.getFavorites(userId)
+	}
+
 	@Post()
 	@HttpCode(200)
 	@UsePipes(new ValidationPipe())

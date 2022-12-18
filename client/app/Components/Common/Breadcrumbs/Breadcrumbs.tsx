@@ -14,13 +14,17 @@ import { BreadcrumbsTitles } from './BreadcrumbsTitles.dict'
 const Breadcrumbs: FC = () => {
 	const user = useAuth()
 	const { asPath, pathname } = useRouter()
-	const urlParts = UrlSeparator(asPath)
+	const [urlParts, setUrlParts] = useState<string[]>(UrlSeparator(asPath))
+	// UrlSeparator(asPath)
 
 	// if (currnetUser) {
 	// 	urlParts.push(currnetUser?.id)
 	// }
+	useEffect(() => {
+		setUrlParts(UrlSeparator(asPath))
+	}, [user, asPath])
 
-	return (
+	return user ? (
 		<MuiBreadcrumbs aria-label="breadcrumb">
 			<Link href="/" passHref>
 				<MuiLink underline="hover" color="primary" fontFamily={'Montserrat'}>
@@ -57,6 +61,8 @@ const Breadcrumbs: FC = () => {
 				)
 			})}
 		</MuiBreadcrumbs>
+	) : (
+		<div>Loading...</div>
 	)
 }
 

@@ -2,11 +2,13 @@ import { format, fromUnixTime } from 'date-fns'
 import 'date-fns'
 import { ru } from 'date-fns/locale'
 import dynamic from 'next/dynamic'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import Button from '@/components/UI/Button/Button'
 import MaterialIcon from '@/components/UI/MaterialIcon'
 import ModalBase, { IModal } from '@/components/UI/Modal/Modal'
+
+import { useAuth } from '@/hooks/useAuth'
 
 import { IDateOfStay } from '@/store/Slices/MainForm/MainForm.interface'
 
@@ -16,6 +18,11 @@ interface IModalProps extends IModal {
 	date: IDateOfStay
 }
 const Modal: FC<IModalProps> = ({ date, open, handleClose }) => {
+	const user = useAuth()
+	// const [user, setUser] = useState<any>(null)
+	// useEffect(() => {
+	// 	setUser(currentUser)
+	// }, [currentUser])
 	const dateComing = format(
 		fromUnixTime(date.dateComing || Date.now()),
 		'd MMMM y',
@@ -52,7 +59,11 @@ const Modal: FC<IModalProps> = ({ date, open, handleClose }) => {
 					<Button background="primary" link="/rooms" className="p-2 mr-2">
 						Назад
 					</Button>
-					<Button background="base" link="/profile" className="p-2">
+					<Button
+						background="base"
+						link={`/profile/${user?.id}/booking`}
+						className="p-2"
+					>
 						Мои бронирования
 					</Button>
 				</div>

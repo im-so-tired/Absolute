@@ -10,15 +10,15 @@ import { DataSidebarItem } from './Sidebar.data'
 import styles from './Sidebar.module.scss'
 import SidebarItem from './SidebarItem'
 
-const Sidebar: FC = () => {
-	const currentUser = useAuth()
-	const [user, setUser] = useState<any>(null)
+const Sidebar: FC<{ user: any }> = ({ user }) => {
+	// const currentUser = useAuth()
+	// const [user, setUser] = useState<any>(null)
 	const { asPath } = useRouter()
 	const [activeLink, setActiveLink] = useState<number>(1)
 
-	useEffect(() => {
-		setUser(currentUser)
-	}, [currentUser])
+	// useEffect(() => {
+	// 	setUser(currentUser)
+	// }, [currentUser])
 
 	return (
 		<MenuList className={cn([styles.sidebar, styles['MuiList-root']])}>
@@ -33,7 +33,7 @@ const Sidebar: FC = () => {
 							[styles.active]: isActive,
 						})}
 					>
-						<SidebarItem sidebarItem={item} active={isActive} />
+						<SidebarItem user={user} sidebarItem={item} active={isActive} />
 					</div>
 				)
 			})}

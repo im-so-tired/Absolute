@@ -24,7 +24,7 @@ export const DataMenuItem: IMenuItem[] = [
 		id: 4,
 		title: 'Понравилось',
 		icon: 'MdFavoriteBorder',
-		link: '',
+		link: '/likes',
 	},
 	{
 		id: 5,

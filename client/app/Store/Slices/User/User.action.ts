@@ -31,7 +31,7 @@ export const register = createAsyncThunk<IAuthResponce, RegisterData>(
 	}
 )
 
-export const editProfile = createAsyncThunk<UserState, IEditProfile>(
+export const editProfile = createAsyncThunk<any, IEditProfile>(
 	'user/profile',
 	async (data: IEditProfile, thunkApi) => {
 		try {

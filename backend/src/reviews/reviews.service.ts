@@ -51,6 +51,11 @@ export class ReviewsService {
 		return comment
 	}
 
+	async getFavorites(userId: string) {
+		const comments = await this.ReviewsModel.find({ likes: { $all: [userId] } })
+		return comments
+	}
+
 	async delete(id: string) {
 		const comment = await this.getOne(id)
 		const user = await this.userService.getById(comment.userId)

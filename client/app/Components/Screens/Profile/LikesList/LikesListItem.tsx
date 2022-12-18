@@ -1,4 +1,5 @@
 import { Rating, Tooltip } from '@mui/material'
+import { useMutation } from '@tanstack/react-query'
 import cn from 'classnames'
 import { parseISO } from 'date-fns'
 import Image from 'next/image'
@@ -11,6 +12,7 @@ import EditField from '@/screens/RoomPage/Comments/EditField'
 import { useReviewsActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
 
+import { ReviewsService } from '@/services/Reviews.service'
 import { UserService } from '@/services/User.service'
 
 import newAvatar from '@/assets/image/newAvatar.svg'
@@ -20,20 +22,33 @@ import { updateTime } from '@/utils/UpdateTime'
 import { IComment } from '@/store/Slices/Reviews/Reviews.interface'
 import { UserState } from '@/store/Slices/User/user.interface'
 
-import styles from './Comments.module.scss'
-import TooltipButton from './TooltipButton'
+import TooltipButton from '../../RoomPage/Comments/TooltipButton'
 
-const CommentItem: FC<{ comment: IComment; likesRefetch?: any }> = ({
-	comment,
-	likesRefetch,
-}) => {
-	const currentUser = useAuth()
+import styles from './LikesList.module.scss'
+
+const LikesListItem: FC<{
+	comment: IComment
+	deleteComment: any
+	likeComment: any
+	updateComment: any
+	currentUser: any
+}> = ({ comment, deleteComment, likeComment, updateComment, currentUser }) => {
 	const [author, setAuthor] = useState<UserState | null>(null)
 	const timeMessage = updateTime(
 		parseISO(comment.createdAt),
 		comment.lastUpdate
 	)
-	const { deleteComment, likeHandler, updateComment } = useReviewsActions()
+	// const { mutateAsync } = useMutation(
+	// 	['delete booking in dashboard'],
+	// 	(bookId: string) => BookingService.delete(bookId),
+	// 	{
+	// 		onSuccess: () => {
+	// 			bookingsRefetch()
+	// 		},
+	// 		onError: error => toastrError('Неправильный запрос', error),
+	// 	}
+	// )
+	// const { deleteComment, likeHandler, updateComment } = useReviewsActions()
 	const [edited, setEdited] = useState<boolean>(false)
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -43,15 +58,14 @@ const CommentItem: FC<{ comment: IComment; likesRefetch?: any }> = ({
 		fetchUser()
 	}, [])
 
-	const finishEditing = (newValue: string) => {
-		updateComment({ commentId: comment._id, message: newValue })
+	const finishEditing = async (newValue: string) => {
+		await updateComment({ commentId: comment._id, message: newValue })
 		setEdited(false)
 	}
-	if (!author) {
-		return <div>Loading...</div>
-	}
 	const liked = comment.likes.includes(currentUser?.id || '')
-	return (
+
+	// console.log(likesRefetch)
+	return currentUser && author ? (
 		<div className={styles.comment}>
 			<div>
 				<p className="mr-3 flex items-center flex-col">
@@ -64,7 +78,7 @@ const CommentItem: FC<{ comment: IComment; likesRefetch?: any }> = ({
 					/>
 					<button
 						className={cn(styles.likeBtn, { [styles.likedBtn]: liked })}
-						onClick={() => likeHandler(comment._id)}
+						onClick={async () => await likeComment(comment._id)}
 					>
 						<MaterialIcon
 							name={liked ? 'MdFavorite' : 'MdFavoriteBorder'}
@@ -94,7 +108,7 @@ const CommentItem: FC<{ comment: IComment; likesRefetch?: any }> = ({
 										<TooltipButton
 											iconName="MdClose"
 											secondColor="#EB0008"
-											onClick={() => deleteComment(comment._id)}
+											onClick={async () => await deleteComment(comment._id)}
 										/>
 									</Tooltip>
 								</>
@@ -120,7 +134,9 @@ const CommentItem: FC<{ comment: IComment; likesRefetch?: any }> = ({
 				)}
 			</div>
 		</div>
+	) : (
+		<></>
 	)
 }
 
-export default CommentItem
+export default LikesListItem

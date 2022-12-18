@@ -1,7 +1,10 @@
 import DateFnsAdapter from '@date-io/date-fns'
+import { TextField } from '@mui/material'
+import { DatePicker, DesktopDatePicker } from '@mui/x-date-pickers'
 import { useQuery } from '@tanstack/react-query'
-import { getUnixTime, sub } from 'date-fns'
+import { fromUnixTime, getUnixTime, sub } from 'date-fns'
 import { Formik } from 'formik'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 
@@ -10,6 +13,7 @@ import Button from '@/components/UI/Button/Button'
 import AuthField from '@/components/UI/Fields/AuthField/AuthField'
 import DateOfStay from '@/components/UI/Fields/DateOfStay/DateOfStay'
 
+import { useAppSelector } from '@/hooks/Redux'
 import { useUserActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
 
@@ -19,33 +23,28 @@ import { UserService } from '@/services/User.service'
 
 import { toastrError } from '@/utils/toastrError'
 
-import { RegisterData } from '@/store/Slices/User/user.interface'
+import { RegisterData, UserState } from '@/store/Slices/User/user.interface'
 
 import styles from './EditProfileForm.module.scss'
 import { schemaEditProfile } from './Schemas'
 
-const FormRegister: FC = () => {
-	const currentUser = useAuth()
+const FormRegister: FC<{ user: UserState }> = ({ user }) => {
 	const { push } = useRouter()
-	const [user, setUser] = useState<any>(null)
+	const [birthYear, setBirthYear] = useState<number>(
+		user.birthYear || getUnixTime(sub(Date.now(), { years: 18 }))
+	)
 	const initialState: IEditProfile = {
 		firstName: user?.firstName || '',
 		secondName: user?.secondName || '',
-		birthYear: user?.birthYear || getUnixTime(sub(Date.now(), { years: 18 })),
 		gender: user?.gender || 'male',
 	}
 	const { editProfile } = useUserActions()
 	const dateFns = new DateFnsAdapter()
 
-	useEffect(() => {
-		setUser(currentUser)
-	}, [currentUser])
-
 	const onSubmitHandle = (value: IEditProfile) => {
-		editProfile(value)
-		push(`/profile`)
+		editProfile({ ...value, birthYear })
+		push(`/profile/${user?.id}`)
 	}
-
 	return !user ? (
 		<div>Loading</div>
 	) : (
@@ -61,7 +60,7 @@ const FormRegister: FC = () => {
 						label="Имя"
 						name="firstName"
 						onChange={handleChange}
-						className={styles.textField}
+						className="w-[420px] mt-3 mb-3"
 						value={values.firstName}
 					/>
 					<AuthField
@@ -69,7 +68,7 @@ const FormRegister: FC = () => {
 						label="Фамилия"
 						name="secondName"
 						onChange={handleChange}
-						className={styles.textField}
+						className="w-[420px] mt-3 mb-3"
 						value={values.secondName}
 					/>
 					<ChooseGender
@@ -79,16 +78,16 @@ const FormRegister: FC = () => {
 					/>
 					<DateOfStay
 						label="Дата рождения"
-						value={values.birthYear}
+						name="birthYear"
+						value={birthYear}
 						onChange={newValue => {
 							if (!newValue) return
 							const result =
 								typeof newValue !== 'number' ? getUnixTime(newValue) : newValue
-							values.birthYear = result
+							setBirthYear(result)
 						}}
-						name="birthYear"
 						maxDate={dateFns.date(Date.now())}
-						defaultDate={initialState.birthYear}
+						defaultDate={birthYear}
 						className={styles.textField}
 					/>
 					<Button

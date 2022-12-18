@@ -30,6 +30,14 @@ export const ReviewsService = {
 		return comments
 	},
 
+	async getFavorites() {
+		const { data: comments } = await axiosAuth.get<IComment[]>(
+			`/reviews/favorites`
+		)
+		comments.sort((a, b) => b.lastUpdate - a.lastUpdate)
+		return comments
+	},
+
 	async delete(id: string) {
 		await axiosAuth.delete<IComment>(`/reviews/${id}`)
 		return id

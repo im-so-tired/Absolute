@@ -4,7 +4,9 @@ import React, { useEffect } from 'react'
 
 import { useAuth } from '@/hooks/useAuth'
 
-const index: NextPage = () => {
+import { NextPageAuth } from '@/shared/types/auth.types'
+
+const index: NextPageAuth = () => {
 	const router = useRouter()
 	const user = useAuth()
 	useEffect(() => {
@@ -13,4 +15,5 @@ const index: NextPage = () => {
 	return <></>
 }
 
+index.isOnlyUser = true
 export default index

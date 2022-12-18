@@ -9,6 +9,6 @@ export type genderType = 'female' | 'male'
 export interface IEditProfile {
 	firstName: string
 	secondName: string
-	birthYear: number
+	birthYear?: number
 	gender: genderType
 }

@@ -12,7 +12,7 @@ export const initialState: IMainFormValue = {
 		dateExit: getUnixTime(addDays(dateFns.date(Date.now()), 1)),
 	},
 	countPeople: arrayTypePeople,
-	priceRange: [0, 15000],
+	priceRange: [0, 50000],
 	comforts: [],
 	terms: [],
 	reach: [],

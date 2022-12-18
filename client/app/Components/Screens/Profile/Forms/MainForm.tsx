@@ -32,7 +32,7 @@ const MainForm: FC = () => {
 				<div className={styles.info}>
 					<p>Имя: {user?.firstName}</p>
 					<p>Фамилия: {user?.secondName}</p>
-					<p>Пол: {user?.gender}</p>
+					<p>Пол: {user?.gender === 'male' ? 'мужской' : 'женский'}</p>
 					<p>Статус: {user?.isAdmin ? 'Администратор' : 'Пользователь'}</p>
 					<p>Дата рождения: {birthYear}</p>
 				</div>

@@ -20,7 +20,7 @@ export const useBooking = () => {
 	const [error, setError] = useState<string>('')
 	const { date, countPeople } = useAppSelector(state => state.mainForm)
 	const { mutateAsync } = useMutation(
-		(data: Omit<booking, 'userId'>) =>
+		(data: Omit<Omit<booking, '_id'>, 'userId'>) =>
 			BookingService.book({ ...data, userId: user?.id || '' }),
 		{
 			onError: error => {
