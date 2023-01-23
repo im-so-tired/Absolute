@@ -3,8 +3,6 @@ import React, { FC, useEffect, useState } from 'react'
 
 import { useAuth } from '@/hooks/useAuth'
 
-import { IUser } from '@/shared/types/user'
-
 import defaultAvatar from '@/assets/image/defaultAvatar.svg'
 
 import { getDateByNumber } from '@/utils/getDateByNumber'

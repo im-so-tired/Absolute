@@ -1,10 +1,6 @@
 import DateFnsAdapter from '@date-io/date-fns'
-import { TextField } from '@mui/material'
-import { DatePicker, DesktopDatePicker } from '@mui/x-date-pickers'
-import { useQuery } from '@tanstack/react-query'
-import { fromUnixTime, getUnixTime, sub } from 'date-fns'
+import { getUnixTime, sub } from 'date-fns'
 import { Formik } from 'formik'
-import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 
@@ -13,17 +9,11 @@ import Button from '@/components/UI/Button/Button'
 import AuthField from '@/components/UI/Fields/AuthField/AuthField'
 import DateOfStay from '@/components/UI/Fields/DateOfStay/DateOfStay'
 
-import { useAppSelector } from '@/hooks/Redux'
 import { useUserActions } from '@/hooks/useActions'
-import { useAuth } from '@/hooks/useAuth'
 
-import { IEditProfile, genderType } from '@/shared/types/user'
+import { IEditProfile } from '@/shared/types/user'
 
-import { UserService } from '@/services/User.service'
-
-import { toastrError } from '@/utils/toastrError'
-
-import { RegisterData, UserState } from '@/store/Slices/User/user.interface'
+import { UserState } from '@/store/Slices/User/user.interface'
 
 import styles from './EditProfileForm.module.scss'
 import { schemaEditProfile } from './Schemas'

@@ -1,7 +1,6 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common'
 import { UsePipes } from '@nestjs/common/decorators'
 import { ValidationPipe } from '@nestjs/common/pipes'
-import { UserModel } from 'src/user/user.model'
 import { AuthService } from './auth.service'
 import { AuthDto } from './dto/auth.dto'
 import { RefreshTokenDto } from './dto/refreshToken.dto'

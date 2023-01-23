@@ -2,13 +2,11 @@ import { Button as MuiButton, Paper } from '@mui/material'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import { FC } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 import Button from '@/components/UI/Button/Button'
 
 import { IRoom, booking } from '@/shared/types/room.types'
 
-import { BookingService } from '@/services/Booking.service'
 import { RoomsService } from '@/services/Rooms/Rooms.service'
 
 import { getDateByNumber } from '@/utils/getDateByNumber'
@@ -32,10 +30,6 @@ const BookingCard: FC<{ booking: booking; deleteHandler: any }> = ({
 	},
 	deleteHandler,
 }) => {
-	const handleRemoveBooking = () => {
-		// dispatch(removeBooking(_id))
-		// dispatch(removeBookingRoom({ roomId, _id: _id || '' }))
-	}
 	const {
 		data: room,
 		isLoading,
@@ -114,7 +108,6 @@ const BookingCard: FC<{ booking: booking; deleteHandler: any }> = ({
 					</Link>
 					<div className="mt-5">
 						<MuiButton
-							// size="large"
 							className="w-full"
 							variant="outlined"
 							color="error"
