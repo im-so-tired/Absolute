@@ -11,7 +11,7 @@
     "client:install": "npm install --prefix client",
     "client:build": "npm run build --prefix client",
     "start": "concurrently \"npm run backend\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client "
+    "heroku-postbuild": "npm i -f --prefix backend && npm run build --prefix backend && npm start --prefix backend && npm install -f --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
