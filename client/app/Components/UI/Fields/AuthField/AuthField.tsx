@@ -1,8 +1,8 @@
-import { TextField } from '@mui/material'
+import {TextField} from '@mui/material'
 import cn from 'classnames'
-import { ErrorMessage, useField } from 'formik'
-import { FC } from 'react'
-import { InputHTMLAttributes } from 'react'
+import {ErrorMessage, useField} from 'formik'
+import {FC} from 'react'
+import {InputHTMLAttributes} from 'react'
 
 import styles from './AuthField.module.scss'
 
@@ -11,10 +11,10 @@ export interface IAuthField extends InputHTMLAttributes<HTMLInputElement> {
 	name: string
 }
 
-const AuthField: FC<IAuthField> = ({ label, className, ...props }) => {
+const AuthField: FC<IAuthField> = ({label, className, ...props}) => {
 	const [field, meta] = useField(props)
 	return (
-		<div className="relative">
+		<div className="relative mt-6">
 			<TextField
 				className={cn(className, {
 					[styles.borderError]: meta.error && meta.touched,

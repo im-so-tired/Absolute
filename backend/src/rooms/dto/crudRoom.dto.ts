@@ -8,12 +8,14 @@ import {
 	ValidateNested,
 } from 'class-validator'
 import { MaxCountPeopleValidate } from '../decorators/countPeopleValidate'
+
 import {
 	comfortsType,
 	reachType,
 	roomType,
 	termsType,
 } from '../rooms.interface'
+
 export class MaxCountPeople {
 	@IsNumber()
 	@IsInt()

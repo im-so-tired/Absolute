@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 
 export const axiosClassic = axios.create({
 	baseURL: `http://localhost:9000/api`,
+	// baseURL: `http://nest-api/api`,
 	headers: {
 		'Content-Type': 'application/json',
 	},
@@ -10,6 +11,7 @@ export const axiosClassic = axios.create({
 
 export const axiosAuth = axios.create({
 	baseURL: `http://localhost:9000/api`,
+	// baseURL: `http://nest-api/api`,
 	headers: {
 		'Content-Type': 'application/json',
 	},

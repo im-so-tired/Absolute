@@ -7,6 +7,7 @@ module.exports = {
 	content: [
 		'./pages/**/*.{js,ts,jsx,tsx}',
 		'./app/components/**/*.{js,ts,jsx,tsx}',
+		'./.next/**/*.{js, html}'
 	],
 	theme: {
 		colors: {
@@ -46,7 +47,7 @@ module.exports = {
 	},
 	plugins: [
 		// require('@tailwindcss/forms'),
-		plugin(function ({ addUtilities, addComponents, theme }) {
+		plugin(function ({addUtilities, addComponents, theme}) {
 			addComponents({
 				'.btn-primary': {
 					backgroundColor: primary,

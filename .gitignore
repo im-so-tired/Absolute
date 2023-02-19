@@ -1,2 +1,5 @@
 node_modules
 .idea/
+docker-compose.yml
+client/.dockerignore
+backend/.dockerignore

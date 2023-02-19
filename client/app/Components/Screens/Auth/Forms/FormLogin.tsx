@@ -1,28 +1,28 @@
-import { Formik } from 'formik'
-import { FC, FormEventHandler } from 'react'
+import {Formik} from 'formik'
+import {FC, FormEventHandler} from 'react'
 
 import Button from '@/components/UI/Button/Button'
 import AuthField from '@/components/UI/Fields/AuthField/AuthField'
 
-import { useUserActions } from '@/hooks/useActions'
+import {useUserActions} from '@/hooks/useActions'
 
 import styles from '../Login.module.scss'
 
 import FooterForm from './FooterForm'
-import { schemaLogin } from './Schemas'
+import {schemaLogin} from './Schemas'
 
 const FormLogin: FC = () => {
-	const { login } = useUserActions()
+	const {login} = useUserActions()
 
 	return (
 		<Formik
-			initialValues={{ email: '', password: '' }}
+			initialValues={{email: '', password: ''}}
 			onSubmit={value => {
 				login(value)
 			}}
 			validationSchema={schemaLogin}
 		>
-			{({ values, handleChange, handleSubmit }) => (
+			{({values, handleChange, handleSubmit}) => (
 				<form onSubmit={handleSubmit}>
 					<AuthField
 						name="email"
@@ -46,7 +46,7 @@ const FormLogin: FC = () => {
 					>
 						Войти
 					</Button>
-					<FooterForm type="login" />
+					<FooterForm type="login"/>
 				</form>
 			)}
 		</Formik>

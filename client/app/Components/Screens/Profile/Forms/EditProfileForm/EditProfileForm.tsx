@@ -1,38 +1,38 @@
 import DateFnsAdapter from '@date-io/date-fns'
-import { getUnixTime, sub } from 'date-fns'
-import { Formik } from 'formik'
-import { useRouter } from 'next/router'
-import { FC, useEffect, useState } from 'react'
+import {getUnixTime, sub} from 'date-fns'
+import {Formik} from 'formik'
+import {useRouter} from 'next/router'
+import {FC, useEffect, useState} from 'react'
 
 import ChooseGender from '@/components/Common/ChooseGender/ChooseGender'
 import Button from '@/components/UI/Button/Button'
 import AuthField from '@/components/UI/Fields/AuthField/AuthField'
 import DateOfStay from '@/components/UI/Fields/DateOfStay/DateOfStay'
 
-import { useUserActions } from '@/hooks/useActions'
+import {useUserActions} from '@/hooks/useActions'
 
-import { IEditProfile } from '@/shared/types/user'
+import {IEditProfile} from '@/shared/types/user'
 
-import { UserState } from '@/store/Slices/User/user.interface'
+import {UserState} from '@/store/Slices/User/user.interface'
 
 import styles from './EditProfileForm.module.scss'
-import { schemaEditProfile } from './Schemas'
+import {schemaEditProfile} from './Schemas'
 
-const FormRegister: FC<{ user: UserState }> = ({ user }) => {
-	const { push } = useRouter()
+const FormRegister: FC<{ user: UserState }> = ({user}) => {
+	const {push} = useRouter()
 	const [birthYear, setBirthYear] = useState<number>(
-		user.birthYear || getUnixTime(sub(Date.now(), { years: 18 }))
+		user.birthYear || getUnixTime(sub(Date.now(), {years: 18}))
 	)
 	const initialState: IEditProfile = {
 		firstName: user?.firstName || '',
 		secondName: user?.secondName || '',
 		gender: user?.gender || 'male',
 	}
-	const { editProfile } = useUserActions()
+	const {editProfile} = useUserActions()
 	const dateFns = new DateFnsAdapter()
 
 	const onSubmitHandle = (value: IEditProfile) => {
-		editProfile({ ...value, birthYear })
+		editProfile({...value, birthYear})
 		push(`/profile/${user?.id}`)
 	}
 	return !user ? (
@@ -43,14 +43,14 @@ const FormRegister: FC<{ user: UserState }> = ({ user }) => {
 			validationSchema={schemaEditProfile}
 			onSubmit={onSubmitHandle}
 		>
-			{({ values, handleChange, handleSubmit }) => (
+			{({values, handleChange, handleSubmit}) => (
 				<form className="flex flex-col" onSubmit={handleSubmit}>
 					<AuthField
 						type="text"
 						label="Имя"
 						name="firstName"
 						onChange={handleChange}
-						className="w-[420px] mt-3 mb-3"
+						className="w-[420px]"
 						value={values.firstName}
 					/>
 					<AuthField
@@ -58,7 +58,7 @@ const FormRegister: FC<{ user: UserState }> = ({ user }) => {
 						label="Фамилия"
 						name="secondName"
 						onChange={handleChange}
-						className="w-[420px] mt-3 mb-3"
+						className="w-[420px]"
 						value={values.secondName}
 					/>
 					<ChooseGender
